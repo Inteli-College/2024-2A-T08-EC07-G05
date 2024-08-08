@@ -1,7 +1,7 @@
 ---
 title: Matriz de Risco
 sidebar_position: 1
-slug: "/"
+slug: "/matriz_de_risco"
 ---
 import {Membro} from "@site/src/components/profile.tsx";
 import useBaseUrl from "@docusaurus/useBaseUrl";
