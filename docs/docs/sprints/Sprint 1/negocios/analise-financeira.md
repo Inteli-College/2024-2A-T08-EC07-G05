@@ -15,7 +15,7 @@ description: Análise Financeira referente a Sprint 1.
 
 ## Protótipo 
 
-&emsp;Iremos considerar um período de 2 meses para realizar o protótipo, dividindo os custos entre os desenvolvidores e o custo da infraestrutura para manter a solução na nuvem (cloud), portanto, as pesquisas e o cálculo relacionados ao investimento será levando em consideração esse tempo.
+&emsp;Iremos considerar um período de 2 meses para realizar o protótipo, dividindo os custos entre os **desenvolvidores** e o custo da **infraestrutura** para manter a solução na nuvem (cloud), portanto, as pesquisas e o cálculo relacionados ao investimento será levando em consideração esse tempo.
 
 
 
@@ -34,25 +34,44 @@ description: Análise Financeira referente a Sprint 1.
 </p>
 
 >Nota: Ao clicar no nome dos sites na coluna "**Fontes**", onde pesquisamos, você será redirecionado diretamente para visualizar os dados da média salarial de cada profissão em questão.
+>Data da pesquisa: 10/08/2024
 
 <p align="center">
 
 ### Custos da infraestrutura na nuvem (Cloud)
 
-&emsp;Para estimar os custos da infraestrutura em nuvem para o protótipo inicial, pesquisamos e consideramos os seguintes aspectos:
+&emsp;Para estimar os custos da infraestrutura em nuvem para o protótipo inicial, pesquisamos e consideramos os seguintes aspectos pensando em um escopo de 2 meses:
 
-| Serviço                | Quantidade | Meses | Custo   Mensal | Valor Final    | 
-| ---------------------  | ---------- | ----- | -------------- | -------------- | 
-| Computação             | 2          | 2     | R$ 6.303,00    | R$ 25.212,00   | 
-| Armazenamento          | 2          | 2     | R$ 10.053      | R$ 40.212,00   | 
-| Rede                   | 1          | 2     | R$ 9.000       | R$ 18.000      |
-| Monitoramento e Logs   | 1          | 2     | R$ 4.742,00    | R$ 9.484,00    | 
-| Banco de Dados         | 1          | 2     | R$ 4.742,00    | R$ 9.484,00    | 
-| **Total**              |            |       |                | **R$ 92.908**  |  
+| Serviço                | Quantidade | valor/Mês   | Valor Final | 
+| ---------------------  | ---------- | ----- | -------------- | 
+| Computação             | 2 instâncias de máquinas virtuais com 4 vCPUs e 16 GB de RAM | R$ 0,50 por hora x 2 instâncias x 160 horas = R$ 1.600,00 | R$ 3.200,00 | 
+| Armazenamento          | 500 GB de armazenamento em SSD | R$ 0,25 por GB x 500 GB = R$ 125,00 | R$ 250,00 | 
+| Rede                   | 1 TB de transferência de dados | R$ 0,10 por GB x 1.024 GB = R$ 102,40 |  R$ 204,80 |
+| Monitoramento e Logs   | Cloud Watch | R$ 200,00 | R$ 400,00    | 
+| Banco de Dados         | 200 GB de banco de dados relacional | R$ 500,00 | R$ 1.000,00 | 
+| **Total**              |            |       | **R$ 5.054,80**  |  
 
 </p>
 
->Nota: Ao clicar no nome dos sites na coluna "**Fontes**", onde pesquisamos, você será redirecionado diretamente para visualizar os dados da média salarial de cada profissão em questão.
+>Nota: As fontes da pesquisa feita para o custo de infraestrutura foram feitas a partir da calculadora de preços de três empresas que oferecem o melhor preço no mercado: [Googl Cloud](https://cloud.google.com/products/calculator/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-BKWS-all-all-trial-p-dr-1707800-LUAC0014411&utm_content=text-ad-none-any-DEV_c-CRE_534950712418-ADGP_Hybrid+%7C+BKWS+-+PHR+%7C+Txt_GCP-Price+Calculator-KWID_43700071226328618-kwd-527030757336&utm_term=KW_google%20cloud%20platform%20pricing%20calculator-ST_google+cloud+platform+pricing+calculator&gad_source=1&gclid=Cj0KCQjwn9y1BhC2ARIsAG5IY-6JiY0ScOr-yHDcpRZh_r15BxP9dBPXCe7JVaEZTPqJbRbdtnIEzc8aAtZLEALw_wcB&gclsrc=aw.ds), [Azuere](https://azure.microsoft.com/en-us/pricing/calculator/) e [AWS](https://calculator.aws/#/). 
+
+<p align="center">
+
+### Custo total do protótipo
+
+&emsp;Para melhorar a visualização, iremos somar o custo da mão de obra + infraestrutura em uma única tabela:
+
+| Descrição | Valor |
+| --------- | ------|
+| Custos relacionados a mão de obra | **R$ 92.908,00** |
+| Custos relacionados a infraestrutura | **R$ 5.054,80** |
+| Custo total para implementação | **R$ 97.962,80** |
+
+</p>
+
+### Valor final: Margem de Lucro + Imposto da Nota Fiscal
+
+&emsp;Ao calcular a margem de lucro, consideramos que ela pode variar um pouco, geralmente ficando entre 10% e 20%. Dado que o aporte para um protótipo de um sistema de manutenção preditiva com IA com arquitetura em nuvem tende a ser caro, é prudente evitar a cobrança de um valor muito elevado. Portanto, calculamos a margem de lucro considerando uma taxa mínima de 10%.
 
 ## Projeto Implementado
 
