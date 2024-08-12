@@ -1,6 +1,7 @@
 ---
 title: Requisitos funcionais
 sidebar_position: 1
+slug: "/requisitos_funcionais"
 ---
 
 # Requisitos funcionais
