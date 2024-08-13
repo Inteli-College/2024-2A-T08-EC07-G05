@@ -7,34 +7,60 @@ description: Análise Financeira referente a Sprint 1.
 
 ## Introdução
 
-&emsp;Nesta seção, abordaremos a análise financeira do protótipo e do projeto implantado IT-CROSS. Vamos descrever e detalhar os custos associados à produção, desde os custos com desenvolvedores até os impostos sobre o projeto. O objetivo é fornecer uma visão clara dos investimentos necessários para validar a viabilidade do projeto antes de avançar para a implementação em larga escala.
+&emsp;Nesta seção, abordaremos a análise financeira da Poc e do projeto em sua versão final implementado pelo o grupo IT-CROSS. Vamos descrever e detalhar os custos associados à produção, desde os custos com desenvolvedores até os impostos sobre o projeto. O objetivo é fornecer uma visão clara dos investimentos necessários para validar a viabilidade do projeto antes de avançar para a implementação em larga escala.
+
+## Business Model Canvas: Como iremos gerar Valor para o projeto?
+
+&emsp;A proposta de valor do projeto é fundamental para definir como o projeto IT-CROSS vai gerar valor significativo para a Volkswagen. A seguir, exploramos os principais aspectos ao observar o Business Model Canvas:
+
+<p align="center"><b> Figura Business Model Canvas</b></p>
+<div align="center">
+  ![](../../../../static/img/sprint1/BMC.png)
+  <p><b>Fonte:</b> Elaborado por IT-CROSS</p>
+</div>
+
+>Nota: Não avaliamos e nem consideramos todo o BMC, apenas dois fatores que estão descritos abaixo que consideramos crucial serem explorados.
+
+### Redução de Erros na Linha de Produção
+
+&emsp;Um dos maiores desafios na produção em massa de veículos é a ocorrência de erros na linha de produção, que podem resultar em produtos defeituosos, recall de veículos, e perda financeira significativa. Com a implementação do projeto pela equipe IT-CROSS, a Volkswagen terá acesso a um sistema de predição que identifica potenciais falhas antes que elas aconteçam. Isso permitirá à empresa:
+
+- **Diminuir a taxa de defeitos:** Garantindo que os veículos saiam da linha de produção com alta qualidade.
+- **Evitar retrabalho:** Economizando tempo e recursos ao eliminar a necessidade de corrigir defeitos após a produção.
+- **Melhorar a eficiência operacional:** Permitindo uma produção mais fluida e sem interrupções.
+
+### Expansão e Adaptação
+
+&emsp;O sistema IT-CROSS é escalável e pode ser adaptado para outras fábricas da Volkswagen ao redor do mundo, assim como para outros setores de produção. Isso proporciona:
+
+- **Flexibilidade:** Capacidade de adaptação do sistema a diferentes linhas de produção e tipos de veículos.
+- **Crescimento global:** Potencial de expansão do sistema para outras unidades de produção da Volkswagen, ampliando os benefícios em escala global.
+- **Personalização:** Possibilidade de ajustar o sistema para atender a necessidades específicas de diferentes mercados ou segmentos.
+
+&emsp;Ao reduzir erros na linha de produção, economizar tempo e recursos, e permitir ações preventivas eficazes, o projeto se alinha perfeitamente com os objetivos estratégicos da Volkswagen de manter-se na vanguarda da inovação tecnológica e da excelência operacional. 
+
+&emsp;Em seuma, a proposta de valor feita sobre os ganhos do projeto, destaca como a combinação de tecnologia avançada e uma abordagem estratégica robusta pode não apenas resolver problemas imediatos, mas também criar uma base sólida para o futuro da Volkswagen no mercado automotivo global. Com a implementação bem-sucedida deste projeto, a Volkswagen não só reforçará sua reputação como líder em inovação, mas também garantirá a satisfação e a lealdade dos seus clientes, posicionando-se de forma ainda mais competitiva no mercado.
 
 ## Levantamento de Custos 
 
 &emsp;Para auxiliar na identificação e estimativa dos custos envolvidos no projeto, dividimos a análise em duas seções distintas: Protótipo e Projeto Implementado. Cada seção aborda os custos específicos relacionados às diferentes fases do projeto, garantindo uma compreensão clara e detalhada dos investimentos necessários.
 
-## Protótipo 
+## Protótipo (Poc)
 
 &emsp;Iremos considerar um período de 2 meses para realizar o protótipo, dividindo os custos entre os **desenvolvidores** e o custo da **infraestrutura** para manter a solução na nuvem (cloud), portanto, as pesquisas e o cálculo relacionados aos investimentos será levando em consideração esse tempo.
 
-<p align="center">
-
-### Desenvolvimento de Software: Custso médio da mão de obra
+### Desenvolvimento de Software: Custo médio da mão de obra
 
 | Função                 | Quantidade | Meses | Salário Mensal | Valor Final    | Fonte                |
 | ---------------------  | ---------- | ----- | -------------- | -------------- | -------------------- |
 | Engenheiro de Software | 2          | 2     | R$ 6.303,00    | R$ 25.212,00   | [VAGAS](https://www.vagas.com.br/cargo/engenheiro-de-software#:~:text=No%20cargo%20de%20Engenheiro%20de,de%20R%24%206.303%2C00.) |
-| Cientista de Dados     | 2          | 2     | R$ 10.053      | R$ 40.212,00   | [GLASSDOR](https://www.glassdoor.com.br/Sal%C3%A1rios/cientista-de-dados-sal%C3%A1rio-SRCH_KO0,18.htm) |
-| Engenheiro de DevOps   | 1          | 2     | R$ 9.000       | R$ 18.000      | [GLASSDOR](https://www.glassdoor.com.br/Sal%C3%A1rios/devops-engineer-sal%C3%A1rio-SRCH_KO0,15.htm) |
+| Cientista de Dados     | 2          | 2     | R$ 10.053,00      | R$ 40.212,00   | [GLASSDOR](https://www.glassdoor.com.br/Sal%C3%A1rios/cientista-de-dados-sal%C3%A1rio-SRCH_KO0,18.htm) |
+| Engenheiro de DevOps   | 1          | 2     | R$ 9.000,00       | R$ 18.000,00      | [GLASSDOR](https://www.glassdoor.com.br/Sal%C3%A1rios/devops-engineer-sal%C3%A1rio-SRCH_KO0,15.htm) |
 | Gestor de Projetos     | 1          | 2     | R$ 4.742,00    | R$ 9.484,00   | [VAGAS](https://www.vagas.com.br/cargo/gestao-de-projetos) |
-| **Total**              |            |       |                | **R$ 92.908** |                    |
-
-</p>
+| **Total**              |            |       |                | **R$ 92.908,00** |                    |
 
 >Nota: Ao clicar no nome dos sites na coluna "**Fontes**", onde pesquisamos, você será redirecionado diretamente para visualizar os dados da média salarial de cada profissão em questão.
 >Data da pesquisa: 10/08/2024
-
-<p align="center">
 
 ### Custos da infraestrutura na nuvem (Cloud)
 
@@ -49,12 +75,8 @@ description: Análise Financeira referente a Sprint 1.
 | Banco de Dados         | 200 GB de banco de dados relacional | R$ 500,00 | R$ 1.000,00 | 
 | **Total**              |            |       | **R$ 5.054,80**  |  
 
-</p>
-
 >Nota I: As fontes da pesquisa feita para o custo de infraestrutura foram feitas a partir da calculadora de preços de três empresas que oferecem o melhor preço no mercado: [Googl Cloud](https://cloud.google.com/products/calculator/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-BKWS-all-all-trial-p-dr-1707800-LUAC0014411&utm_content=text-ad-none-any-DEV_c-CRE_534950712418-ADGP_Hybrid+%7C+BKWS+-+PHR+%7C+Txt_GCP-Price+Calculator-KWID_43700071226328618-kwd-527030757336&utm_term=KW_google%20cloud%20platform%20pricing%20calculator-ST_google+cloud+platform+pricing+calculator&gad_source=1&gclid=Cj0KCQjwn9y1BhC2ARIsAG5IY-6JiY0ScOr-yHDcpRZh_r15BxP9dBPXCe7JVaEZTPqJbRbdtnIEzc8aAtZLEALw_wcB&gclsrc=aw.ds), [Azuere](https://azure.microsoft.com/en-us/pricing/calculator/) e [AWS](https://calculator.aws/#/). 
 >Nota II: Os impostos sobre esses serviços já são inclusos na cobrança pela plataforma utilizada.
-
-<p align="center">
 
 ### Custo total do protótipo
 
@@ -66,9 +88,6 @@ description: Análise Financeira referente a Sprint 1.
 | Custos relacionados a infraestrutura | **R$ 5.054,80**  |
 | Custo total para implementação       | **R$ 97.962,80** |
 
-</p>
-
-<p align="center">
 
 ### Valor final: Margem de Lucro + Imposto da Nota Fiscal
 
@@ -80,9 +99,8 @@ description: Análise Financeira referente a Sprint 1.
 
 | Descrição | + Lucro (10%) | Custos + Lucro | Impostos de emissão da NF (18%) | Valor final |
 | --------- | ------------- | -------------- | ------------------------------- | ----------- |
-| Custos para a implementação do protótipo | R$ 9.796,28 | R$ 107.759,08 | R$ 19.396,63 | R$ 127.155,71 | 
+| Custos para a implementação do protótipo | R$ 9.796,28 | R$ 107.759,08 | R$ 23.654,43 | R$ 131.413,51 | 
 
-</p>
 
 ## Projeto Implementado
 
@@ -92,24 +110,21 @@ description: Análise Financeira referente a Sprint 1.
 
 >Nota: A implementação final do projeto acrescenta 4 meses de trabalho aos 2 meses já dedicados ao desenvolvimento do protótipo. Portanto, o projeto completo, desde a fase inicial (protótipo) até a implementação final, será concluído em **6 meses no total**. Os primeiros **2 meses são destinados à criação e avaliação do protótipo**, seguidos por **4 meses para a implementação completa do sistema.**
 
-<p align="center">
 
 ### Desenvolvimento de Software: Custso médio da mão de obra
 
 | Função                 | Quantidade | Meses | Salário Mensal | Valor Final    | Fonte                |
 | ---------------------  | ---------- | ----- | -------------- | -------------- | -------------------- |
 | Engenheiro de Software | 2          | 4     | R$ 6.303,00    | R$ 50.424,00   | [VAGAS](https://www.vagas.com.br/cargo/engenheiro-de-software#:~:text=No%20cargo%20de%20Engenheiro%20de,de%20R%24%206.303%2C00.) |
-| Cientista de Dados     | 2          | 4     | R$ 10.053      | R$ 80.424,00   | [GLASSDOR](https://www.glassdoor.com.br/Sal%C3%A1rios/cientista-de-dados-sal%C3%A1rio-SRCH_KO0,18.htm) |
-| Engenheiro de DevOps   | 1          | 4     | R$ 9.000       | R$ 36.000      | [GLASSDOR](https://www.glassdoor.com.br/Sal%C3%A1rios/devops-engineer-sal%C3%A1rio-SRCH_KO0,15.htm) |
+| Cientista de Dados     | 2          | 4     | R$ 10.053,00      | R$ 80.424,00   | [GLASSDOR](https://www.glassdoor.com.br/Sal%C3%A1rios/cientista-de-dados-sal%C3%A1rio-SRCH_KO0,18.htm) |
+| Engenheiro de DevOps   | 1          | 4     | R$ 9.000,00       | R$ 36.000,00      | [GLASSDOR](https://www.glassdoor.com.br/Sal%C3%A1rios/devops-engineer-sal%C3%A1rio-SRCH_KO0,15.htm) |
 | Gestor de Projetos     | 1          | 4     | R$ 4.742,00    | R$ 18.968,00  | [VAGAS](https://www.vagas.com.br/cargo/gestao-de-projetos) |
 | **Total**              |            |       |                | **R$ 185.816,00** |                    |
 
-</p>
 
 >Nota: Ao clicar no nome dos sites na coluna "**Fontes**", onde pesquisamos, você será redirecionado diretamente para visualizar os dados da média salarial de cada profissão em questão.
 >Data da pesquisa: 10/08/2024
 
-<p align="center">
 
 ### Custos da infraestrutura na nuvem (Cloud)
 
@@ -124,12 +139,9 @@ description: Análise Financeira referente a Sprint 1.
 | Banco de Dados         | 200 GB de banco de dados relacional | R$ 500,00 | R$ 2.000,00 | 
 | **Total**              |            |       | **R$ 10.109,60**  |  
 
-</p>
 
 >Nota I: As fontes da pesquisa feita para o custo de infraestrutura foram feitas a partir da calculadora de preços de três empresas que oferecem o melhor preço no mercado: [Googl Cloud](https://cloud.google.com/products/calculator/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-BKWS-all-all-trial-p-dr-1707800-LUAC0014411&utm_content=text-ad-none-any-DEV_c-CRE_534950712418-ADGP_Hybrid+%7C+BKWS+-+PHR+%7C+Txt_GCP-Price+Calculator-KWID_43700071226328618-kwd-527030757336&utm_term=KW_google%20cloud%20platform%20pricing%20calculator-ST_google+cloud+platform+pricing+calculator&gad_source=1&gclid=Cj0KCQjwn9y1BhC2ARIsAG5IY-6JiY0ScOr-yHDcpRZh_r15BxP9dBPXCe7JVaEZTPqJbRbdtnIEzc8aAtZLEALw_wcB&gclsrc=aw.ds), [Azuere](https://azure.microsoft.com/en-us/pricing/calculator/) e [AWS](https://calculator.aws/#/). 
 >Nota II: Os impostos sobre esses serviços já são inclusos na cobrança pela plataforma utilizada.
-
-<p align="center">
 
 ### Custos adicionais
 
@@ -142,13 +154,17 @@ description: Análise Financeira referente a Sprint 1.
 | Suporte Pós-Implementação | ~ R$ 75.000,00 | Suporte técnico treinamento |
 | Total de custos adicionais | ~ R$ 127.500,00 |
 
-</p>
 
 >Nota I: Os custos adicionais apresentados são estimados e, por isso, indicados com o símbolo de aproximadamente (~). Para os custos de testes, utilizamos as ferramentas da [AWS](https://calculator.aws/#/) como referência. O custo de manutenção foi estimado em ~10% do valor total do projeto. Já para suporte e treinamento, os valores foram baseados em preços de mercado praticados por empresas como Red Hat, Microsoft e consultorias como a ThoughtWorks.
 
 >Nota II: Os custos adicionais são importantes para a finalização do projeto, mas podem ser enxugados e até mesmo considerar o corte de alguns, como suporte e treinamento, para assim garantir a viabilidade econômica. 
 
-<p align="center">
+:::warning
+
+Atenção!! O valor de manutenção e suporte após a implementação não inclui a implementação de novas features no projeto ou no modelo, apenas recalibragem e ajustes em geral.
+
+:::
+
 
 ### Custo total do restante da implementação do projeto (+4 meses de desenvolvimento)
 
@@ -161,9 +177,6 @@ description: Análise Financeira referente a Sprint 1.
 | Custos adcionais                                 | **~ R$ 127.500,00** |
 | Custo total para finalizar a implementação       | **R$ 323.425,60**   |
 
-</p>
-
-<p align="center">
 
 ### Valor final: Margem de Lucro + Imposto da Nota Fiscal
 
@@ -183,21 +196,14 @@ Esse trecho explicando sobre como consideramos e calculamos o lucro + impostos s
 
 | Descrição | + Lucro | Custos + Lucro | Impostos de emissão da NF (18%) | Valor final |
 | --------- | ------------- | -------------- | ------------------------------- | ----------- |
-| Custos para a implementação do protótipo | (Lucro de 10%) R$ 9.796,28 | R$ 107.759,08 | R$ 19.396,63 | R$ 127.155,71 | 
-| Custos para a implementação da segunda II do projeto | (Lucro de 14,5%) R$ 46.896,71  | R$ 370.322,31 | R$ 66.658,01 | R$ 436.980,32 | 
-| Custos para a implementação total do projeto | (Lucro de 10% fase I + 14,5% na fase II) R$ 56.692,99  | R$ 478.081,39 | R$ 86.054,65 | R$ 564.136,04 | 
+| Custos para a implementação do protótipo | (Lucro de 10%) R$ 9.796,28 | R$ 107.759,08 | R$ 23.654,43 | R$ 131.413,51 | 
+| Custos para a implementação da segunda II do projeto | (Lucro de 14,5%) R$ 46.896,71  | R$ 370.322,31 | R$ 81.290,26 | R$ 451.612,57 | 
+| Custos para a implementação total do projeto | (Lucro de 10% fase I + 14,5% na fase II) R$ 56.692,99  | R$ 478.081,39 | R$ 104.944,69| R$ 583.026,08 | 
 
-</p>
 
 ## Fontes de Receita
 
 &emsp;Neste tópico, abordaremos as principais fontes de receita do projeto IT-CROSS. Identificar e compreender essas fontes é essencial para garantir a sustentabilidade financeira e o sucesso do projeto a longo prazo. As fontes de receita podem incluir, mas não se limitam as seguintes estratégias que mapeamos:
-
-<p align="center">
-
-### Vendas de Licença de Software
-
-- **Licença Inicial:** Receita gerada pela venda de licenças para o uso do software. Dependendo do modelo de licenciamento escolhido, isso pode incluir licenças perpétuas ou assinaturas anuais.
 
 ### Suporte e Manutenção
 
@@ -205,16 +211,69 @@ Esse trecho explicando sobre como consideramos e calculamos o lucro + impostos s
 
 - **Manutenção Programada:** Receita proveniente de serviços de manutenção periódica e atualizações de sistema para garantir a continuidade e a eficiência operacional do software.
 
-### Parcerias e Licenciamento de Tecnologia
+### ROI (Retorno Sobre o Investimento)
 
-- **Parcerias Estratégicas:** Receita gerada através de parcerias com outras empresas para a integração do software em suas soluções ou plataformas.
+&emsp;Para realizar o cálculo do retorno sobre o investimento podemos analisar a seguinte fórmula:
 
-- **Licenciamento de Tecnologia:** Receita proveniente da concessão de licenças para outras empresas utilizarem ou integrarem a tecnologia desenvolvida ao produto, por exemplo, outra montadora de carros utilizar o modelo voltado para sua indústria.
+<p align="center"><b> Figura Retorno Sobre o Investimentos</b></p>
+<div align="center">
+  ![](../../../../static/img/sprint1/ROI.png)
+  <p><b>Fonte:</b> Elaborado por IT-CROSS</p>
+</div>
 
-</p>
+- Receita: É a soma de todas as fontes de receita.
+- Custo: É a soma de todos os custos necessários para desenvolver, implementar, e manter o projeto.
 
-## Proposta de Valor
+### Interpretação do ROI:
+
+- ROI Positivo (Maior que zero): Indica que o projeto está gerando mais receita do que o custo, o que sugere **viabilidade** e potencial de lucro.
+
+- ROI Negativo (Menor que zero): Indica que o custo está superando a receita, o que pode sugerir necessidade de **reavaliação** ou ajuste do projeto para melhorar a rentabilidade.
+
+### Exemplo de cáclulo
+
+&emsp;Se, por exemplo, o Custo Total Estimado para desenvolver e implementar o IT-CROSS for R$ 583.026,08 e a Receita Total Estimada for R$ 700.000,00 com a venda de contratos de suporte e expansão para outras plantas, o ROI seria calculado da seguinte forma:
+
+<p align="center"><b> Figura Retorno Sobre o Investimentos cálculo</b></p>
+<div align="center">
+  ![](../../../../static/img/sprint1/ROI-example.png)
+  <p><b>Fonte:</b> Elaborado por IT-CROSS</p>
+</div>
+
+>Nota: O valor da receita foi estimado a partir da tabela `Custos adicionais` presente nesse documento. Diante disso, consideramos uma parceria com o cliente por cerca de 6 meses utilizando os nossos serviços de manutenção e suporte. 
+
+&emsp;Neste exemplo, um ROI de 23,39% indica que o projeto é financeiramente viável e que a Volkswagen pode esperar um retorno de 23,39% sobre o investimento inicial.
 
 ## Análise de Viabilidade Financeira 
 
+&emsp;Para determinar a viabilidade financeira do projeto IT-CROSS, é essencial avaliar se os benefícios e retornos esperados justificam o investimento necessário. A análise será conduzida com base nos seguintes aspectos:
+
+### Análise de Custo-Benefício
+
+&emsp;No caso da Volkswagen, a análise de custo-benefício apresenta um caráter um tanto subjetivo, dado que o projeto não visa escalar o produto para o mercado, mas sim utilizá-lo internamente para aprimorar a qualidade da produção. O principal objetivo é evitar perdas significativas nos ativos da empresa, que são os veículos, ao final da montagem. Diante desse cenário, o produto pode ajudar a Volkswagen a mitigar:
+
+- **Redução de Custos com Defeitos:** Implementar um sistema de manutenção preditiva pode diminuir os custos associados a defeitos e retrabalho, que são comuns em processos de montagem de veículos. A identificação antecipada de falhas pode evitar reparos caros e garantir a entrega de produtos com qualidade superior.
+
+- **Impacto Financeiro a Longo Prazo:** Embora o investimento inicial possa parecer elevado, os benefícios financeiros a longo prazo, como a redução de custos com manutenção e a proteção de ativos, podem superar os custos iniciais e trazer um retorno significativo sobre o investimento.
+
+### Impacto no Valor da Empresa
+
+&emsp;O impacto do projeto de manutenção preditiva no valor da empresa Volkswagen pode ser avaliado sob várias perspectivas. Embora o projeto esteja inicialmente destinado a uso interno, os benefícios resultantes têm o potencial de influenciar positivamente a valorização da empresa de várias maneiras:
+
+- **Melhoria da Rentabilidade:** A redução de custos operacionais e de manutenção através de um sistema de manutenção preditiva pode aumentar a margem de lucro da Volkswagen. Menos gastos com reparos e menos perdas na produção significam um aumento direto na rentabilidade, o que pode refletir positivamente no valor da empresa.
+
+- **Imagem e Reputação da Marca:** A implementação bem-sucedida de tecnologias avançadas para melhorar a qualidade e a eficiência pode reforçar a imagem da Volkswagen como uma líder em inovação e excelência operacional. Uma reputação positiva e a percepção de alta qualidade podem aumentar a confiança dos investidores e melhorar o valor de mercado da empresa.
+
+### Ganhos Tangíveis e Intangíveis
+
+&emsp;A análise de ganhos tangíveis e intangíveis é crucial para compreender o impacto total do projeto de manutenção preditiva na Volkswagen. Esses ganhos não só ajudam a justificar o investimento, mas também fornecem uma visão mais completa dos benefícios que o projeto pode oferecer.
+
+- **Diminuição de Paradas Não Planejadas:** Com a implementação do sistema de manutenção preditiva, a Volkswagen pode reduzir o tempo de inatividade não planejado das linhas de produção. Isso resulta em uma produção mais contínua e eficiente, aumentando a capacidade de produção e, consequentemente, a receita.
+
+- **Redução de Desperdícios:** Ao evitar falhas e problemas durante a produção, a Volkswagen pode reduzir o desperdício de materiais e produtos defeituosos. Isso não só economiza recursos, mas também melhora a eficiência operacional.
+
 ## Conclusão 
+
+&emsp;A análise financeira do projeto IT-CROSS revela que, para a fase de protótipo, o custo total é de aproximadamente R$ 97.962,80, incluindo tanto a mão de obra quanto a infraestrutura na nuvem. Com a adição de uma margem de lucro de 10% e impostos sobre a nota fiscal, o valor final estimado é de R$ 131.413,51. Para a implementação completa do projeto, com um desenvolvimento adicional de 4 meses, os custos totais somam cerca de R$ 323.425,60, considerando a mão de obra, infraestrutura e custos adicionais. Incluindo a margem de lucro ajustada e impostos, o valor final é de R$ 583.026,08.
+
+&emsp;Esses valores indicam um investimento significativo, porém necessário para garantir a viabilidade e a excelência do sistema de manutenção preditiva. A análise de custo-benefício sugere que, apesar dos altos custos iniciais, o retorno esperado com a melhoria da qualidade e a redução de perdas pode justificar o investimento. A continuidade do projeto deve considerar esses custos e os benefícios a longo prazo, alinhando-os com os objetivos estratégicos da Volkswagen e o valor agregado pela solução proposta.
