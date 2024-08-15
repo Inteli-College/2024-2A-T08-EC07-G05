@@ -9,4 +9,5 @@ sidebar_position: 1
 
 ![Infográfico](../../../../static/img/sprint-1/infografico.png)
 
-No infográfico, há alguns pontos de destaques a serem levados em consideração. O primeiro deles refere-se à 
+O infográfico mostra o fluxo de produção de carros pela Volkswagen.
+
