@@ -39,7 +39,7 @@ description: Análise Financeira referente a Sprint 1.
 
 &emsp;Ao reduzir erros na linha de produção, economizar tempo e recursos, e permitir ações preventivas eficazes, o projeto se alinha perfeitamente com os objetivos estratégicos da Volkswagen de manter-se na vanguarda da inovação tecnológica e da excelência operacional. 
 
-&emsp;Em seuma, a proposta de valor feita sobre os ganhos do projeto, destaca como a combinação de tecnologia avançada e uma abordagem estratégica robusta pode não apenas resolver problemas imediatos, mas também criar uma base sólida para o futuro da Volkswagen no mercado automotivo global. Com a implementação bem-sucedida deste projeto, a Volkswagen não só reforçará sua reputação como líder em inovação, mas também garantirá a satisfação e a lealdade dos seus clientes, posicionando-se de forma ainda mais competitiva no mercado.
+&emsp;Em suma, a proposta de valor feita sobre os ganhos do projeto, destaca como a combinação de tecnologia avançada e uma abordagem estratégica robusta pode não apenas resolver problemas imediatos, mas também criar uma base sólida para o futuro da Volkswagen no mercado automotivo global. Com a implementação bem-sucedida deste projeto, a Volkswagen não só reforçará sua reputação como líder em inovação, mas também garantirá a satisfação e a lealdade dos seus clientes, posicionando-se de forma ainda mais competitiva no mercado.
 
 ## Levantamento de Custos 
 
@@ -47,7 +47,7 @@ description: Análise Financeira referente a Sprint 1.
 
 ## Protótipo (Poc)
 
-&emsp;Iremos considerar um período de 2 meses para realizar o protótipo, dividindo os custos entre os **desenvolvidores** e o custo da **infraestrutura** para manter a solução na nuvem (cloud), portanto, as pesquisas e o cálculo relacionados aos investimentos será levando em consideração esse tempo.
+&emsp;Iremos considerar um período de 2 meses para realizar o protótipo, dividindo os custos entre os **desenvolvedores** e o custo da **infraestrutura** para manter a solução na nuvem (cloud). Portanto, as pesquisas e o cálculo relacionados aos investimentos será levando em consideração esse tempo.
 
 ### Desenvolvimento de Software: Custo médio da mão de obra
 
@@ -75,12 +75,12 @@ description: Análise Financeira referente a Sprint 1.
 | Banco de Dados         | 200 GB de banco de dados relacional | R$ 500,00 | R$ 1.000,00 | 
 | **Total**              |            |       | **R$ 5.054,80**  |  
 
->Nota I: As fontes da pesquisa feita para o custo de infraestrutura foram feitas a partir da calculadora de preços de três empresas que oferecem o melhor preço no mercado: [Googl Cloud](https://cloud.google.com/products/calculator/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-BKWS-all-all-trial-p-dr-1707800-LUAC0014411&utm_content=text-ad-none-any-DEV_c-CRE_534950712418-ADGP_Hybrid+%7C+BKWS+-+PHR+%7C+Txt_GCP-Price+Calculator-KWID_43700071226328618-kwd-527030757336&utm_term=KW_google%20cloud%20platform%20pricing%20calculator-ST_google+cloud+platform+pricing+calculator&gad_source=1&gclid=Cj0KCQjwn9y1BhC2ARIsAG5IY-6JiY0ScOr-yHDcpRZh_r15BxP9dBPXCe7JVaEZTPqJbRbdtnIEzc8aAtZLEALw_wcB&gclsrc=aw.ds), [Azuere](https://azure.microsoft.com/en-us/pricing/calculator/) e [AWS](https://calculator.aws/#/). 
+>Nota I: As fontes da pesquisa feita para o custo de infraestrutura foram feitas a partir da calculadora de preços de três empresas que oferecem o melhor preço no mercado: [Google Cloud](https://cloud.google.com/products/calculator/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-BKWS-all-all-trial-p-dr-1707800-LUAC0014411&utm_content=text-ad-none-any-DEV_c-CRE_534950712418-ADGP_Hybrid+%7C+BKWS+-+PHR+%7C+Txt_GCP-Price+Calculator-KWID_43700071226328618-kwd-527030757336&utm_term=KW_google%20cloud%20platform%20pricing%20calculator-ST_google+cloud+platform+pricing+calculator&gad_source=1&gclid=Cj0KCQjwn9y1BhC2ARIsAG5IY-6JiY0ScOr-yHDcpRZh_r15BxP9dBPXCe7JVaEZTPqJbRbdtnIEzc8aAtZLEALw_wcB&gclsrc=aw.ds), [Azure](https://azure.microsoft.com/en-us/pricing/calculator/) e [AWS](https://calculator.aws/#/). 
 >Nota II: Os impostos sobre esses serviços já são inclusos na cobrança pela plataforma utilizada.
 
 ### Custo total do protótipo
 
-&emsp;Para melhorar a visualização, iremos somar o custo da mão de obra + infraestrutura em uma única tabela:
+&emsp;Para melhorar a visualização, iremos somar o custo da mão de obra com o custo de infraestrutura em uma única tabela:
 
 | Descrição                            | Valor            |
 | ------------------------------------ | ---------------- |
@@ -106,12 +106,12 @@ description: Análise Financeira referente a Sprint 1.
 
 &emsp;Para realizar os cálculos e estimativa do projeto implementado após a validação do protótipo iremos seguir na mesma linha de raciocínio, considerando os mesmo serviços e valores, algumas coisas irão mudar, como por exemplo o tempo de desenvolvimento e implementação do produto. 
 
-&emsp;Iremos considerar um período de 6 meses para realizar a implementação do projeto final, dividindo os custos entre os **desenvolvidores**, o custo da **infraestrutura** para manter a solução na nuvem (cloud) e **custos adicionais** para essa segunda fase do projeto, portanto, as pesquisas e o cálculo relacionados aos investimentos será levando em consideração esse tempo.
+&emsp;Iremos considerar um período de 6 meses para realizar a implementação do projeto final, dividindo os custos entre os **desenvolvedores**, o custo da **infraestrutura** para manter a solução na nuvem (cloud) e **custos adicionais** para essa segunda fase do projeto, portanto, as pesquisas e o cálculo relacionados aos investimentos será levando em consideração esse tempo.
 
 >Nota: A implementação final do projeto acrescenta 4 meses de trabalho aos 2 meses já dedicados ao desenvolvimento do protótipo. Portanto, o projeto completo, desde a fase inicial (protótipo) até a implementação final, será concluído em **6 meses no total**. Os primeiros **2 meses são destinados à criação e avaliação do protótipo**, seguidos por **4 meses para a implementação completa do sistema.**
 
 
-### Desenvolvimento de Software: Custso médio da mão de obra
+### Desenvolvimento de Software: Custo médio da mão de obra
 
 | Função                 | Quantidade | Meses | Salário Mensal | Valor Final    | Fonte                |
 | ---------------------  | ---------- | ----- | -------------- | -------------- | -------------------- |
@@ -141,7 +141,7 @@ description: Análise Financeira referente a Sprint 1.
 
 
 >Nota I: As fontes da pesquisa feita para o custo de infraestrutura foram feitas a partir da calculadora de preços de três empresas que oferecem o melhor preço no mercado: [Googl Cloud](https://cloud.google.com/products/calculator/?utm_source=google&utm_medium=cpc&utm_campaign=latam-BR-all-pt-dr-BKWS-all-all-trial-p-dr-1707800-LUAC0014411&utm_content=text-ad-none-any-DEV_c-CRE_534950712418-ADGP_Hybrid+%7C+BKWS+-+PHR+%7C+Txt_GCP-Price+Calculator-KWID_43700071226328618-kwd-527030757336&utm_term=KW_google%20cloud%20platform%20pricing%20calculator-ST_google+cloud+platform+pricing+calculator&gad_source=1&gclid=Cj0KCQjwn9y1BhC2ARIsAG5IY-6JiY0ScOr-yHDcpRZh_r15BxP9dBPXCe7JVaEZTPqJbRbdtnIEzc8aAtZLEALw_wcB&gclsrc=aw.ds), [Azuere](https://azure.microsoft.com/en-us/pricing/calculator/) e [AWS](https://calculator.aws/#/). 
->Nota II: Os impostos sobre esses serviços já são inclusos na cobrança pela plataforma utilizada.
+>Nota II: Os custos adicionais são importantes para a finalização do projeto, mas podem ser reduzidos e até mesmo cortados em partes pontuais (como suporte e treinamento) para assim garantir a viabilidade econômica. 
 
 ### Custos adicionais
 
@@ -151,7 +151,7 @@ description: Análise Financeira referente a Sprint 1.
 | --------- | ------------------- | ----------- |
 | Testes em larga escala | ~ R$ 37.500,00 | Inclui ferramentas de teste e pen testing |  
 | Manutenção Contínua | ~ R$ 15.000,00 | Atualizações, correções, otimizações |
-| Suporte Pós-Implementação | ~ R$ 75.000,00 | Suporte técnico treinamento |
+| Suporte Pós-Implementação | ~ R$ 75.000,00 | Suporte técnico para treinamento de colaboradores |
 | Total de custos adicionais | ~ R$ 127.500,00 |
 
 
