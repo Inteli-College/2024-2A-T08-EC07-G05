@@ -50,6 +50,6 @@
 
 ## Diagrama de Blocos
 
-![Diagrama de Blocos](../../../static/sprint_1/diagrama_de_blocos.png)
+![Diagrama de Blocos](../../../../static/sprint_1/diagrama_de_blocos.png)
 
 
