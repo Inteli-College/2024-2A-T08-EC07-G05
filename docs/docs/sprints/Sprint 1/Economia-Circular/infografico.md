@@ -7,7 +7,7 @@ sidebar_position: 4
 
 &emsp;Para melhor entendimento dos aspectos de economia circular envolvidos no desenvolvimento da solução, o grupo It-Cross elaborou um infográfico que sumariza a cadeia produtiva de veículos da Volkswagen. O infográfico está disponível na figura 1 e conta com explicações detalhadas e relações com o tema de ESG (Environmental, Social, and Governance) logo a seguir.
 
-<p style={{textAlign: 'center'}}>Figura 1 - Persona: Luana Gomes</p>
+<p style={{textAlign: 'center'}}>Figura 1 - Infográfico: fluxo cíclico de produção de carros na Volkswagen</p>
 
 ![Infográfico](../../../../static/img/sprint-1/infografico.png)
 
@@ -26,7 +26,3 @@ sidebar_position: 4
 &emsp;A penúltima etapa do fluxo refere-se à qualidade dos carros. Assim que a fase de montagem é finalizada, ocorre uma inspeção geral sobre o carro, que geralmente é realizada de maneira roteirizada por uma pessoa com experiência na área de qualidade de produtos industriais. Por fim, parte dos carros é submetido a "testes de rodagem", nos quais os veículos são testados em funcionamento prático em pistas isoladas, a fim de verificar questões como peças soltas, frenagem e desempenho do carro em diferentes tipos de piso.
 
 &emsp;Por fim, há a etapa de comercialização, que ocorre com um automóvel somente após todas as demais fases de produção e após a aprovação na etapa de qualidade. Com isso, os veículos são vendidos através de concessionárias para os consumidores finais. É interessante ressaltar que, apesar de ser a etapa final do fluxo de produção, ainda pode existir uma ligação cíclica entre a comercialização e a extração de matéria-prima. Essa ligação se dá após o fim da vida útil de um carro, que geralmente acompanha o processo de desmanche de carros, que separa partes e materiais destes que podem ser reciclados e, de maneira direta ou indireta, podem servir como matéria-prima para produção de novos veículos.
-
----
-
-# Referências
