@@ -16,8 +16,8 @@
 
 &emsp;Como mencionado na TAPI (Termo de Arbetura de Projeto Inicial), a visualização dos resultados do modelo é um requisito para a MVP da solução. Para isso e para as necessidades listadas acima, os dashboards interativos são uma ótima opção, uma vez que podem contar com gráficos que permitam filtrar por diferentes checkpoints e proporcionar uma visão clara e imediata do status da produção. Mapas de calor podem ser utilizados para identificar rapidamente as áreas de produção. 
 
-Ademais, também é interessante a possibilidade de geração de relatórios automáticos a partir deste dashboard, os quais poderiam ser customizados de acordo com as necessidades dos gerentes e supervisores, incluindo dados históricos e previsões baseadas nos modelos preditivos. Também pode ser interessanque que diferentes perfis de visualização sejam implementados para operadores, supervisores e gerentes, de modo que cada perfil receba as informações mais relevantes para suas responsabilidades.
+&emsp;Ademais, também é interessante a possibilidade de geração de relatórios automáticos a partir deste dashboard, os quais poderiam ser customizados de acordo com as necessidades dos gerentes e supervisores, incluindo dados históricos e previsões baseadas nos modelos preditivos. Também pode ser interessanque que diferentes perfis de visualização sejam implementados para operadores, supervisores e gerentes, de modo que cada perfil receba as informações mais relevantes para suas responsabilidades.
 
 ## Possibilidades de acesso
 
-O acesso aos dashboards e relatórios deve ser possível através de um portal web seguro, permitindo que diferentes perfis de usuários acessem as informações de qualquer dispositivo com conexão à internet. Além disso, a visualização pode ser integrada com sistemas existentes na planta da Volkswagen.
+&emsp;O acesso aos dashboards e relatórios deve ser possível através de um portal web seguro, permitindo que diferentes perfis de usuários acessem as informações de qualquer dispositivo com conexão à internet. Além disso, a visualização pode ser integrada com sistemas existentes na planta da Volkswagen.
