@@ -47,3 +47,9 @@
 &emsp;Além disso, a escolha de tecnologias, como o uso de Python para o desenvolvimento do modelo e a integração com a AWS para a escalabilidade da solução, fortalece ainda mais a viabilidade técnica do projeto. O principal desafio será garantir a implementação de uma interface amigável e intuitiva que permita aos usuários finais compreenderem facilmente os resultados das classificações e agirem conforme necessário.
 
 &emsp;Portanto, com as condições atuais, a execução do projeto é recomendada, desde que os desafios identificados sejam devidamente abordados e mitigados ao longo do desenvolvimento.
+
+## Diagrama de Blocos
+
+![Diagrama de Blocos](../../../static/img/sprint_1/diagrama_de_blocos.png)
+
+
