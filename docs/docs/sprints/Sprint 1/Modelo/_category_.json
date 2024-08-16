@@ -1,0 +1,8 @@
+{
+    "label": "Modelo",
+    "position": 1,
+    "link": {
+        "type": "generated-index",
+        "description": "Essa seção busca documentar o modelo de machine learning desenvolvido para o projeto e discutir sobre o processo de desenvolvimento, bem como as escolhas de projeto."
+    }
+}
