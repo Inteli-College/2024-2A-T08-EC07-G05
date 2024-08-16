@@ -2,5 +2,9 @@
 /FALHAS_04_05_06_2024_Relatorio_1.csv
 /STATUS_PREDICTOR_ANO.csv
 /PREDICT_VW_M7_EC.csv
+/RESULTADOS_04_06_2024_full.parquet
+/RESULTADOS_04_06_2024_TRATADO.parquet
+/resultados.csv
+/falhas.csv
 /venv
 /.ipynb_checkpoints
