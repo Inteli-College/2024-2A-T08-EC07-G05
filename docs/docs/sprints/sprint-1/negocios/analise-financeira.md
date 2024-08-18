@@ -13,9 +13,9 @@ description: Análise Financeira referente a Sprint 1.
 
 &emsp;A proposta de valor do projeto é fundamental para definir como o projeto IT-CROSS vai gerar valor significativo para a Volkswagen. A seguir, exploramos os principais aspectos ao observar o Business Model Canvas:
 
-<p align="center"><b> Figura Business Model Canvas</b></p>
+<p align="center"><b> Figura 1 - Figura Business Model Canvas</b></p>
 <div align="center">
-  ![](../../../../static/img/sprint1/BMC.png)
+  ![](../../../../static/img/sprint-1/BMC.png)
   <p><b>Fonte:</b> Elaborado por IT-CROSS</p>
 </div>
 
@@ -215,9 +215,9 @@ Esse trecho explicando sobre como consideramos e calculamos o lucro + impostos s
 
 &emsp;Para realizar o cálculo do retorno sobre o investimento podemos analisar a seguinte fórmula:
 
-<p align="center"><b> Figura Retorno Sobre o Investimentos</b></p>
+<p align="center"><b> Figura 2 - Retorno Sobre o Investimento</b></p>
 <div align="center">
-  ![](../../../../static/img/sprint1/ROI.png)
+  ![](../../../../static/img/sprint-1/ROI.png)
   <p><b>Fonte:</b> Elaborado por IT-CROSS</p>
 </div>
 
@@ -234,9 +234,9 @@ Esse trecho explicando sobre como consideramos e calculamos o lucro + impostos s
 
 &emsp;Se, por exemplo, o Custo Total Estimado para desenvolver e implementar o IT-CROSS for R$ 583.026,08 e a Receita Total Estimada for R$ 700.000,00 com a venda de contratos de suporte e expansão para outras plantas, o ROI seria calculado da seguinte forma:
 
-<p align="center"><b> Figura Retorno Sobre o Investimentos cálculo</b></p>
+<p align="center"><b> Figura 3 - Retorno Sobre o Investimento cálculo</b></p>
 <div align="center">
-  ![](../../../../static/img/sprint1/ROI-example.png)
+  ![](../../../../static/img/sprint-1/ROI-example.png)
   <p><b>Fonte:</b> Elaborado por IT-CROSS</p>
 </div>
 
