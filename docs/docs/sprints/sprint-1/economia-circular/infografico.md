@@ -31,5 +31,5 @@ sidebar_position: 4
 
 # Referências
 
-1. Responsible Raw Materials Report 2021 (Englisch) | Volkswagen Group. Disponível em: <www.volkswagen-group.com/de/publikationen/weitere/responsible-raw-materials-report-2021-englisch-1737.>
+1. Responsible Raw Materials Report 2021 (Englisch) | Volkswagen Group. Disponível em: < www.volkswagen-group.com/de/publikationen/weitere/responsible-raw-materials-report-2021-englisch-1737. >
 2. Informação obtida a partir de entrevista coletiva em kick-off do projeto entre alunos Inteli e representantes da empresa parceira.

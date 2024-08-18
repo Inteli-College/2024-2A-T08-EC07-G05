@@ -1,4 +1,9 @@
-# Levantamento de requisitos de visualização 
+---
+title: Requisitos de visualização
+sidebar_position: 3
+---
+
+# Requisitos de visualização 
 
 &emsp;Por requisitos de visualização, entende-se tudo que será necessário para que o usuário da solução possa visualizar os resultados. Tendo em vista que, de acordo com o especificado na [respectiva seção], a persona principal do projeto desenvolvido pela equipe It-Cross é Luana, uma supervisora da linha de produção de carros da Volkswagen, é necessário que os requisitos de visualização englobem as tarefas diárias desta, que incluem transitar entre pontos da linha constantemente e inspecioná-la de maneira simultânea.
 
