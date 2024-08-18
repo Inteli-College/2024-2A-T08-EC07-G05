@@ -55,7 +55,10 @@ slug: "/requisitos_de_viabilidade"
 &emsp;Portanto, com as condições atuais, a execução do projeto é recomendada, desde que os desafios identificados sejam devidamente abordados e mitigados ao longo do desenvolvimento.
 
 ## Diagrama de Blocos
+<p style={{textAlign: 'center'}}>Figura 1 - Diagrama de blocos</p>
 
 ![Diagrama de Blocos](../../../../static/img/sprint-1/diagrama_de_blocos.png)
+
+<p style={{textAlign: 'center'}}>Fonte: Elaborado pela equipe It-Cross</p>
 
 
