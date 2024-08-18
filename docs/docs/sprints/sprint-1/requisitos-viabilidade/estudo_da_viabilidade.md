@@ -1,4 +1,10 @@
-# 3. Estudo de Viabilidade Técnica
+---
+title: Requisitos de viabilidade técnica
+sidebar_position: 3
+slug: "/requisitos_de_viabilidade"
+---
+
+# Estudo de Viabilidade Técnica
 
 ## Introdução
 
