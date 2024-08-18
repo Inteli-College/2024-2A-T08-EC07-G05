@@ -1,4 +1,11 @@
-# Levantamento de matérias-primas, recursos, processos e impactos relacionados com a produção de automovéis
+---
+title: Contexto da atividade
+sidebar_position: 2
+---
+
+# Levantamento de contexto da atividade
+
+> :bulb: **Tip:** Essa seção contextualiza a atividade de produção de automóveis na Volkswagen, incluindo uma visão gerais sobre matérias-primas, recursos, processos e impactos relacionados à fabricação dos veículos.
 
 &emsp;A produção de carros envolve uma variedade de matérias-primas, recursos, processos e impactos. No que se refere às matérias-primas, aço e alumínio são utilizados na estrutura e carroceria dos carros, com o aço de alta resistência sendo comum em componentes estruturais e o alumínio sendo usado nas partes que exigem leveza, como capôs e portas. Os plásticos e polímeros são usados no interior dos carros, como painéis de portas, painéis de instrumentos e assentos. O vidro é utilizado para fabricar as janelas, para-brisas e espelhos. A borracha é usada na produção de pneus, vedações, mangueiras e outras partes flexíveis do carro. O cobre é usado na fiação elétrica e componentes eletrônicos por sua condutividade, enquanto o silício e outros semicondutores são importantes para os sistemas eletrônicos e de infotainment, sensores, microprocessadores e módulos de controle. O petróleo e seus derivados são matérias-primas para os plásticos, borracha sintética, e também são utilizados na produção de combustíveis e lubrificantes.
 
