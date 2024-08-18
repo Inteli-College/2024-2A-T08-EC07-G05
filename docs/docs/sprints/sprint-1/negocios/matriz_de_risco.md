@@ -14,7 +14,7 @@ import styles from "@site/src/css/profile.module.css";
 
 <h2 align="center"> Matriz de Riscos </h2>
 
-![Matriz de Risco](../../../../static/img/matriz_de_risco.PNG)
+![Matriz de Risco](../../../../static/img/sprint-1/matriz_de_risco.PNG)
 
 <h6 align="center"> Fonte: Elaboração Grupo IT-Cross </h6>
 

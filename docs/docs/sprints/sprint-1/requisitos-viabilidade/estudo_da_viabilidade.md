@@ -56,6 +56,6 @@ slug: "/requisitos_de_viabilidade"
 
 ## Diagrama de Blocos
 
-![Diagrama de Blocos](../../../../static/sprint_1/diagrama_de_blocos.png)
+![Diagrama de Blocos](../../../../static/img/sprint-1/diagrama_de_blocos.png)
 
 
