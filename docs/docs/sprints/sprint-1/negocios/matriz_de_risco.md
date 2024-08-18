@@ -12,7 +12,7 @@ import styles from "@site/src/css/profile.module.css";
 
 **OBS: Todos os itens dispostos na matriz de risco vão estar descritos logo abaixo para melhor compreensão de onde pode-se encontrar os verdadeiros riscos/oportunidades e como mitigalos/potencializa-los**
 
-<h2 align="center"> Matriz de Riscos </h2>
+<h2 align="center"> Figura 1 - Matriz de Riscos </h2>
 
 ![Matriz de Risco](../../../../static/img/sprint-1/matriz_de_risco.PNG)
 
