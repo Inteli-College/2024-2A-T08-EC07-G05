@@ -1,5 +1,5 @@
 ---
-title: Requisitos de viabilidade técnica
+title: Estudo de viabilidade técnica
 sidebar_position: 3
 slug: "/requisitos_de_viabilidade"
 ---
