@@ -17,6 +17,8 @@ slug: "/requisitos_de_viabilidade"
 - **RF02 - Segurança e Privacidade:** O sistema deve garantir a proteção dos dados sensíveis e prevenir acessos não autorizados, assegurando a integridade dos dados durante o processamento e transmissão.
 - **RF03 - Integração com AWS:** O sistema deve ser projetado para integração com a AWS. A infraestrutura deve ser capaz de escalar automaticamente conforme a demanda e assegurar alta disponibilidade.
 - **RF04 - Interface Visual:** O resultado do algoritmo deve ser apresentado de forma visual e compreensível, indicando o tipo de inspeção necessária para cada veículo.
+- **RF05 - API do Modelo:** O sistema deve disponibilizar uma API para que a Volkswagen possa integrar o modelo de classificação em seus sistemas internos, permitindo a automação do processo de inspeção. Podendo também fazer o retreino dos modelos com novos dados.
+- **RF06 - Adicionar novos dados:** O sistema deve permitir a adição de novos dados para treinamento do modelo, garantindo a atualização contínua do algoritmo e a melhoria da precisão das predições.
 
 ### Dados Disponíveis
 
@@ -51,8 +53,6 @@ slug: "/requisitos_de_viabilidade"
 &emsp;Após análise dos requisitos funcionais, dos desafios técnicos e da qualidade dos dados fornecidos pela Volkswagen, concluímos que é tecnicamente viável desenvolver a solução proposta. O volume e a qualidade dos dados disponíveis são adequados para treinar um modelo preditivo capaz de atingir uma taxa de assertividade acima de 95%, desde que seja implementado um processo rigoroso de calibração e monitoramento contínuo.
 
 &emsp;Além disso, a escolha de tecnologias, como o uso de Python para o desenvolvimento do modelo e a integração com a AWS para a escalabilidade da solução, fortalece ainda mais a viabilidade técnica do projeto. O principal desafio será garantir a implementação de uma interface amigável e intuitiva que permita aos usuários finais compreenderem facilmente os resultados das classificações e agirem conforme necessário.
-
-&emsp;Portanto, com as condições atuais, a execução do projeto é recomendada, desde que os desafios identificados sejam devidamente abordados e mitigados ao longo do desenvolvimento.
 
 ## Diagrama de Blocos
 <p style={{textAlign: 'center'}}>Figura 1 - Diagrama de blocos</p>
