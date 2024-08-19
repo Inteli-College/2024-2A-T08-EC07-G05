@@ -42,11 +42,33 @@ Features selecionadas:
 
 ## Avaliação
 
-&nbsp;&nbsp;A avaliação é a etapa em que a equipe irá avaliar o desempenho do modelo, verificando se ele está atendendo aos objetivos propostos e se ele está gerando valor para o negócio. Para avaliar o modelo, a equipe utilizou a métrica de...
+&nbsp;&nbsp;A avaliação é a etapa em que a equipe irá avaliar o desempenho do modelo, verificando se ele está atendendo aos objetivos propostos e se ele está gerando valor para o negócio.
 
-(A ser preenchido pelo zé)
+&nbsp;&nbsp;Após a divisão dos dados entre treino e teste, pudemos treinar o modelo e depois testá-lo. Com os testes, avaliamos esse resultado e aqui está um resumo dos dados:
+
+| Modelo             | Acurácia | Recall |
+|--------------------|----------|--------|
+| RF                 | 0.91     | 0.50   |
+| KNN                | 0.91     | 0.50   |
+| XGBoost            | 0.75     | 0.53   |
+
+&nbsp;&nbsp;Acurácia se refere a quantidade de previsões corretas em relação ao total de predições realizadas. E recall se refere a quantidade de previsões corretas em relação a previsões que eram pra serem corretas e realmente foram corretas mais previsões que eram pra terem sido corretas e foram negativas (falso negativo) - essa métrica em específico é a mais importante para nós, pois não queremos prever um carro como sem falhas, sendo que na verdade possuía falhas em primeiro lugar.
+
+&nbsp;&nbsp;A primeiro momento, o valor de 91% de acurácia é surpreendente. Mas acontece que o nosso dataset está desbalanceado. Isso significa que temos mais dados de uma classe que outra, podendo classificar nosso modelo em um estado de overfitting - onde o modelo fica enviesado pois há menos dados de uma classe. Nesse caso, temos mais casos de carros que não tiveram falhas do que carros que realmente tiveram falhas.
+
+&nbsp;&nbsp;Para corrigir esse erro, buscamos por estratégias de balancear os dados. A técnica que usamos se chama `RandomUnderSampler`, no qual ela equaliza a quantidade de valores de cada classe, diminuindo a classe de maior valor (carros que não apresentaram falhas no halle rodagem). Agora, podemos novamente treinar e testar nosso modelo. E esses foram os resultados oficiais do nosso primeiro modelo inicial:
+
+| Modelo             | Acurácia | Recall |
+|--------------------|----------|--------|
+| Balanceado RF      | 0.51     | 0.51   |
+| Balanceado KNN     | 0.49     | 0.49   |
+| Balanceado XGBoost | 0.48     | 0.48   |
 
 
 ## Conclusão
 
-(A ser preenchido pelo zé)
+&nbsp;&nbsp;Realizamos técnicas eficientes para entender, processar e modelar os dados. Porém, podemos concluir que nosso modelo ainda necessita de ajustes. Apesar do valor baixo, é um ótimo resultado para essa versão inicial. A seguir, estratégias que iremos implementar nas próximas sprints:
+
+* **Incorporar mais dados**. Nosso dataset possui poucos veículos que apresentaram falhas no halle de rodagem e mais dados seriam interessantes para o modelo;
+* **Extrair mais features**. Podemos entender melhor a relação das tabelas e extrair mais features. Além disso, temos features que não inserimos desta vez, mas que serão adicionadas;
+* **Rodar outros tipos de algoritmos de Machine Learning**. Há outros algoritmos de classificação que podemos rodar para ver e avaliar as diferenças nos resultados. 
