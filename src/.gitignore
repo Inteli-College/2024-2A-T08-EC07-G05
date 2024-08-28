@@ -5,3 +5,5 @@ src/data/xlsx/FALHAS_PREDICT_1.xlsx
 /src/utils
 /src/notebooks/Sprint_2/.ipynb_checkpoints
 /src/notebooks/Sprint_1/.ipynb_checkpoints
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
