@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd 
 import pickle
 from fastapi import HTTPException
-from models.models import Operacao, Procedimento, Info
 from supabase import Client
 from datetime import datetime
 
@@ -103,4 +102,4 @@ def prediction(knr: str = None, supabase = Client):
     # Convert numpy types to native Python types
     prediction_value = prediction_result[0].item()  # Convert numpy.int64 to Python int
 
-    return {"prediction": prediction_value}
+    return {"prediction": prediction_value, "cor": info['COR'], "motor": info['MOTOR']}
