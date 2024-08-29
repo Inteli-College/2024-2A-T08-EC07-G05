@@ -1,17 +1,27 @@
 import React from 'react';
 import BaseButton from "@/components/baseButton"; 
 import IconHome from "@/../public/icone_home.svg";
-// import styles from "style.css"
+import "./style.css";
 
 function AnalysisPage() {
+
+  const zones = [
+    { name: "ZP1", pintura: 80, amassados: 50, painel: 20 },
+    { name: "ZP2", pintura: 70, amassados: 60, painel: 30 },
+    { name: "ZP3", pintura: 85, amassados: 40, painel: 25 },
+    { name: "ZP4", pintura: 60, amassados: 75, painel: 45 },
+    { name: "ZP5", pintura: 90, amassados: 55, painel: 35 },
+    { name: "ZP6", pintura: 95, amassados: 65, painel: 50 },
+    { name: "ZP7", pintura: 50, amassados: 70, painel: 30 },
+    { name: "ROD", pintura: 65, amassados: 80, painel: 55 },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
-      {/* Header with Home and Back buttons */}
       <div className="flex justify-between items-center mb-4">
         <div className="flex space-x-2">
-          {/* Home Button using BaseButton component */}
-          <BaseButton text="Home" icon={IconHome} />
-          <button className="bg-gray-300 p-2 rounded-full">
+          <BaseButton text="Home" icon={IconHome} className="button-gray" />
+          <a href="/history" className="bg-gray-300 p-2 rounded-full flex items-center space-x-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -26,38 +36,31 @@ function AnalysisPage() {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-          </button>
+            <span>Voltar</span>
+          </a>
         </div>
         <div className="text-sm bg-white p-2 rounded shadow-md">
           precisão do modelo: 93%
         </div>
       </div>
-
-      {/* Title */}
       <h1 className="text-xl font-semibold mb-4">Recorrência de falhas:</h1>
-
-      {/* Grid for ZP blocks */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {/* ZP1 Block */}
-        <div className="bg-gray-300 p-4 rounded border-4 border-blue-400">
-          <h2 className="font-semibold mb-2">ZP1</h2>
-          <ul className="text-red-500">
-            <li>Pintura</li>
-            <li>Amassados</li>
-            <li>Painel</li>
-            <li>--</li>
-          </ul>
-        </div>
-
-        {/* Other ZP Blocks */}
-        {['ZP2', 'ZP3', 'ZP4', 'ZP5', 'ZP6', 'ZP7', 'ROD'].map((zone) => (
-          <div key={zone} className="bg-gray-300 p-4 rounded">
-            <h2 className="font-semibold mb-2">{zone}</h2>
+        {zones.map((zone) => (
+          <div key={zone.name} className="bg-gray-300 p-4 rounded">
+            <h2 className="font-semibold mb-2">{zone.name}</h2>
             <ul className="text-red-500">
               <li>Pintura</li>
+              <div className="progress-bar">
+                <div className="progress-bar-fill" style={{ width: `${zone.pintura}%` }}></div>
+              </div>
               <li>Amassados</li>
+              <div className="progress-bar">
+                <div className="progress-bar-fill" style={{ width: `${zone.amassados}%` }}></div>
+              </div>
               <li>Painel</li>
-              <li>--</li>
+              <div className="progress-bar">
+                <div className="progress-bar-fill" style={{ width: `${zone.painel}%` }}></div>
+              </div>
             </ul>
           </div>
         ))}
