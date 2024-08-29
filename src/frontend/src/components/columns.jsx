@@ -5,19 +5,15 @@ import { ColumnDef } from "@tanstack/react-table";
 // Definindo as colunas da tabela
 export const columns = [
   {
-    accessorKey: "username",
-    header: "Username",
+    accessorKey: "KNR",
+    header: "KNR",
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: "model",
+    header: "Modelo",
   },
   {
-    accessorKey: "phone",
-    header: "Phone Number",
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
+    accessorKey: "cor",
+    header: "Cor",
   }
 ];
