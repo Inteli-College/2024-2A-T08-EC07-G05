@@ -1,0 +1,122 @@
+/* Corpo da página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Container principal */
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  
+  .bg-gray-100 {
+    background-color: #f7f7f7;
+  }
+  
+  .p-4 {
+    padding: 1rem;
+  }
+  
+  /* Header */
+  .flex {
+    display: flex;
+  }
+  
+  .justify-between {
+    justify-content: space-between;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .space-x-2 > *:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+  
+  /* Botão Home personalizado */
+  button.bg-gray-300 {
+    background-color: #d1d5db;
+  }
+  
+  button.p-2 {
+    padding: 0.5rem;
+  }
+  
+  button.rounded-full {
+    border-radius: 9999px;
+  }
+  
+  /* Ícone */
+  svg.h-6 {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  .bg-white {
+    background-color: #ffffff;
+  }
+  
+  .shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .p-2 {
+    padding: 0.5rem;
+  }
+  
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  
+  /* Título */
+  .text-xl {
+    font-size: 1.25rem;
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  
+  /* Grid */
+  .grid {
+    display: grid;
+  }
+  
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .gap-4 {
+    gap: 1rem;
+  }
+
+/* Barra de progresso */
+.progress-bar {
+    background-color: #e5e7eb; /* Fundo da barra (cinza claro) */
+    border-radius: 0.25rem; /* Bordas arredondadas */
+    height: 1rem; /* Altura da barra */
+    margin-bottom: 0.5rem; /* Espaçamento abaixo de cada barra */
+    overflow: hidden; /* Esconde conteúdo que transborda */
+  }
+  
+  .progress-bar-fill {
+    background-color: #ef4444; /* Cor de preenchimento (vermelho) */
+    height: 100%; /* Preenche toda a altura da barra */
+    border-radius: 0.25rem; /* Bordas arredondadas para o preenchimento */
+    transition: width 0.3s ease-in-out; /* Animação suave ao alterar a largura */
+  }
