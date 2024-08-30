@@ -1,8 +1,8 @@
 ---
-title: Modelos
-sidebar_position: 2
+title: Estudo dos Modelos
+sidebar_position: 1
+slug: "/estudo-modelo-s2"
 ---
-
 
 # Modelos RNN
 
