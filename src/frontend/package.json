@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "next": "14.2.5",
+    "node": "^20.17.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-router-dom": "^6.26.1",
     "@tanstack/react-table": "^8.20.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
