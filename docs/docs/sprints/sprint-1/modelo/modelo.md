@@ -1,3 +1,9 @@
+---
+title: Modelo
+sidebar_position: 1
+slug: "/modelo"
+---
+
 # Primeiro modelo de predição
 
 ## Introdução
