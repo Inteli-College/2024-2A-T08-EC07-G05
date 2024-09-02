@@ -5,13 +5,16 @@ sidebar_position: 1
 
 # Análise exploratória e processo de tratamento dos novos dados
 
-## Tabela: FALHAS_PREDICT
+&emsp;Nesta sprint, realizamos uma análise exploratória do dataset seguindo a mesma metodologia utilizada em etapas anteriores. Identificamos as colunas presentes, analisamos os dados fornecidos e avaliamos a completude geral do dataset. Abaixo, apresentamos os principais trechos de código utilizados durante este processo:
 
-1-Instalando o pandas, pyarrow e numpy para manusear os dados
+## Tabela: FALHAS_PREDICT
+&emsp;Abaixo você pode conferir melhor os trechos relevantes de códigos que utilizamos essa etapa:
+
+### 1. Instalando o pandas, pyarrow e numpy para manusear os dados
 ```python
 !pip install pandas pyarrow numpy
 ```
-2-Importando todas as bibliotecas para poder trabalhar com os dados
+### 2. Importando todas as bibliotecas para poder trabalhar com os dados
 ```python
 import pandas as pd
 import pyarrow
@@ -21,13 +24,14 @@ import requests
 import io
 import re
 ```
-3- Nomeando o dataset como "df_falhas_predict" e plotando as primeiras 5 linhas
+### 3. Nomeando o dataset como "df_falhas_predict" e plotando as primeiras 5 linhas
 ```python
 df_falhas_predict = pd.read_csv("../../../data/csv/FALHAS_PREDICT.csv")
 df_falhas_predict.head()
 ```
 
-4- Tirando a primeira coluna "Unnamed: 0" pois não tinha informações relevantes, depois tiramos a primeira linha e colocamos os nomes certos das colunas
+### 4. Tratamento nas colunas da tabela
+&emsp;Tirando a primeira coluna "Unnamed: 0" pois não tinha informações relevantes, depois tiramos a primeira linha e colocamos os nomes certos das colunas
 Nome das colunas = 'KNR', 'MODELO', 'COR', 'MOTOR', 'ESTACAO', 'USUARIO', 'HALLE', 'FALHA', 'DATA'
 ```python
 df_falhas_predict.drop(columns = 'Unnamed: 0', inplace=True)
@@ -36,6 +40,8 @@ df_falhas_predict.drop([0,1], axis = 0, inplace=True)
 columns = df_falhas_predict.columns.tolist()
 print("Columns:", columns)
 ```
+
+
 
 ## Conclusão
 
