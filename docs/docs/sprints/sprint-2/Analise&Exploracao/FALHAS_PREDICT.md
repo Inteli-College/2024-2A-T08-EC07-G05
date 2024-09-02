@@ -3,9 +3,9 @@ title: Tabelas
 sidebar_position: 1
 ---
 
-# Análise exploratória e processo de tratamento do database
+# Análise exploratória e processo de tratamento dos novos dados
 
-## FALHAS_PREDICT
+## Tabela: FALHAS_PREDICT
 
 1-Instalando o pandas, pyarrow e numpy para manusear os dados
 ```python
