@@ -6,7 +6,7 @@ slug: "/modelo-s2"
 
 # Implementação de RNN com os modelos LSTM e GRU
 
-&emsp;Durante essa sprint, decidimos implementar Redes Neurais Recorrentes (RNN) para treinar nossos modelos devido à necessidade de capturar dependências temporais nos dados. As RNNs são particularmente eficazes em lidar com sequências de dados, o que é essencial para problemas onde o contexto histórico influencia diretamente as previsões futuras. Dentro das RNNs, optamos por utilizar duas variantes populares: LSTM (Long Short-Term Memory) e GRU (Gated Recurrent Unit).
+&emsp;Durante essa sprint, decidimos implementar Redes Neurais Recorrentes (RNN) para treinar nossos modelos devido à necessidade de capturar tendências temporais nos dados. As RNNs são particularmente eficazes em lidar com sequências de dados, o que é essencial para problemas onde o contexto histórico influencia diretamente as previsões futuras. Dentro das RNNs, optamos por utilizar duas variantes populares: LSTM (Long Short-Term Memory) e GRU (Gated Recurrent Unit).
 
 &emsp;**Por que LSTM e GRU?**
 
@@ -78,7 +78,7 @@ df = df.drop(columns=["KNR"])
 
 ## Construção dos Modelos RNN: GRU e LSTM
 
-&emsp;Para explorar o potencial das Redes Neurais Recorrentes (RNN) na classificação de falhas, implementamos dois tipos de modelos: GRU (Gated Recurrent Unit) e LSTM (Long Short-Term Memory). Ambos os modelos são bem conhecidos por sua eficácia em tarefas que envolvem sequências temporais, como a que estamos abordando.
+&emsp;Para explorar o potencial das Redes Neurais Recorrentes (RNN) na classificação de falhas, implementamos dois tipos de modelos: GRU (Gated Recurrent Unit) e LSTM (Long Short-Term Memory). Ambos os modelos são bem conhecidos por sua eficácia em tarefas que envolvem sequências temporais.
 
 ### Modelo GRU
 
@@ -179,8 +179,6 @@ O relatório de classificação para o modelo GRU é o seguinte:
          1.0       1.00      0.89      0.94       824
 
     accuracy                           0.95      1665
-   macro avg       0.95      0.95      0.95      1665
-weighted avg       0.95      0.95      0.95      1665
 ```
 
 - Precisão (Precision): 0.91 para a classe 0 e 1.00 para a classe 1
@@ -223,8 +221,6 @@ print(classification_report(y_test, y_pred_lstm))
          1.0       1.00      0.92      0.96       824
 
     accuracy                           0.96      1665
-   macro avg       0.96      0.96      0.96      1665
-weighted avg       0.96      0.96      0.96      1665
 ```
 
 - Precisão (Precision): 0.93 para a classe 0 e 1.00 para a classe 1

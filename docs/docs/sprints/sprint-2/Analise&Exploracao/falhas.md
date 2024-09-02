@@ -4,12 +4,12 @@ sidebar_position: 1
 slug: "/falhas"
 ---
 
-# Análise exploratória e processo de tratamento do datase
+# Análise exploratória e processo de tratamento dos novos dados
 
 &emsp;Nesta sprint, realizamos uma análise exploratória do dataset seguindo a mesma metodologia utilizada em etapas anteriores. Identificamos as colunas presentes, analisamos os dados fornecidos e avaliamos a completude geral do dataset. Abaixo, apresentamos os principais trechos de código utilizados durante este processo:
 
 ## Tabela Falhas-Predict-1
-&emsp;Abaixo você pode conferir melhor os trechos crucias de códigos que utilizamos essa etapa:
+&emsp;Abaixo você pode conferir melhor os trechos relevantes de códigos que utilizamos essa etapa:
 
 ### 1. Carregamento do Dataset
 &emsp;Primeiramente, carregamos o dataset que será utilizado na análise:
