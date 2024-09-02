@@ -37,7 +37,7 @@ CREATE TABLE Info (
 
 ### Tabela Procedimento
 
-A tabela `Procedimento` armazena os procedimentos realizados em cada veículo.
+A tabela `Procedimento` armazena os procedimentos realizados em cada veículo. Esta tabela foi criada com base no dataset de "Resultados" fornecido pelo parceiro. 
 
 - **ID_PROCEDIMENTO**: Identificador único do procedimento (chave primária).
 - **KNR**: Identificador do veículo (chave estrangeira referenciando Info.KNR).
@@ -59,7 +59,7 @@ CREATE TABLE Procedimento (
 
 ### Tabela Operacao
 
-A tabela `Operacao` armazena informações sobre operações específicas realizadas nos veículos.
+A tabela `Operacao` armazena informações sobre operações específicas realizadas nos veículos. Esta tabela foi criada com base no dataset de "Falhas" fornecido pelo parceiro. Ela registra KNRs que tiveram falhas assim como os que não tiveram, para não enviesar o modelo.
 
 - **ID**: Identificador único da operação (chave primária).
 - **KNR**: Identificador do veículo (chave estrangeira referenciando Info.KNR).
@@ -83,7 +83,7 @@ CREATE TABLE Operacao (
 
 ### Tabela Performance
 
-A tabela `Performance` armazena dados de performance e predições dos modelos aplicados aos veículos.
+A tabela `Performance` armazena dados de performance e predições dos modelos aplicados aos veículos. Foi criada para controle nosso na aplicação que o parceiro irá utilizar. 
 
 - **KNR**: Identificador do veículo (chave primária).
 - **ID_MODELO**: Identificador do modelo (chave estrangeira referenciando Modelo.ID_MODELO).
@@ -107,7 +107,7 @@ CREATE TABLE Performance (
 
 ### Tabela Modelo
 
-A tabela `Modelo` armazena informações sobre os modelos utilizados para análise de performance.
+A tabela `Modelo` armazena informações sobre os modelos de inteligência artificial utilizados para análise de performance.
 
 - **ID_MODELO**: Identificador único do modelo (chave primária).
 - **DATA_TREINO**: Data do treinamento do modelo.
