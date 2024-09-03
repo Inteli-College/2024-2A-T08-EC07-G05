@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import BaseButton from "@/components/baseButton"; 
 import IconHome from "@/../public/icone_home.svg";
@@ -42,11 +43,15 @@ function HistoryPage() {
     </tr>
   );
 
+  const homeClick = () => {
+    window.location.href = '/';
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       {/* Header with Home Icon and Title */}
       <div className="flex items-center mb-4">
-        <BaseButton text="Home" icon={IconHome} className="button-gray" />
+        <BaseButton text="Home" icon={IconHome} onClick={homeClick} className="button-gray" />
         <a href="/analysis" className="ml-4 text-gray-700 font-semibold text-lg">Análise</a>
       </div>
 

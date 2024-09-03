@@ -55,6 +55,10 @@ export default function PredictionPage() {
     }
   };
 
+  const homeClick = () => {
+    window.location.href = '/';
+  };
+
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -63,7 +67,7 @@ export default function PredictionPage() {
     <main className="flex min-h-screen flex-col justify-between p-10">
 
       <div className="h-12 w-full flex justify-evenly mb-6">
-        <BaseButton icon={IconHome} />
+        <BaseButton icon={IconHome} onClick={homeClick} />
         <InputBar onChange={handleInputChange} />
         <BaseButton text='Ok' onClick={handleButtonClick} />
       </div>
