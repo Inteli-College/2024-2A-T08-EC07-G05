@@ -16,3 +16,9 @@ sidebar_position: 1
 <p style={{textAlign: 'center'}}>Fonte: Elaborado pela equipe It-Cross</p>
 
 &emsp;Luana Gomes, a persona descrita na figura 1, representa a pessoa responsável por visualizar o dashboard com os resultados do modelo preditivo envolvido na solução. Luana, como supervisora da linha produção, se encarregaria de analisar tais informações e direcionar seu trabalho de acordo com elas. Isso se daria de modo que, por exemplo, caso o dashboard mostre que muitos carros tem potencial para apresentar falhas a partir de uma etapa específica da produção, a Luana foque sua supervisão sobre a determinada etapa.
+
+<p style={{textAlign: 'center'}}>Figura 2 - Persona: Leonardo Garcia</p>
+
+![](../../../../static/img/sprint-1/persona2.png)
+
+&emsp;Leonardo Garcia, a persona descrita na figura 2, representa o analista de dados responsável por monitorar e interpretar os dados na área de qualidade dentro da Volkswagen. Leonardo, em sua função, se encarrega de analisar os dados coletados ao longo do tempo e traduzir essas informações em insights valiosos para melhorar os processos de produção. Caso os dados revelem, por exemplo, que há uma tendência de falhas em veículos após uma determinada fase da produção, Leonardo direciona suas análises para identificar a raiz do problema e sugerir ajustes que minimizem esses riscos, garantindo a consistência e a qualidade dos carros fabricados.
