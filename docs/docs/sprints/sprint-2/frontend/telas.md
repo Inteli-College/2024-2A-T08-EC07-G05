@@ -16,7 +16,7 @@
 
 ## Interface do Usuário
 
-&emsp;Atualmente, foram desenvolvidas trêS páginas para mostrar de forma organizada e limpa os dados resultantes do modelo. Essas páginas são consecutivamente a de predição do modelo, histórico de carros na produção e uma página de análise derivada da página de histórico onde mostra-se detalhadamente cada tipo de falha ocorrida em cada checkpoint e durante a rodagem. A seguir, você poderá ver o desenvolvimento detalhado de cada página:
+&emsp;Atualmente, foram desenvolvidas três páginas para mostrar de forma organizada e limpa os dados resultantes do modelo. Essas páginas são consecutivamente a de predição do modelo, histórico de carros na produção e uma página de análise derivada da página de histórico, a qual mostra detalhadamente cada tipo de falha ocorrida em cada checkpoint e durante a rodagem. A seguir, você poderá ver o desenvolvimento detalhado de cada página:
 
 ### Tela de predição do modelo
 
