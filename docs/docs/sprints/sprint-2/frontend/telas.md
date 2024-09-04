@@ -2,7 +2,7 @@
 
 ## Introdução
 
-&emsp;Durante a segunda sprint do projeto, a equipe It-Cross desenvolveu uma interface gráfica para proporcionar ao parceiro uma melhor visualização dos dados do modelo preditivo. Seguindo o que foi confeccionado durante a etapa de wireframe, a interface do usuário (UI) foi desenvolvida utilizando o React, que proporcionou uma experiência de desenvolvimento mais eficiente e flexível. Na parte de estilização, a equipe optou por utilizar o framework de CSS chamado Tailwind, que proporcionou a personalização das páginas.
+&emsp;Durante a segunda sprint do projeto, a equipe It-Cross desenvolveu uma interface gráfica para proporcionar ao parceiro uma melhor visualização dos dados do modelo preditivo. Seguindo o que foi confeccionado durante a etapa de wireframe, a interface do usuário (UI) foi desenvolvida utilizando o Next.js, que proporcionou uma experiência de desenvolvimento mais eficiente e flexível devido ao seu suporte a renderização híbrida e server-side rendering (SSR), permitindo otimização de performance e SEO. Na parte de estilização, a equipe optou por utilizar o framework de CSS chamado Tailwind, que proporcionou a personalização das páginas de maneira rápida e modular, facilitando a criação de designs responsivos e reutilizáveis, além de permitir a manutenção simplificada do código CSS.
 
 ## Tecnologias Utilizadas
 
