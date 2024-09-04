@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import predict
+from routers import predict, history
 
 
 app = FastAPI()
 
 app.include_router(predict.router)
+app.include_router(history.router)
 
 app.add_middleware(
     CORSMiddleware,
