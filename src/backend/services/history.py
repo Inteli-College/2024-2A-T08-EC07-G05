@@ -14,6 +14,6 @@ def fetch_history():
     parsed_data = parse_halle_times(data)
     model_data = query_table('Performance','KNR, OUTPUT_MODELO')
     for entry in parsed_data: 
-        pas
+        pass 
     return parsed_data
     
