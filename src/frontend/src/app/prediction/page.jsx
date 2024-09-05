@@ -78,7 +78,7 @@ export default function PredictionPage() {
   };
 
   const validateInput = (e) => { 
-    const regex = /^\d{3}-\d{4}$/;
+    const regex = /^\d{4}-\d{7}$/;
     return regex.test(inputValue);
   };
 
