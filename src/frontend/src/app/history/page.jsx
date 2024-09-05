@@ -1,51 +1,69 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import BaseButton from "@/components/baseButton"; 
 import IconHome from "@/../public/icone_home.svg";
 import "./style.css";
+import { useState } from 'react';
+
 
 function HistoryPage() {
-  const renderTableRow = () => (
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(true)
+  const renderTableRow = (data) => (
+    console.log("data:", data),
     <tr className="table-row">
-      <td className="border px-4 py-2">KNR Example</td>
       <td className="border px-4 py-2">
         <table className="w-full bg-white">
           <thead>
             <tr className="table-header">
-              <th className="border px-2 py-1 text-left">ZP1</th>
-              <th className="border px-2 py-1 text-left">ZP2</th>
-              <th className="border px-2 py-1 text-left">ZP3</th>
-              <th className="border px-2 py-1 text-left">ZP4</th>
               <th className="border px-2 py-1 text-left">ZP5</th>
-              <th className="border px-2 py-1 text-left">ZP6</th>
+              <th className="border px-2 py-1 text-left">ZP5A</th>
+              <th className="border px-2 py-1 text-left">ZP61</th>
+              <th className="border px-2 py-1 text-left">ZP6 / ZP62</th>
+              <th className="border px-2 py-1 text-left">CAB</th>
               <th className="border px-2 py-1 text-left">ZP7</th>
               <th className="border px-2 py-1 text-left">ROD</th>
+              <th className="border px-2 py-1 text-left">AGUA</th>
+              <th className="border px-2 py-1 text-left">ZP8</th>
               <th className="border px-2 py-1 text-left">Total</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td className="border px-2 py-1 text-left">10</td>
-              <td className="border px-2 py-1 text-left">15</td>
-              <td className="border px-2 py-1 text-left">20</td>
-              <td className="border px-2 py-1 text-left">12</td>
-              <td className="border px-2 py-1 text-left">18</td>
-              <td className="border px-2 py-1 text-left">14</td>
-              <td className="border px-2 py-1 text-left">11</td>
-              <td className="border px-2 py-1 text-left">22</td>
-              <td className="border px-2 py-1 text-left">122</td>
+              <td className="border px-2 py-1 text-left"></td>
+              <td className="border px-2 py-1 text-left">mock</td>
+              <td className="border px-2 py-1 text-left">mock</td>
+              <td className="border px-2 py-1 text-left">mock</td>
+              <td className="border px-2 py-1 text-left">mock</td>
+              <td className="border px-2 py-1 text-left">mock</td>
+              <td className="border px-2 py-1 text-left">mock</td>
+              <td className="border px-2 py-1 text-left">mock</td>
+              <td className="border px-2 py-1 text-left">mock</td>
+              <td className="border px-2 py-1 text-left">mock</td>
             </tr>
           </tbody>
         </table>
       </td>
-      <td className="border px-4 py-2">Predição Example</td>
-      <td className="border px-4 py-2">Status Example</td>
     </tr>
   );
 
   const homeClick = () => {
     window.location.href = '/';
   };
+
+  useEffect( () => {
+    fetch('http://127.0.0.1:8000/getHistory')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
+
+  if (isLoading) return <p>Loading...</p>
+  if (!data) return <p>No profile data</p>
+
+  console.log(data)
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
@@ -63,13 +81,18 @@ function HistoryPage() {
               <th className="border px-4 py-2 text-left">KNR</th>
               <th className="border px-4 py-2 text-left">Tempo</th>
               <th className="border px-4 py-2 text-left">Predição</th>
-              <th className="border px-4 py-2 text-left">Status</th>
+              <th className="border px-4 py-2 text-left">Resultado do teste</th>
             </tr>
           </thead>
           <tbody>
-            {renderTableRow()}
-            {renderTableRow()}
-            {/* Adicione mais linhas conforme necessário */}
+            {data.map((item, index) => (
+              <tr key={index} className="table-row">
+                <td className="border px-4 py-2">{item.KNR}</td>
+                <td className="border px-4 py-2">{renderTableRow(item.HALLE_TIMES)}</td>
+                <td className="border px-4 py-2">-</td>
+                <td className="border px-4 py-2">-</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
