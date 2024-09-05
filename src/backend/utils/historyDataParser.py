@@ -12,17 +12,18 @@ def parse_halle_times(data):
     results = []
 
     for knr, halle_data in grouped_data.items():
-
         halle_data.sort(key=lambda x: x["TEMPO"])
 
-        halle_times = []
+        # Create an object with HALLE names as keys and time spent as values
+        halle_times = {}
         for i in range(len(halle_data) - 1):
             current_halle = halle_data[i]
             next_halle = halle_data[i + 1]
-            time_spent = (next_halle["TEMPO"] - current_halle["TEMPO"]).total_seconds() / 60  # Time in minutes
-            halle_times.append((current_halle["HALLE"], time_spent))
+            time_spent = (next_halle["TEMPO"] - current_halle["TEMPO"]).total_seconds() / 60
+            halle_times[current_halle["HALLE"]] = time_spent
 
-        halle_times.append((halle_data[-1]["HALLE"], 0))
+        # Set the last HALLE with zero time as there's no further entry
+        halle_times[halle_data[-1]["HALLE"]] = 0
 
         results.append({
             "KNR": knr,

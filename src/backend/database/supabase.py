@@ -20,7 +20,6 @@ def query_table(table: str, columns: str):
     supabase = create_supabase_client()
     try:
         response = supabase.table(table).select(columns).execute()
-        print(f"CAMADA DE DADOS: {response.data}")
         return response.data
     except Exception as e:
         print("An error occurred:", e)
