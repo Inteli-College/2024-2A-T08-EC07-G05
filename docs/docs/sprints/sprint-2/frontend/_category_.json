@@ -1,0 +1,8 @@
+{
+    "label": "Frontend",
+    "position": 3,
+    "link": {
+        "type": "generated-index",
+        "description": "Essa seção contempla todos os avanços referentes ao frontend da aplicação web durante a sprint 2." 
+    }
+}

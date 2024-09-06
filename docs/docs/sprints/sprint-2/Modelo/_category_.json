@@ -1,0 +1,8 @@
+{
+    "label": "Criação, treino e teste do Modelo",
+    "position": 1,
+    "link": {
+        "type": "generated-index",
+        "description": "Essa seção busca documentar a estratégia que utilizamos para a construção do modelo."
+    }
+}
