@@ -1,0 +1,8 @@
+{
+    "label": "Análise e exploração dos dados",
+    "position": 1,
+    "link": {
+        "type": "generated-index",
+        "description": "Essa seção busca documentar a estratégia que utilizamos na exploração e tratamento dos novos dados que o cliente forneceu nessa sprint"
+    }
+}
