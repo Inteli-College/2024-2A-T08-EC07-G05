@@ -6,7 +6,7 @@ services:
     image: src/frontend
     restart: unless-stopped
     environment:
-      NEXT_PUBLIC_BACKEND_URL: "http://localhost:8000"
+      NEXT_PUBLIC_BACKEND_URL: "http://backend:8000"
     ports:
       - "3000:3000"
     depends_on:
@@ -15,13 +15,15 @@ services:
 
   postgres:
     image: postgres:13
+    user: "${UID}:${GID}" 
     restart: unless-stopped
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydb
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - ./postgres_data/:/var/lib/postgresql/data
+      - ./database:/docker-entrypoint-initdb.d  
     ports:
       - "5432:5432"
     container_name: itcross-postgres
@@ -31,7 +33,7 @@ services:
     image: src/backend
     restart: unless-stopped
     environment:
-      DATABASE_URL: "postgresql://myuser:mypassword@postgres:5432/mydb"
+      DATABASE_URL: ${DATABASE_URL}
     ports:
       - "8000:8000"
     depends_on:
