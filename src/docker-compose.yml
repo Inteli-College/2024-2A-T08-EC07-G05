@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    image: src/frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: "http://localhost:8000"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    container_name: itcross-frontend
+
+  postgres:
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
+    volumes:
+      - ./postgres_data/:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    container_name: itcross-postgres
+
+  backend:
+    build: ./backend
+    image: src/backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: "postgresql://myuser:mypassword@postgres:5432/mydb"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    container_name: itcross-backend
