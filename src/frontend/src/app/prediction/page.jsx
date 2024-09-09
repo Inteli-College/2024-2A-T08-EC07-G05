@@ -1,8 +1,5 @@
 'use client';
-
 import { useState } from 'react';
-import BaseButton from "@/components/baseButton";
-import InputBar from "@/components/inputBar";
 import { columns } from "@/components/columns";
 import { DataTable } from "@/components/ui/data-table";
 import BaseCard from '@/components/baseCard';
@@ -11,7 +8,13 @@ import { Button,
   FormControl,
   FormErrorMessage,
   FormLabel,
-  HStack
+  HStack,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Heading,
+  Text
 } from '@chakra-ui/react'
 
 export default function PredictionPage() {
@@ -118,6 +121,17 @@ export default function PredictionPage() {
 
       {showTable && data && (
         <div className="flex justify-center items-center mt-6">
+          <Card align='center'>
+            <CardHeader>
+              <Heading size='md'> Customer dashboard</Heading>
+            </CardHeader>
+            <CardBody>
+              <Text>View a summary of all your customers over the last month.</Text>
+            </CardBody>
+            <CardFooter>
+              <Button colorScheme='blue'>View here</Button>
+            </CardFooter>
+          </Card>
           <BaseCard text={predictionTextOutput} color={cardColor} />  {/* Passa a cor como prop */}
         </div>
       )}
