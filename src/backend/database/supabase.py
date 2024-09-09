@@ -11,3 +11,15 @@ key: str = os.getenv("SUPABASE_KEY")
 def create_supabase_client():
     supabase: Client = create_client(api_url, key)
     return supabase
+
+def query_table(table: str, columns: str):
+    """
+    Table deve ser o nome da tabela, como 'Operacao'.
+    Columns deve ser uma string que lista as tabelas, como 'KNR, HALLE, TEMPO' (Por algum motivo satânico)
+    """
+    supabase = create_supabase_client()
+    try:
+        response = supabase.table(table).select(columns).execute()
+        return response.data
+    except Exception as e:
+        print("An error occurred:", e)
