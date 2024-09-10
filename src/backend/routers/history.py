@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
-from services.history import fetch_history
+from services.history import fetch_history, fetch_stats
 from schemas.schemas import KNRInput
 from supabase import Client
 
@@ -14,3 +14,7 @@ def get_supabase_client() -> Client:
 @router.get("/getHistory")
 async def get_predictions():
    return fetch_history()
+
+@router.get("/getStats")
+async def get_stats():
+    return fetch_stats()
