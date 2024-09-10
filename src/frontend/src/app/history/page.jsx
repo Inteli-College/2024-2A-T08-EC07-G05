@@ -2,8 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import "./style.css";
 import LoadingPage from "../../components/loadingBar";
-import { Button, Table, Thead, Tbody, Tr, Th, Td, Box, TableContainer } from '@chakra-ui/react';
 import ReactPaginate from 'react-paginate';
+import {Button } from "@/components/ui/button";
+import { DataTable } from '@/components/ui/data-table';
+import Link from "next/link";
+
 
 function HistoryPage() {
   const [data, setData] = useState(null)
@@ -24,61 +27,108 @@ function HistoryPage() {
     },
     {
       groupKey: "HALLE_TIMES",
+      header: () => <div className="text-center">Tempo</div>,
       columns: [
         {
           accessorKey: "HALLE_TIMES.ZP5",
           header: "ZP5",
+          cell: ({cell}) => {
+            return cell.getValue("ZP5") === undefined ? "-" : cell.getValue("ZP5");
+          }
         },
         {
           accessorKey: "HALLE_TIMES.ZP5A",
           header: "ZP5A",
+          cell: ({cell}) => {
+            return cell.getValue("ZP5A") === undefined ? "-" : cell.getValue("ZP5A");
+          }
         },
         {
           accessorKey: "HALLE_TIMES.ZP61",
           header: "ZP61",
+          cell: ({cell}) => {
+            return cell.getValue("ZP61") === undefined ? "-" : cell.getValue("ZP61");
+          }
         },
         {
           accessorKey: "HALLE_TIMES.ZP6 || HALLE_TIMES.ZP62",
           header: "ZP6/ZP62",
+          cell: ({cell}) => {
+            return cell.getValue("ZP6") === undefined ? (cell.getValue("ZP6") === undefined ? "-" : cell.getValue("ZP5")) : cell.getValue("ZP6");
+          }
         },
         {
           accessorKey: "HALLE_TIMES.CAB",
           header: "CAB",
+          cell: ({cell}) => {
+            return cell.getValue("CAB") === undefined ? "-" : cell.getValue("CAB");
+          }
         },
         {
           accessorKey: "HALLE_TIMES.ZP7",
           header: "ZP7",
+          cell: ({cell}) => {
+            return cell.getValue("ZP7") === undefined ? "-" : cell.getValue("ZP7");
+          }
         },
         {
           accessorKey: "HALLE_TIMES.ROD",
           header: "ROD",
+          cell: ({cell}) => {
+            return cell.getValue("ROD") === undefined ? "-" : cell.getValue("ROD");
+          }
         },
         {
           accessorKey: "HALLE_TIMES.AGUA",
           header: "AGUA",
+          cell: ({cell}) => {
+            return cell.getValue("AGUA") === undefined ? "-" : cell.getValue("AGUA");
+          }
         },
         {
           accessorKey: "HALLE_TIMES.ZP8",
           header: "ZP8",
+          cell: ({cell}) => {
+            return cell.getValue("ZP8") === undefined ? "-" : cell.getValue("ZP8");
+          }
         },
         {
           accessorKey: "HALLE_TIMES.ESPC",
           header: "ESPC",
+          cell: ({cell}) => {
+            return cell.getValue("ESPC") === undefined ? "-" : cell.getValue("ESPC");
+          }
         },
         {
-          accessorKey: "HALLE_TIMES.Total",
           header: "Total",
+          cell: ({ cell }) => {
+            const fields = ["ZP5", "ZP5A", "ZP61", "ZP6", "CAB", "ZP7", "ROD", "AGUA", "ZP8", "ESPC"];
+            
+            const total = fields.reduce((acc, field) => {
+              const value = parseFloat(cell.getValue(field)) || 0;
+              return acc + value;
+            }, 0);
+        
+            return total.toFixed(2);
+          },
         },
       ],
-      header: "Tempo",
+      id: "tempo",
+
     },
     {
       accessorKey: "OUTPUT_MODELO",
       header: "Predição (há falha?)",
+      cell: ({cell}) => {
+        return cell.getValue("OUTPUT_MODELO") === null ? "-" : (cell.getValue("OUTPUT_MODELO") === true ? "Sim" : "Não");
+      },
     },
     {
       accessorKey: "RESULTADO_TESTE",
       header: "Resultado teste (há falha?)",
+      cell: ({cell}) => {
+        return cell.getValue("RESULTADO_TESTE") === null ? "-" : (cell.getValue("RESULTADO_TESTE") === true ? "Sim" : "Não");
+      },
     },
   ];
 
@@ -118,76 +168,37 @@ function HistoryPage() {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       {/* Header with Home Icon and Title */}
-      <div className="flex items-center mb-4">
-      <Button colorScheme='blue' onClick={homeClick}>
+      <header>
+        <nav className="flex flex-start items-center p-4 gap-4">
+        <Button className='bg-blue-500 hover:bg-blue-600 text-white' onClick={homeClick}>
           <img src="/icone_home.svg" className='w-5'></img>
         </Button>
-        <a href="/analysis" className="ml-4 text-gray-700 font-semibold text-lg">Análise</a>
-      </div>
-
+          <Link 
+          href="/history">
+            Histórico de registros</Link>
+            <Link 
+          href="/prediction">
+            Predição de falhas</Link>
+            <Link 
+          href="/analysis">
+            Análise de falhas</Link>
+        </nav>
+      </header>
       {/* Main Table */}
       <div>
-      <Box p={4}>
-        <TableContainer>
-          <Table variant="striped" size="md" colorScheme='blue' width="100%">
-            <Thead>
-              <Tr colSpan={14} className='text-wrap justify-center'>
-                <Th>KNR</Th>
-                <Th colSpan={11}>Tempo</Th>
-                <Th>Predição (há falha?)</Th>
-                <Th>Resultado teste (há falha?)</Th>
-              </Tr>
-              <Tr>
-                <Th></Th>
-                <Th whiteSpace="normal" maxWidth="100px">ZP5</Th>
-                <Th whiteSpace="normal" maxWidth="100px">ZP5A</Th>
-                <Th whiteSpace="normal" maxWidth="100px">ZP61</Th>
-                <Th whiteSpace="normal" maxWidth="100px">ZP6/ZP62</Th>
-                <Th whiteSpace="normal" maxWidth="100px">CAB</Th>
-                <Th whiteSpace="normal" maxWidth="100px">ZP7</Th>
-                <Th whiteSpace="normal" maxWidth="100px">ROD</Th>
-                <Th whiteSpace="normal" maxWidth="100px">AGUA</Th>
-                <Th whiteSpace="normal" maxWidth="100px">ZP8</Th>
-                <Th whiteSpace="normal" maxWidth="100px">ESPC</Th>
-                <Th>Total</Th>
-                <Th></Th>
-                <Th></Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {paginatedData.map((row) => (
-                <Tr key={row.KNR}>
-                  <Td>{row.KNR}</Td>
-                {['ZP5', 'ZP51', 'ZP6', 'ZP62', 'CAB', 'ZP7', 'ROD', 'AGUA', 'ZP8', 'ESPC'].map((col) => (
-                  <Td 
-                  whiteSpace="normal" maxWidth="100px"
-                  key={col}>{row.HALLE_TIMES[col] !== undefined ? row.HALLE_TIMES[col] : '-'}</Td>
-                ))}
-                <Td>-</Td>
-                  <Td>{row.OUTPUT_MODELO === null ? "-" : (row.OUTPUT_MODELO ? "S" : "N")}</Td>
-                  <Td>{row.RESULTADO_TESTE === null ? "-" : (row.RESULTADO_TESTE ? "S" : "N")}</Td>
-                </Tr>
-              ))}
-            </Tbody>
-          </Table>
-        </TableContainer>
-
-        {/* Paginador */}
+        <DataTable columns={historyColumns} data={paginatedData} />
         <ReactPaginate
-          previousLabel={'Anterior'}
-          nextLabel={'Próximo'}
-          breakLabel={'...'}
-          breakClassName={'break-me'}
+          className='flex justify-center gap-4'
+          previousLabel={"←"}
+          nextLabel={"→"}
           pageCount={Math.ceil(data.length / itemsPerPage)}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
           onPageChange={handlePageClick}
-          containerClassName={'pagination'}
-          activeClassName={'active'}
-          className='flex justify-center mt-4 gap-2' 
+          containerClassName={"pagination"}
+          previousLinkClassName={"pagination__link"}
+          nextLinkClassName={"pagination__link"}
+          disabledClassName={"pagination__link--disabled"}
+          activeClassName={"pagination__link--active"}
         />
-      </Box>
-
       </div>
     </div>
   );

@@ -1,7 +1,11 @@
+"use client";
 import React from 'react';
 import BaseButton from "@/components/baseButton"; 
 import IconHome from "@/../public/icone_home.svg";
 import "./style.css";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
 
 function AnalysisPage() {
 
@@ -15,34 +19,31 @@ function AnalysisPage() {
     { name: "ZP7", pintura: 50, amassados: 70, painel: 30 },
     { name: "ROD", pintura: 65, amassados: 80, painel: 55 },
   ];
-
+  const homeClick = () => {
+    window.location.href = '/';
+  };
   return (
     <div className="min-h-screen bg-gray-100 p-4">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex space-x-2">
-          <BaseButton text="Home" icon={IconHome} className="button-gray" />
-          <a href="/history" className="bg-gray-300 p-2 rounded-full flex items-center space-x-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-            <span>Voltar</span>
-          </a>
-        </div>
-        <div className="text-sm bg-white p-2 rounded shadow-md">
+            <header>
+        <nav className="flex flex-start items-center p-4 gap-4">
+        <Button className='bg-blue-500 hover:bg-blue-600 text-white' onClick={homeClick}>
+          <img src="/icone_home.svg" className='w-5'></img>
+        </Button>
+          <Link 
+          href="/history">
+            Histórico de registros</Link>
+            <Link 
+          href="/prediction">
+            Predição de falhas</Link>
+            <Link 
+          href="/analysis">
+            Análise de falhas</Link>
+        <div className="text-sm bg-white p-2 rounded shadow-md align-right">
           precisão do modelo: 93%
         </div>
-      </div>
+        </nav>
+      </header>
+      
       <h1 className="text-xl font-semibold mb-4">Recorrência de falhas:</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {zones.map((zone) => (
