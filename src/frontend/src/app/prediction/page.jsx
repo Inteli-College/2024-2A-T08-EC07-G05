@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { columns } from "@/components/columns";
 import { DataTable } from "@/components/ui/data-table";
 import BaseCard from '@/components/baseCard';
-import { Button,
+import {
   Input, 
   FormControl,
   FormErrorMessage,
@@ -16,6 +16,8 @@ import { Button,
   Heading,
   Text
 } from '@chakra-ui/react'
+import {Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function PredictionPage() {
   const [data, setData] = useState(null);
@@ -94,11 +96,24 @@ export default function PredictionPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col justify-between p-10">
-      <div className="w-full flex space-x-4 mb-6">
-        <Button colorScheme='blue' onClick={homeClick}>
+    <main className="flex min-h-screen flex-col px-10 py-6">
+      <header>
+        <nav className="flex flex-start items-center p-4 gap-4">
+        <Button className='bg-blue-500 hover:bg-blue-600 text-white' onClick={homeClick}>
           <img src="/icone_home.svg" className='w-5'></img>
         </Button>
+          <Link 
+          href="/history">
+            Histórico de registros</Link>
+            <Link 
+          href="/prediction">
+            Predição de falhas</Link>
+            <Link 
+          href="/analysis">
+            Análise de falhas</Link>
+        </nav>
+      </header>
+      <div className="w-full flex space-x-4 mb-6">
         <form onSubmit={submitPrediction} className='flex flex-start space-x-4 w-full'>
           <FormControl isInvalid={isError} className="flex flex-col w-200" >
           <HStack spacing={2}>
@@ -110,7 +125,7 @@ export default function PredictionPage() {
               required
               className='w-100'
             />
-          <Button colorScheme='blue' type="submit">OK</Button>
+          <Button className='bg-blue-500 hover:bg-blue-600 text-white' type="submit">OK</Button>
           </HStack>
           {isError && (<FormErrorMessage>Formato inválido. Insira o KNR no formato 0000-0000000</FormErrorMessage>)}
           </FormControl>
