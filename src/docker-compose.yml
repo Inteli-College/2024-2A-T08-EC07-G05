@@ -1,4 +1,4 @@
-version: '3.8'
+
 services:
   frontend:
     build: ./frontend
@@ -8,9 +8,13 @@ services:
       NEXT_PUBLIC_BACKEND_URL: "http://backend:3000"
     ports:
       - "3000:3000"
-    depends_on:
-      - backend
     container_name: itcross-frontend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]  
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
 
   backend:
     build: ./backend
@@ -23,3 +27,10 @@ services:
     container_name: itcross-backend
     env_file:
       - .env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health_backend"]  
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
