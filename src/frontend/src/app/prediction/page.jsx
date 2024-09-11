@@ -7,7 +7,6 @@ import {
   Input, 
   FormControl,
   FormErrorMessage,
-  FormLabel,
   HStack,
   Card,
   CardHeader,
@@ -27,7 +26,6 @@ export default function PredictionPage() {
   const [cardColor, setCardColor] = useState('bg-blue-500');
   const [isError, setIsError] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
 
   const submitPrediction = async (event) => {
     console.log("Valor de KNR inserido: " + inputValue);
@@ -68,13 +66,13 @@ export default function PredictionPage() {
     setData([responseJson]);
     setShowTable(true);
 
-    // Atualiza o estado com base na predição
+
     if (responseJson['prediction'] == 1) {
       setPredictionTextOutput("Suscetível a teste");
-      setCardColor('bg-red-600');  // Define a cor verde para resultado positivo
+      setCardColor('bg-red-600');
     } else {
       setPredictionTextOutput("NÃO suscetível a teste");
-      setCardColor('bg-green-600');  // Define a cor vermelha para resultado negativo
+      setCardColor('bg-green-600');
     }
   };
 
@@ -91,7 +89,7 @@ export default function PredictionPage() {
     setInputValue(e.target.value);
     if (isSubmitted) {
       setIsError(false);
-      setIsSubmitted(false);  // Reset submission status when user edits
+      setIsSubmitted(false);
     }
   };
 

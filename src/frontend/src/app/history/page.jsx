@@ -162,7 +162,6 @@ function HistoryPage() {
   if (isLoading) return <LoadingPage progress={progress} />;
   if (!data) return <p>No profile data</p>;
   const paginatedData = data.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
-
   console.log(data)
 
   return (
@@ -184,7 +183,6 @@ function HistoryPage() {
             Análise de falhas</Link>
         </nav>
       </header>
-      {/* Main Table */}
       <div>
         <DataTable columns={historyColumns} data={paginatedData} />
         <ReactPaginate

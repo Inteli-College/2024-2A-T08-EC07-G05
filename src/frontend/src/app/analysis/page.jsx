@@ -1,27 +1,55 @@
 "use client";
-import React from 'react';
-import BaseButton from "@/components/baseButton"; 
-import IconHome from "@/../public/icone_home.svg";
+import React, {useEffect, useState} from 'react';
 import "./style.css";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
+import LoadingPage from "../../components/loadingBar";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {failTypes} from "../../components/failTypes";
 
 function AnalysisPage() {
+  const [data, setData] = useState(null)
+  const [isLoading, setLoading] = useState(true)
+  const [progress, setProgress] = useState(0);
 
-  const zones = [
-    { name: "ZP1", pintura: 80, amassados: 50, painel: 20 },
-    { name: "ZP2", pintura: 70, amassados: 60, painel: 30 },
-    { name: "ZP3", pintura: 85, amassados: 40, painel: 25 },
-    { name: "ZP4", pintura: 60, amassados: 75, painel: 45 },
-    { name: "ZP5", pintura: 90, amassados: 55, painel: 35 },
-    { name: "ZP6", pintura: 95, amassados: 65, painel: 50 },
-    { name: "ZP7", pintura: 50, amassados: 70, painel: 30 },
-    { name: "ROD", pintura: 65, amassados: 80, painel: 55 },
-  ];
   const homeClick = () => {
     window.location.href = '/';
   };
+
+  useEffect(() => {
+    if (isLoading) {
+      const interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev < 90) return prev + 10;
+          return prev;
+        });
+      }, 500);
+
+      return () => clearInterval(interval);
+    }
+  }, [isLoading]);
+
+  useEffect( () => {
+    fetch('http://127.0.0.1:8000/getStats')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+        setProgress(100);
+      })
+  }, []);
+
+  if (isLoading) return <LoadingPage progress={progress} />;
+  if (!data) return <p>No profile data</p>;
+  console.log(data);
+  console.log("failtypes:", failTypes);
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
             <header>
@@ -46,25 +74,40 @@ function AnalysisPage() {
       
       <h1 className="text-xl font-semibold mb-4">Recorrência de falhas:</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {zones.map((zone) => (
-          <div key={zone.name} className="bg-gray-300 p-4 rounded">
-            <h2 className="font-semibold mb-2">{zone.name}</h2>
-            <ul className="text-red-500">
-              <li>Pintura</li>
-              <div className="progress-bar">
-                <div className="progress-bar-fill" style={{ width: `${zone.pintura}%` }}></div>
-              </div>
-              <li>Amassados</li>
-              <div className="progress-bar">
-                <div className="progress-bar-fill" style={{ width: `${zone.amassados}%` }}></div>
-              </div>
-              <li>Painel</li>
-              <div className="progress-bar">
-                <div className="progress-bar-fill" style={{ width: `${zone.painel}%` }}></div>
-              </div>
-            </ul>
-          </div>
-        ))}
+        { Object.keys(data).map((key, index) => {
+        const totalFailures = Object.entries(data[key]).reduce((acc, [subKey, value]) => {
+          const parsedValue = parseInt(value) || 0;
+          return acc + parsedValue;
+        }, 0);
+        return(
+          <Card key={index}>
+            <CardHeader>
+              <CardTitle>{key}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul>
+                <li></li>
+                <div>
+                  <div>
+                  {Object.entries(data[key]).map(([subKey, value], subIndex) => (
+                    <div>
+                      <li key={subIndex}>
+                        {failTypes[subKey] || subKey}: {value}
+                      </li>
+                    <div className="progress-bar">
+                    <div className="progress-bar-fill" style={{ width: `${(value * 100)/totalFailures}%`}}></div>
+                    </div>
+                  </div>
+                  ))}
+                  </div>
+                </div>
+              </ul>
+            </CardContent>
+            <CardFooter>
+              <p>total de falhas: {totalFailures}</p>
+            </CardFooter>
+          </Card>)})
+          }
       </div>
     </div>
   );
