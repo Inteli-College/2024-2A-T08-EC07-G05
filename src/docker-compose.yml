@@ -38,18 +38,16 @@ services:
       - postgres
     container_name: itcross-backend
 
-
   minio:
-    build: ./minio
-    container_name: minio-datalake
+    image: minio/minio
+    container_name: itcross-minio
     environment:
-      MINIO_ROOT_USER: "minioadmin"
-      MINIO_ROOT_PASSWORD: "minioadmin"
+      MINIO_ROOT_USER: ROOTNAME
+      MINIO_ROOT_PASSWORD: CHANGEME123
+    volumes:
+      - ./minio/data:/data
     ports:
       - "9000:9000"
-      - "9001:9001"  # Console Web
-    volumes:
-      - ./minio_data:/data
+      - "9001:9001"
     command: server /data --console-address ":9001"
     restart: unless-stopped
-
