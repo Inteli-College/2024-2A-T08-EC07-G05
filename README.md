@@ -87,5 +87,29 @@ git clone https://github.com/Inteli-College/2024-2A-T08-EC07-G05.git
 
 ## Instalação e Execução
 
+&emsp; Para poder executar o projeto seguindo a ordem de pastas que está dentro do projeto devemos seguir alguns passos que estão dispostos abaixo:
+
+1 - Garantir que, quando você fez o git clone no projeto, o arquivo chamado "docker-compose.yml" está dentro de pasta "src"
+
+2 - Estando o arquivo dentro do projeto, precisamos estar presente dentro da pasta "src" e instalar todas as dependências para rodar o projeto
+```cmd
+pip install -r requirements.txt
+```
+
+3 - Estando dentro de "src" rode o comando abaixo para poder subir os containers que estamos usando que são: 
+  - Container Back
+  - Container Front
+  - Container DataLake (MINIO)
+  - Container Postgress (Banco de Dados)
+  ```cmd
+  docker-compose up
+  ```
+
+4 - Enquanto estiver rodando os containers, poderemos ver o local onde o DataLake e a nossa página via web estará funcionando.
+```cmd
+http://0.0.0.0:8000
+http://127.0.0.1:9000
+```
+
 ## Demonstração da Solução
 
