@@ -8,7 +8,4 @@
 /falhas.csv
 /venv
 /.ipynb_checkpoints
-/df_falhas_processado.parquet
-/df_processado.parquet
-/FALHAS_04_05_06_2024.parquet
-/modelo_por_knr.parquet
+/modelo.pkl
