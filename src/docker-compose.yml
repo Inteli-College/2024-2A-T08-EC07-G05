@@ -20,7 +20,21 @@ services:
     container_name: itcross-backend
     env_file:
       - .env
-
+      
+  minio:
+    image: minio/minio
+    container_name: itcross-minio
+    environment:
+      MINIO_ROOT_USER: ROOTNAME
+      MINIO_ROOT_PASSWORD: CHANGEME123
+    volumes:
+      - ./minio/data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    command: server /data --console-address ":9001"
+    restart: unless-stopped
+    
   health:
     build: ./health
     image: src/health
