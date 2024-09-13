@@ -7,8 +7,6 @@ services:
       NEXT_PUBLIC_BACKEND_URL: "http://backend:3000"
     ports:
       - "3000:3000"
-    depends_on:
-      - backend
     container_name: itcross-frontend
 
   backend:
@@ -28,7 +26,6 @@ services:
     image: src/health
     restart: unless-stopped
     depends_on:
-      - backend
       - frontend
     ports:
       - 5000:5000
