@@ -3,20 +3,38 @@
 import { useState } from 'react';
 import BaseButton from "@/components/baseButton";
 import InputBar from "@/components/inputBar";
-import IconHome from "@/../public/icone_home.svg";
 import { columns } from "@/components/columns";
 import { DataTable } from "@/components/ui/data-table";
 import BaseCard from '@/components/baseCard';
+import { Button,
+  Input, 
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  HStack
+} from '@chakra-ui/react'
 
 export default function PredictionPage() {
   const [data, setData] = useState(null);
   const [showTable, setShowTable] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [predictionTextOutput, setPredictionTextOutput] = useState('');
-  const [cardColor, setCardColor] = useState('bg-blue-500');  // Estado para a cor do BaseCard
+  const [cardColor, setCardColor] = useState('bg-blue-500');
+  const [isError, setIsError] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleButtonClick = async () => {
+
+  const submitPrediction = async (event) => {
     console.log("Valor de KNR inserido: " + inputValue);
+    event.preventDefault();
+    const isValid = validateInput();
+    setIsSubmitted(true);
+    if (!isValid) {
+      setIsError(true);
+      return;
+    }
+
+    setIsError(false);
 
     const response = await fetch(
       "http://127.0.0.1:8000/predict/", {
@@ -55,17 +73,45 @@ export default function PredictionPage() {
     }
   };
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+  const homeClick = () => {
+    window.location.href = '/';
+  };
+
+  const validateInput = (e) => { 
+    const regex = /^\d{4}-\d{7}$/;
+    return regex.test(inputValue);
+  };
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+    if (isSubmitted) {
+      setIsError(false);
+      setIsSubmitted(false);  // Reset submission status when user edits
+    }
   };
 
   return (
     <main className="flex min-h-screen flex-col justify-between p-10">
-
-      <div className="h-12 w-full flex justify-evenly mb-6">
-        <BaseButton icon={IconHome} />
-        <InputBar onChange={handleInputChange} />
-        <BaseButton text='Ok' onClick={handleButtonClick} />
+      <div className="w-full flex space-x-4 mb-6">
+        <Button colorScheme='blue' onClick={homeClick}>
+          <img src="/icone_home.svg" className='w-5'></img>
+        </Button>
+        <form onSubmit={submitPrediction} className='flex flex-start space-x-4 w-full'>
+          <FormControl isInvalid={isError} className="flex flex-col w-200" >
+          <HStack spacing={2}>
+            <Input
+              type="text"
+              value={inputValue}
+              onChange={handleChange}
+              placeholder="Insira o KNR no formato 0000-0000000"  
+              required
+              className='w-100'
+            />
+          <Button colorScheme='blue' type="submit">OK</Button>
+          </HStack>
+          {isError && (<FormErrorMessage>Formato inválido. Insira o KNR no formato 0000-0000000</FormErrorMessage>)}
+          </FormControl>
+        </form>
       </div>
 
       {showTable && data && <DataTable columns={columns} data={data} />}
