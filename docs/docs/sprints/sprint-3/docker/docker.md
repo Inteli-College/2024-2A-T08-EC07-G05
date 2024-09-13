@@ -194,8 +194,6 @@ services:
       NEXT_PUBLIC_BACKEND_URL: "http://backend:3000"
     ports:
       - "3000:3000"
-    depends_on:
-      - backend
     container_name: itcross-frontend
 
   backend:
@@ -228,8 +226,6 @@ services:
     build: ./health
     image: src/health
     restart: unless-stopped
-    depends_on:
-      - backend
       - frontend
     ports:
       - 5000:5000
@@ -245,11 +241,11 @@ services:
 ### Explicação dos Serviços no Docker Compose
 
 - Frontend:
-        - A imagem do frontend é criada e exposta na porta `3000`. Ela depende do serviço backend - para funcionar corretamente.
+        - A imagem do frontend é criada e exposta na porta `3000`. 
         - A URL do backend é passada como uma variável de ambiente `NEXT_PUBLIC_BACKEND_URL`.
 
 - Backend:
-        - O serviço de backend é responsável pela API da aplicação e está exposto na porta `3001` para comunicações internas, mas acessa-se pela porta `3000` no contêiner.
+        - O serviço de backend é responsável pela API da aplicação e está exposto na porta `3001` para comunicações internas, mas acessa-se pela porta `3000` no contêiner. 
         - O arquivo `.env` é utilizado para passar variáveis sensíveis como a `DATABASE_URL`.
 
 - MinIO:
@@ -257,7 +253,7 @@ services:
         - Os dados são montados em um volume persistente no caminho `./minio/data`.
 
 - Health Check:
-        - Um serviço para verificar a saúde dos componentes da aplicação. Ele usa a porta `5000` para expor um endpoint de verificação de integridade.
+        - Um serviço para verificar a saúde dos componentes da aplicação. Ele usa a porta `5000` para expor um endpoint de verificação de integridade. Esse serviço depende do Frontend estar ativo para subir.
         - O comando `healthcheck` monitora o serviço periodicamente e define o comportamento em caso de falhas de integridade.
 
 ## Conclusão
