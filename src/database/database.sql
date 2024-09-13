@@ -32,6 +32,12 @@ CREATE TABLE "Procedimento" (
   "STATUS" boolean
 );
 
+CREATE TABLE "Health" (
+  "ID" varchar PRIMARY KEY,
+  "SERVICO" varchar text,
+  "HEALTH" varchar text
+)
+
 CREATE TABLE "Performance" (
   "KNR" varchar PRIMARY KEY,
   "ID_MODELO" varchar, 

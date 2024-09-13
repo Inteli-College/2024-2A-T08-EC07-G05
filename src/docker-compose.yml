@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   frontend:
     build: ./frontend
@@ -8,8 +7,6 @@ services:
       NEXT_PUBLIC_BACKEND_URL: "http://backend:3000"
     ports:
       - "3000:3000"
-    depends_on:
-      - backend
     container_name: itcross-frontend
 
   backend:
@@ -37,3 +34,19 @@ services:
       - "9001:9001"
     command: server /data --console-address ":9001"
     restart: unless-stopped
+    
+  health:
+    build: ./health
+    image: src/health
+    restart: unless-stopped
+    depends_on:
+      - frontend
+    ports:
+      - 5000:5000
+    container_name: itcross-health
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://itcross-health:5000/health"]  
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
