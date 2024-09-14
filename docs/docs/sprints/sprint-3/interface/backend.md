@@ -11,6 +11,35 @@ As principais mudanças no backend da aplicação foram a criação de novas rot
 
 (pedro cruz irá detalhar)
 
+## 3. Como executar
+
+Para executar o backend, siga os passos abaixo:
+
+1. Clone o repositório, caso ainda não tenha feito:
+
+```bash  
+git clone https://github.com/Inteli-College/2024-2A-T08-EC07-G05.git
+```
+
+2. Acesse a pasta do backend:
+
+```bash
+cd src/backend
+```
+
+3. Instale as dependências:
+
+```bash
+pip install -r requirements.txt
+```
+
+4. Execute a aplicação:
+
+```bash
+fastapi run main.py
+``` 
+
+
 ## 3. Próximos passos
 
 (pedro cruz irá detalhar)
