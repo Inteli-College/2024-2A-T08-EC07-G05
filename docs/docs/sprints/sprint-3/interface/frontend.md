@@ -53,8 +53,7 @@ useEffect( () => {
 
 &nbsp;&nbsp; A página de histórico foi alterada principalmente no design e na integração com o backend. O design foi alterado para seguir a identidade visual da aplicação e o cabeçalho foi adicionado, possibilitando navegar diretamente para outras páginas. A integração com o backend foi feita para que a página possa exibir os dados de histórico que estão armazenados no banco de dados, permitindo que o usuário possa visualizar os KNRs produzidos na fábrica. O sistema conta com uma página de carregamento para fornecer feedback ao usuário enquanto os dados são carregados do backend.Além disso, a página foi estilizada para que o usuário possa visualizar as informações de forma clara e intuitiva.
 
-(alterar para carregamento)
-![Página de Histórico](../../../../static/img/sprint-3/tela-historico.png)
+![Página de Histórico](../../../../static/img/sprint-3/tela-carregando.png)
 
 ### 5.2 Próximos passos
 
@@ -104,4 +103,4 @@ npm run dev
 
 ## 8. Conclusão
 
-Para a próxima sprint, as principais alterações serão em relação ao design das páginas, para que o usuário possa visualizar as informações de forma mais clara e intuitiva, e a adição de filtros de busca e ordenação, para que o usuário possa encontrar as informações de forma mais rápida e eficiente.Para tal, serão realizados alguns testes para validar as mudanças e garantir que a aplicação esteja atendendo às necessidades dos usuários. Porém, atualmente a página se encontra funcional e integrada com o backend, permitindo que o usuário possa realizar as principais funcionalidades propostas pela solução. Os próximos passos serão focados em melhorar a experiência do usuário e refinar os detalhes da aplicação.
+Para a próxima sprint, as principais alterações serão em relação ao design das páginas, para que o usuário possa visualizar as informações de forma mais clara e intuitiva, e a adição de filtros de busca e ordenação, para que o usuário possa encontrar as informações de forma mais rápida e eficiente. Além disso, o cabeçalho será alterado para ter uma estética mais similar ao resto da aplicação.Portanto, serão realizados alguns testes para validar as mudanças e garantir que a aplicação esteja atendendo às necessidades dos usuários. Porém, atualmente a página se encontra funcional e integrada com o backend, permitindo que o usuário possa realizar as principais funcionalidades propostas pela solução. Em suma, os próximos passos serão focados em melhorar a experiência do usuário e refinar detalhes da aplicação.
