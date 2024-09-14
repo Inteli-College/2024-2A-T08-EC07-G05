@@ -14,7 +14,6 @@ def get_supabase_client() -> Client:
 async def get_predictions():
    return fetch_history()
 
-
 @router.get("/getStats")
 async def get_stats():
     return fetch_stats()
