@@ -66,6 +66,7 @@ export default function PredictionPage() {
     console.log("Resultado da predição: " + responseJson['prediction']);
 
     setData([responseJson]);
+    setInputValue('');
     setShowTable(true);
 
 
