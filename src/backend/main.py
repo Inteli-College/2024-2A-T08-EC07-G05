@@ -9,7 +9,7 @@ app.include_router(history.router)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # p/ permitir requisições do frontend
+    allow_origins=['*'],  # p/ permitir requisições do frontend
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

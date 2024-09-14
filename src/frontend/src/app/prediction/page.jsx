@@ -7,16 +7,18 @@ import {
   Input, 
   FormControl,
   FormErrorMessage,
-  HStack,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Heading,
-  Text
+  HStack
 } from '@chakra-ui/react'
-import {Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 import Link from "next/link";
+// import {
+//   Card,
+//   CardContent,
+//   CardDescription,
+//   CardFooter,
+//   CardHeader,
+//   CardTitle,
+// } from "@/components/ui/card";
 
 export default function PredictionPage() {
   const [data, setData] = useState(null);
@@ -40,7 +42,7 @@ export default function PredictionPage() {
     setIsError(false);
 
     const response = await fetch(
-      "http://127.0.0.1:8000/predict/", {
+      `http://${window.location.hostname}:8000/predict`, {
         method: "POST",
         body: JSON.stringify({
           knr: inputValue
@@ -68,10 +70,10 @@ export default function PredictionPage() {
 
 
     if (responseJson['prediction'] == 1) {
-      setPredictionTextOutput("Suscetível a teste");
+      setPredictionTextOutput("Teste Longo");
       setCardColor('bg-red-600');
     } else {
-      setPredictionTextOutput("NÃO suscetível a teste");
+      setPredictionTextOutput("Teste curto");
       setCardColor('bg-green-600');
     }
   };
@@ -134,17 +136,18 @@ export default function PredictionPage() {
 
       {showTable && data && (
         <div className="flex justify-center items-center mt-6">
-          <Card align='center'>
+          {/* <Card>
             <CardHeader>
-              <Heading size='md'> Customer dashboard</Heading>
+              <CardTitle>{predictionTextOutput}</CardTitle>
+              <CardDescription>Card Description</CardDescription>
             </CardHeader>
-            <CardBody>
-              <Text>View a summary of all your customers over the last month.</Text>
-            </CardBody>
+            <CardContent>
+              <p>Card Content</p>
+            </CardContent>
             <CardFooter>
-              <Button colorScheme='blue'>View here</Button>
+              <p>Card Footer</p>
             </CardFooter>
-          </Card>
+          </Card> */}
           <BaseCard text={predictionTextOutput} color={cardColor} />  {/* Passa a cor como prop */}
         </div>
       )}
