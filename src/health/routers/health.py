@@ -3,8 +3,8 @@ import httpx
 
 router = APIRouter(tags=["health"])
 
-BACKEND_URL = "http://itcross-backend:3001/health_backend"
-FRONTEND_URL = "http://itcross-frontend:3000/api/health"
+BACKEND_URL = "http://backend:3000/health_backend"
+FRONTEND_URL = "http://frontend:3000/api/health"
 
 @router.get("/health", status_code=status.HTTP_200_OK)
 async def health_check():
