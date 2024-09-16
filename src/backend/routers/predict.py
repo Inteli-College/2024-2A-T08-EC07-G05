@@ -6,13 +6,6 @@ from supabase import Client
 from database.supabase import create_supabase_client
 router = APIRouter(tags=["predict"])
 
-# @router.get("/predict")
-# async def predict():
-#     my_prediction = prediction()
-#     return my_prediction
-
-# Dependency to get the database session
-
 def get_supabase_client() -> Client:
     return create_supabase_client()
 
