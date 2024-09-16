@@ -1,0 +1,41 @@
+services:
+  frontend:
+    build: ./frontend
+    image: src/frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: "http://backend:3000"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    container_name: itcross-frontend
+
+  backend:
+    build: ./backend
+    image: src/backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    ports:
+      - "3001:3000"
+    container_name: itcross-backend
+    env_file:
+      - .env
+
+  health:
+    build: ./health
+    image: src/health
+    restart: unless-stopped
+    depends_on:
+      - backend
+      - frontend
+    ports:
+      - 5000:5000
+    container_name: itcross-health
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://itcross-health:5000/health"]  
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
