@@ -25,16 +25,16 @@ sidebar_position: 1
 
 <p style={{textAlign: 'center'}}>Fonte: Elaborado pela equipe It-Cross</p>
 
-&emsp;À vista dessa redução, a equipe It-Cross idealizou possibilidades para elevar tais valores, a fim de que o modelo preditivo atendesse aos padrões de qualidades de um MVP adequado. Dentre as possibilidades, duas foram seleconadas como as mais ideais:
+&emsp;À vista dessa redução, a equipe It-Cross idealizou possibilidades para elevar tais valores, a fim de que o modelo preditivo atendesse aos padrões de qualidades de um MVP adequado. Dentre as possibilidades, duas foram selecionadas como as mais ideais:
 
 1. implementar novas *features*/colunas referentes ao tempo que cada veículo passou em cada checkpoint do processo de produção Volkswagen;
 2. realizar a técnica de *oversampling* para aumentar a quantidade de dados disponíveis para treino do modelo.
 
 ## Implementação de novas features
 
-&emsp;A primeira possibilidade de aprimoramento do modelo, referente à implementação de novas features, foi possível graças à tabela de dados `status` — que contém códigos de identificação e registros de tempo referentes às falhas ocorridas com cada veículo —, a qual foi fornecida pelo Volkswagen na primeira sprint de desenvolvimento do projeto. Tal tabela não foi utilizada pela equipe já no início do desenvolvimento pois a tabela continha códigos cujo significado era desconhecido para a equipe, situação que se revertou posteriormente com novas informações repassadas pelo parceiro.
+&emsp;A primeira possibilidade de aprimoramento do modelo, referente à implementação de novas features, foi possível graças à tabela de dados `status` — que contém códigos de identificação e registros de tempo referentes às falhas ocorridas com cada veículo —, a qual foi fornecida pelo Volkswagen na primeira sprint de desenvolvimento do projeto. Tal tabela não foi utilizada pela equipe já no início do desenvolvimento pois a tabela continha códigos cujo significado era desconhecido para a equipe, situação que se reverteu posteriormente com novas informações repassadas pelo parceiro.
 
-&emsp;A partir dessas novas informações, foi possível tratar a tabela status de modo a criar colunas que indicam quanto tempo cada veículo passou em cada checkpoint. Isso representa grande valor para o treinamento do modelo, uma vez que o fato de um carro ter passado tempo de mais ou de menos numa determinada etapa de sua produção pode indicar a existência de uma anomalia em sua fabricação. Por isso, tais colunas foram integradas ao dataframe utilizado para o treinamendo do modelo.
+&emsp;A partir dessas novas informações, foi possível tratar a tabela status de modo a criar colunas que indicam quanto tempo cada veículo passou em cada checkpoint. Isso representa grande valor para o treinamento do modelo, uma vez que o fato de um carro ter passado tempo de mais ou de menos numa determinada etapa de sua produção pode indicar a existência de uma anomalia em sua fabricação. Por isso, tais colunas foram integradas ao dataframe utilizado para o treinamento do modelo.
 
 ## Fabricação de novos dados
 
@@ -48,13 +48,13 @@ sidebar_position: 1
 
 &emsp;A técnica de oversampling consiste na geração de novos dados de uma classe que é minoritária dentro de uma base de dados. No caso deste projeto, a classe minoritária refere-se à classe de carros suscetíveis a falha, uma vez que, na linha de produção da Volkswagen, há muito mais carros sem falhas do que carros com falhas. Por isso, nas tabelas de dados fornecidas pelo parceiro, existem muito menos dados referentes a carros suscetíveis a falha, o que pode fazer com que o modelo consiga classificar adequadamente carros sem falha, mas não carros com falha.
 
-&emsp;Diante do exposto, os dados de carros suscetíveis a falhas foram submetidos ao oversampling de tal maneira que novas linhas de dados sintéticos dessa classe foram geradas no dataframe de treino do modelo, igualando a quantidade de dados das diferentes clases. 
+&emsp;Diante do exposto, os dados de carros suscetíveis a falhas foram submetidos ao oversampling de tal maneira que novas linhas de dados sintéticos dessa classe foram geradas no dataframe de treino do modelo, igualando a quantidade de dados das diferentes classes. 
 
 ## Resultados
 
 &emsp;Após essas etapas de tratamento de dados, o modelo foi treinado sem as colunas de checkpoints posteriores ao teste de rodagem, com as novas features de tempo despendido em cada checkpoint e com os novos dados sintéticos obtidos através do oversampling. Depois do treinamento tanto com o algoritmo GRU quanto com o algoritmo LSTM, o modelo foi submetido a teste e obteve uma acurácia de **98%** com ambos os algoritmos, o que representa um grande aumento em relação à acurácia anterior, de 54.0%.
 
-&emsp;Como tal valor de acurácia é significantemente elevado, o modelo ainda foi submetido a um teste de validação cruzada, técnica que considera vários subconjuntos diferentes da base de dados do modelo para treiná-lo e/ou testá-lo. Com o uso desta técnica, o modelo apresentou acurácia de **94.9%** (tanto com o algoritmo GRU quanto com o algoritmo LSTM) e valores de perda que podem ser conferidos nas figuras 4 e 5, a seguir.
+&emsp;Como tal valor de acurácia é significativamente elevado, o modelo ainda foi submetido a um teste de validação cruzada, técnica que considera vários subconjuntos diferentes da base de dados do modelo para treiná-lo e/ou testá-lo. Com o uso desta técnica, o modelo apresentou acurácia de **94.9%** (tanto com o algoritmo GRU quanto com o algoritmo LSTM) e valores de perda que podem ser conferidos nas figuras 4 e 5, a seguir.
 
 <p style={{textAlign: 'center'}}>Figura 4 - Variação de perda do modelo (GRU)</p>
 
