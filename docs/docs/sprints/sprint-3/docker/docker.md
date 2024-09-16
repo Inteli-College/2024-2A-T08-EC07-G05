@@ -207,13 +207,15 @@ services:
     container_name: itcross-backend
     env_file:
       - .env
-    
+    volumes:
+      - ./backend:/app/backend  
+
   minio:
     image: minio/minio
     container_name: itcross-minio
     environment:
-      MINIO_ROOT_USER: ROOTNAME
-      MINIO_ROOT_PASSWORD: CHANGEME123
+      MINIO_ROOT_USER: ${USER_MINIO}
+      MINIO_ROOT_PASSWORD: ${PASSWORD_MINIO}
     volumes:
       - ./minio/data:/data
     ports:
@@ -226,12 +228,21 @@ services:
     build: ./health
     image: src/health
     restart: unless-stopped
+    depends_on:
       - frontend
     ports:
-      - 5000:5000
+      - "5000:5000"
     container_name: itcross-health
+    volumes:
+      - ./backend:/app/backend  
+      - ./health:/app/health    
+    environment:
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_KEY: ${SUPABASE_KEY}
+    env_file:
+      - .env
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://itcross-health:5000/health"]  
+      test: ["CMD", "curl", "-f", "http://itcross-health:5000/health?m=m"]  
       interval: 30s
       timeout: 10s
       retries: 5
