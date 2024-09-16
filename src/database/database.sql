@@ -35,8 +35,9 @@ CREATE TABLE "Procedimento" (
 CREATE TABLE "Health" (
   "ID" varchar PRIMARY KEY,
   "SERVICO" varchar text,
-  "HEALTH" varchar text
-)
+  "HEALTH" varchar text,
+  "DATE" varchar text
+);
 
 CREATE TABLE "Performance" (
   "KNR" varchar PRIMARY KEY,
