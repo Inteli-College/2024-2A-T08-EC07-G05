@@ -29,3 +29,4 @@ class Info(Base):
     TEMPO_MEDIO_OPERACOES = Column(TIMESTAMP)
     RESULTADO_TESTE = Column(Boolean)
     DATA_TESTE = Column(TIMESTAMP)
+
