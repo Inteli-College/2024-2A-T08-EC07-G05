@@ -1,6 +1,6 @@
+import Health from "@/app/health/health.jsx";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button"
-
 
 export default function Home() {
   return (
