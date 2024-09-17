@@ -1,0 +1,8 @@
+{
+    "label": "Dockerizando a aplicação",
+    "position": 1,
+    "link": {
+        "type": "generated-index",
+        "description": "Essa seção busca documentar a estratégia que utilizamos para dockerizar a aplicação."
+    }
+}
