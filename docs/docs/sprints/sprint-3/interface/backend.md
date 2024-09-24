@@ -37,4 +37,4 @@ fastapi run main.py
 
 
 ## 3. Próximos passos
-Para as proximas sprints, serão implementadas as mudanças de acordo com o frontend, além de novas rotas que serão utilizadas para o processo de ETL.
+Para as próximas sprints, serão implementadas novas rotas no frontend para aprimorar a experiência do usuário e adicionar funcionalidades essenciais. Essas rotas incluirão páginas dedicadas ao processo de ETL (Extração, Transformação e Carregamento) e ao retreinamento do modelo. Essas páginas serão responsáveis por exibir informações relevantes sobre os modelos em uso, como métricas de desempenho, data do último treinamento e status atual. Além disso, essas rotas também permitirão que os usuários ativem as pipelines de ETL e retreinamento diretamente a partir da interface do usuário, proporcionando um controle mais intuitivo e facilitando o gerenciamento dos processos de dados e atualização dos modelos.
