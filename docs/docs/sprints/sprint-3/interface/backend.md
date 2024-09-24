@@ -37,5 +37,4 @@ fastapi run main.py
 
 
 ## 3. Próximos passos
-
-(pedro cruz irá detalhar)
+Para as proximas sprints, serão implementadas as mudanças de acordo com o frontend, além de novas rotas que serão utilizadas para o processo de ETL.
