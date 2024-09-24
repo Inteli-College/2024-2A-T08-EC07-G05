@@ -112,6 +112,12 @@ export default function PredictionPage() {
             <Link 
           href="/analysis">
             Análise de falhas</Link>
+            <Link 
+          href="/data">
+            Dados do Modelo</Link>
+            <Link 
+          href="/models">
+            Treino de Modelos</Link>
         </nav>
       </header>
       <div className="w-full flex space-x-4 mb-6">
