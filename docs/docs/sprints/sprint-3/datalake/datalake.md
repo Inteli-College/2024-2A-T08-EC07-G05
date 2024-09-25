@@ -94,5 +94,5 @@ O MinIO é uma solução robusta e escalável para a implementação de DataLake
 
 # Referências
 [1] AWS SERVICE. O que é Data-Lake ?. Disponível em: [https://aws.amazon.com/pt/what-is/data-lake/](https://aws.amazon.com/pt/what-is/data-lake/). Acesso em: 25 setembro. 2024.
-[2] SAVE CLOUD. Como funciona o MINIO ? ?. Disponível em: [://saveincloud.com/pt/blog/armazenamento/saiba-o-que-e-e-como-funciona-o-minio/](://saveincloud.com/pt/blog/armazenamento/saiba-o-que-e-e-como-funciona-o-minio/). Acesso em: 25 setembro. 2024.
+[2] SAVE CLOUD. Como funciona o MINIO ?. Disponível em: [://saveincloud.com/pt/blog/armazenamento/saiba-o-que-e-e-como-funciona-o-minio/](://saveincloud.com/pt/blog/armazenamento/saiba-o-que-e-e-como-funciona-o-minio/). Acesso em: 25 setembro. 2024.
 
