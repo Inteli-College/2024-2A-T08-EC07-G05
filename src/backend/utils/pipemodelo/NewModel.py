@@ -6,23 +6,22 @@ from imblearn.over_sampling import SMOTE
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
-from sqlalchemy import create_engine  # Correção: importação adicionada
-import tempfile  # Correção: importação adicionada
+import httpx
+import os
+from datetime import datetime
 
-def fetch_data_from_db(database_url, table_name):
-    # Criar uma conexão com o banco de dados
-    engine = create_engine(database_url)
-    
-    # Consultar os dados da tabela
-    query = f"SELECT * FROM {table_name}"
-    df = pd.read_sql(query, con=engine)
+FETCH_ALL_DATA = os.getenv("FETCH_ALL_DATA")
 
-    # Salvar os dados em um arquivo CSV temporário
-    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.csv')
-    df.to_csv(temp_file.name, index=False)
-
-    print(f"Dados salvos em {temp_file.name}")
-    return df, temp_file.name
+async def fetch_data_from_supabase():
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.get(FETCH_ALL_DATA)
+            response.raise_for_status()  # Levanta um erro se a resposta não for 200
+            data = response.json()  # Extraindo os dados JSON da resposta
+            return pd.DataFrame(data)  # Convertendo para um DataFrame do pandas
+        except httpx.RequestError as e:
+            print(f"Request error: {e}")
+            return None  # Retorna None em caso de erro
 
 def apply_smote(X_train, y_train):
     smote = SMOTE(sampling_strategy='auto', random_state=42)
@@ -47,9 +46,9 @@ def create_lstm_model(input_shape):
     return model
 
 # Dividindo os dados
-def split_data(df_numerical_scaled):
-    X = df_numerical_scaled.drop(columns=['TEM_FALHA_ROD'])  # Removendo a variável alvo
-    y = df_numerical_scaled['TEM_FALHA_ROD']  # Definindo a variável alvo
+def split_data(df):
+    X = df.drop(columns=['TEM_FALHA_ROD'])  # Removendo a variável alvo
+    y = df['TEM_FALHA_ROD']  # Definindo a variável alvo
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
     
@@ -116,24 +115,23 @@ def evaluate_model(model, X_test, y_test):
     # Relatório de classificação
     print(classification_report(y_test_reshaped, y_pred_lstm))
 
-
-
-if __name__ == "__main__":
-    # Defina a URL do banco de dados e o nome da tabela
-    database_url = 'sqlite:///your_database.db'  # Exemplo com SQLite
-    table_name = 'sua_tabela'
-
-    # Passo 1: Extrair dados do banco de dados
-    df, temp_csv_path = fetch_data_from_db(database_url, table_name)
+async def main():
+    # Passo 1: Extrair dados do Supabase
+    df = await fetch_data_from_supabase()  # Usar await para chamar a função assíncrona
     
-    # Usar os dados diretamente do banco de dados, ao invés de carregar outro CSV
-    df_numerical_scaled = df
+    if df is not None:  # Verifica se os dados foram carregados com sucesso
+        # Dividir os dados e aplicar SMOTE
+        X_resampled, y_resampled, X_test, y_test = split_data(df)
 
-    # Dividir os dados e aplicar SMOTE
-    X_resampled, y_resampled, X_test, y_test = split_data(df_numerical_scaled)
+        # Realizar validação cruzada e treinar o modelo
+        model_lstm, train_losses, val_losses = cross_validate_lstm(X_resampled, y_resampled)
 
-    # Realizar validação cruzada e treinar o modelo
-    model_lstm, train_losses, val_losses = cross_validate_lstm(X_resampled, y_resampled)
+        # Avaliar o modelo no conjunto de teste
+        evaluate_model(model_lstm, X_test, y_test)
+    else:
+        print("Erro ao buscar dados do Supabase.")
 
-    # Avaliar o modelo no conjunto de teste
-    evaluate_model(model_lstm, X_test, y_test)
+# Executar a função principal
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())
