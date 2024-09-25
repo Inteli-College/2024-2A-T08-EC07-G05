@@ -1,2 +1,6 @@
+data/
 .env
-database/
+venv/
+__pycache__/
+.gitignore
+
