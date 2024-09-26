@@ -19,7 +19,9 @@ async def get_model():
     return get_model_by_id()
 
 @router.post("/createModel/")
+## RECEBER METRICAS E O ARQUIVO PKL
 async def get_model(precisao: float):
+ # função no services/model 
     return create_model_by_id(precisao)
 
 @router.get("/new_model", status_code=status.HTTP_200_OK)
