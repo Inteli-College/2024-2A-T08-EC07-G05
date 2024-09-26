@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
+<<<<<<< HEAD
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+=======
+>>>>>>> 0dd130b5c36ca2d38e9acf76213af40760ccde60
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@radix-ui/react-slot": "^1.1.0",
@@ -19,13 +22,20 @@
     "@tanstack/react-table": "^8.20.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+<<<<<<< HEAD
     "framer-motion": "^11.8.0",
+=======
+    "framer-motion": "^11.5.4",
+>>>>>>> 0dd130b5c36ca2d38e9acf76213af40760ccde60
     "lucide-react": "^0.436.0",
     "next": "14.2.5",
     "node": "^20.17.0",
     "react": "^18",
     "react-dom": "^18",
+<<<<<<< HEAD
     "react-icons": "^5.3.0",
+=======
+>>>>>>> 0dd130b5c36ca2d38e9acf76213af40760ccde60
     "react-paginate": "^8.2.0",
     "react-router-dom": "^6.26.1",
     "tailwind-merge": "^2.5.2",
