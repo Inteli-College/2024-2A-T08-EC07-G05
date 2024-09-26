@@ -38,9 +38,9 @@ function HealthPage() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h1 className="text-4xl text-center mb-6">Healthcheck</h1>
       <div className="w-full max-w-3xl p-10">
-        <h1 className="text-4xl text-center mb-6">Healthcheck:</h1>
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 bg-gray-100 rounded-lg shadow-lg overflow-hidden">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -70,6 +70,13 @@ function HealthPage() {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className='px-10'>
+        <div className='px-10'>
+          <div className="mt-6 text-center px-10">
+            Nesta página, é possível verificar o estado atual de cada serviço da aplicação It-Cross. A tabela acima exibe essa informação na coluna "STATUS", na qual "healthy" indica estabilidade e "unhealthy" indica instabilidade. Em caso de instabilidade, a coluna "DESCRIÇÃO DE ERRO" detalha o erro associado à instabilidade.
+          </div>
+        </div>
       </div>
     </div>
   );
