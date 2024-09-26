@@ -1,7 +1,6 @@
 from supabase import Client, create_client
 import os
 import tempfile
-
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
