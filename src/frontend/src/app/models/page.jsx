@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-"use client";
-import React, {useEffect, useState} from 'react';
-import "./style.css";
-
-function DataPage() {
-
-  return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      Página de Dados
-=======
 'use client';
 import React, { useEffect, useState } from 'react';
 import "./style.css";
@@ -92,13 +81,8 @@ function TrainModelPage() {
         <h2 className="text-2xl font-bold mb-4">Modelos Criados</h2>
         <DataTable columns={modelsColumns} data={paginatedData} />
       </div>
->>>>>>> 0dd130b5c36ca2d38e9acf76213af40760ccde60
     </div>
   );
 }
 
-<<<<<<< HEAD
-export default DataPage;
-=======
 export default TrainModelPage;
->>>>>>> 0dd130b5c36ca2d38e9acf76213af40760ccde60
