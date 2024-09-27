@@ -24,7 +24,7 @@ async def fetch_all_data():
 
 @router.get("/new_model", status_code=status.HTTP_200_OK)
 async def create_new_model():
-    return StreamingResponse(new_model())
+    return StreamingResponse(new_model(), media_type="text/event-stream")
 
 @router.get("/health_backend", status_code=status.HTTP_200_OK)
 def health_check_backend():

@@ -38,15 +38,14 @@ def get_last_model():
 
 def create_model_by_id(key, metrics):
     now = datetime.now().isoformat()
-    data = insert_table('Modelo', {"DATA_TREINO": now, "METRICAS": metrics, "ID_BUCKET": key})
+    data = insert_table('Modelo', {"DATA_TREINO": now, "METRICAS": metrics, "URL_BUCKET": key})
     if data is not None:
         return data
     
 def save_model(model,filename, bucketname):
     model_bytes = pickle.dumps(model)
-    response  = save_model_to_bucket(model_bytes, filename, bucketname)
-    print("response", response)
-    return response
+    model_url  = save_model_to_bucket(model_bytes, filename, bucketname)
+    return model_url
 
 # Func para buscar e preparar todos os dados do banco de dados para treinar um novo modelo abaixo 
 
@@ -193,10 +192,7 @@ async def new_model():
         key = save_model(model_lstm, f"model-lstm-{now}.pkl", "modelos-it-cross")
         model_metadata = create_model_by_id(key, metrics_json)
         yield "data: Modelo Salvo!\n\n"
-
-        # Retornar as métricas como JSON
-        yield metrics_json
-        yield model_metadata
+        yield "Id do modelo : " + str(model_metadata[0]['ID_MODELO']) + "\n\n"
 
     else:
         yield "data: Erro ao buscar dados.\n\n"

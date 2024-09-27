@@ -66,6 +66,13 @@ def save_model_to_bucket(model_bytes: bytes, filename: str, bucketname: str):
     supabase = create_supabase_client()
     try:
         response = supabase.storage.from_(bucketname).upload(filename, model_bytes)
-        return response
+
+        if response.status_code == 200:
+            model_url = supabase.storage.from_(bucketname).get_public_url(filename)
+            return model_url
+        else:
+            print("Erro ao salvar o modelo no bucket:", response.json())
+            return None
     except Exception as e:
         print("An error occurred:", e)
+        return None
