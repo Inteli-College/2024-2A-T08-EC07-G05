@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from datetime import datetime
 import json
 import pickle
 from sklearn.model_selection import train_test_split
@@ -8,11 +9,12 @@ from imblearn.over_sampling import SMOTE
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
+# from services.model import save_model
 import os
 import asyncio
 import httpx
 
-# Func para bucar e preparar todos os dados do banco de dados para treinar um novo modelo abaixo 
+# Func para buscar e preparar todos os dados do banco de dados para treinar um novo modelo abaixo 
 
 # # Variável de ambiente para buscar dados do Supabase
 # FETCH_ALL_DATA = os.getenv("FETCH_ALL_DATA")
@@ -95,7 +97,7 @@ def train_lstm(X_resampled, y_resampled, epochs=10, batch_size=32):
     return model_lstm, history
 
 # Função para exportar o modelo como arquivo .pkl
-def save_model(model, filename="models/model_lstm.pkl"):
+def save_model(model, filename="models/model_lstm.pkl", bucketname="modelos-it-cross"):
     # Cria o diretório "models" se ele não existir
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     
@@ -128,28 +130,39 @@ def evaluate_model(model, X_test, y_test):
     return metrics_json
 
 # Função principal assíncrona
-async def main():
+async def new_model():
     # Mockar os dados
     df = mock_data()  # --> quando for integrar na nos dados que vem do banco substituir linha pela de baixo
-
+    yield "data: Iniciando carregamento dos dados...\n\n"
     # df = await fetch_data_from_supabase()
+    yield "data: Dados carregados com sucesso!\n\n"
     
     if df is not None:
         print("Colunas do DataFrame:", df.columns)
+        yield "data: Separando dados entre treino e teste...\n\n"
         X_resampled, y_resampled, X_test, y_test = split_data(df)
+        yield "data: Separação concluído!\n\n"
 
         # Treinar o modelo
+        yield "data: Iniciando treinamento do modelo...\n\n"
         model_lstm, history = train_lstm(X_resampled, y_resampled)
+        yield "data: Treinamento concluído!\n\n"
 
         # Avaliar o modelo no conjunto de teste
+        yield "data: Avaliando modelo...\n\n"
         metrics_json = evaluate_model(model_lstm, X_test, y_test)
+        yield "data: Avaliação completa!\n\n"
 
         # Salvar o modelo
+        yield "data: Salvando modelo...\n\n"
         save_model(model_lstm)
+        yield "data: Modelo Salvo!\n\n"
 
         # Retornar as métricas como JSON
-        return metrics_json
+        yield metrics_json
+
     else:
+        yield "data: Erro ao buscar dados.\n\n"
         print("Erro ao buscar dados.")
 
 if __name__ == "__main__":

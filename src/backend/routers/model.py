@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
-from services.model import get_model_by_id, create_model_by_id
+from services.model import get_model_by_id, create_model_by_id, get_last_model
 from supabase import Client
 # from pydantic import BaseModel
 
@@ -15,7 +15,7 @@ async def get_model(ID_MODELO: int):
 
 @router.post("/getLastModel")
 async def get_model():
-    return get_model_by_id()
+    return get_last_model()
 
 # class precisao(BaseModel):
 #     precisao: float
