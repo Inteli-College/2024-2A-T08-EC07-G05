@@ -49,13 +49,53 @@ Essas fases ajudam a garantir que o Pipeline seja eficiente e adaptável ao long
 
 ## Rotas e funções para a Pipeline (Modelo)
 
+As rotas feitas no backend para que pudessemos usar em relação ao salvamento dos novos modelos partindo do pipeline introduzido estão descritos abaixo: 
 
+```bash
+@router.post("/createModel/")
+## RECEBER METRICAS E O ARQUIVO PKL
+async def get_model(precisao: float):
+ # função no services/model 
+    return create_model_by_id(precisao)
+```
+E a função principal que utlizamos nessa rota principal é a "create_model_by_id" que, de fato, faz a criação do modelo, salva no bucket do supabase e destaca o **ID** onde vamos utilizar para evidenciar qual modelo estamos usando e com qual vamos comparar:
+
+```bash
+def create_model_by_id(precisao: float):
+    ## add o parametro do modelo (pkl) e data
+    # função que insere o pkl no bucket e retorna o id do bucket
+    # insere as metricas + id do bucket na tabela do supabase
+    data = insert_table('Modelo', {"DATA_TREINO": datetime.now, "PRECISAO": precisao})
+    parsed_data = parse_halle_times(data)
+    print(data)
+    for entry in parsed_data:
+        id = entry['ID_MODELO']
+        entry['DATA_TREINO'] = {item['ID_MODELO']: item['DATA_TREINO'] for item in data}.get(id, None)
+        entry['PRECISAO'] = {item['ID_MODELO']: item['PRECISAO'] for item in data}.get(id, None)
+    return parsed_data
+```
+Nessa rota a seguir, utilizamos para poder pegar o modelo salvo no bucket atráves do **ID**
+
+```bash
+@router.get("/getModel/")
+async def get_model(ID_MODELO: int):
+    return get_model_by_id(ID_MODELO: int)
+```
+
+A função referente é a "get_model_by_id" que identifica o modelo com base no **ID** colocado e trás para o usuário:
+
+```bash
+def get_model_by_id():
+    data = get_by_id('Modelo', 'ID_MODELO,DATA_TREINO,PRECISAO')
+    print(data)
+    return data
+```
 
 ## Processo de Pipeline no Frontend (Modelo)
 
 ![Processo de Pipeline no front (Modelo)](Linkdofuncionamentodapipelinedomodelo)
 
-O processo de Pipeline do modelo no projeto também conta com uma interface simples e intuitiva no frontend. As páginas permitem que o usuário salve os novos modelos que o pipeline gerou, a visualização dos modelos que estão salvos no bucket do datalake (MINIO) e a escolha de qual modelo usar através das métricas dispostas.
+O processo de Pipeline do modelo no projeto também conta com uma interface simples e intuitiva no frontend. As páginas permitem que o usuário salve os novos modelos que o pipeline gerou, a visualização dos modelos que estão salvos no bucket do datalake (SUPABASE) e a escolha de qual modelo usar através das métricas dispostas.
 
 ### (Contar sobre o Pipeline na parte do Front)
 
