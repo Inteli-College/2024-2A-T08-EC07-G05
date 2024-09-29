@@ -6,10 +6,7 @@ import numpy as np
 """
 
 
-PAREI EM SPRINT 1 !!!!!!!!!!!!
-
-
-FALHAS ROUTINE TA FUCNIONANDO ESTRANHO, VAMOS INVESTIGAR! PEGUEI DATA_PROCESSING DA SPRINT 2
+TODAS FUNCOES FUNCIONANDO, TRATAMENTO SIMILAR. FALTA APENAS ADICIONAR A LOGICA DE ADICIONAR NO BACK
 
 """
 
@@ -22,17 +19,15 @@ def RESULTADO_ROUTINE(path: str):
     elif path.endswith('.json'):
         df_resultados = pd.read_json(path)
     elif path.endswith('.parquet'):
-        df_resultados = pd.read_parquet(path)
+        df_resultados = pd.read_parquet(path,engine='pyarrow')
     elif path.endswith('.txt'):
         df_resultados = pd.read_csv(path, delimiter='\t')  # Supondo que seja um arquivo tabulado
     else:
         raise ValueError(f"Formato de arquivo não suportado: {path}")
 
-    # Drop Unnamed: 0 and first row (similar to how it was done for df)
     df_resultados = df_resultados.drop('Unnamed: 0', axis=1)
     df_resultados = df_resultados.drop(0)
 
-    # Renaming the columns similar to the steps you provided earlier
     df_resultados = df_resultados.rename(columns={
         'Unnamed: 1': 'KNR',
         'Unnamed: 2': 'NAME',
@@ -44,28 +39,23 @@ def RESULTADO_ROUTINE(path: str):
         'Unnamed: 8': 'DATA'
     })
 
-    # Drop duplicates and handle missing values
     df_resultados = df_resultados.drop_duplicates()
     df_resultados = df_resultados.dropna()
 
-    # Convert DATA column to datetime
+   
     df_resultados['DATA'] = pd.to_datetime(df_resultados['DATA'], errors='coerce')
 
-    # Creating a pivot table similar to the process you described
+
     pivot_df = df_resultados.pivot_table(index='KNR', columns=["ID", "STATUS"], aggfunc='size', fill_value=0)
 
-    # Rename the pivot columns
     pivot_df.columns = [f'QTD_STATUS_{col[0]}_OK' if col[1] == 10 else f'QTD_STATUS_{col[0]}_NOK' for col in pivot_df.columns]
 
-    # Reset index and calculate the time difference between the maximum and minimum DATA for each KNR
+   
     pivot_df.reset_index(inplace=True)
     pivot_df["TEMPO_MEDIO"] = df_resultados.groupby('KNR').DATA.transform('max') - df_resultados.groupby('KNR').DATA.transform('min')
 
-    # Convert time difference to minutes
     pivot_df["TEMPO_MEDIO"] = pivot_df["TEMPO_MEDIO"].dt.total_seconds() / 60
-
-    # Display the first 20 rows of the resulting pivot dataframe
-    print(pivot_df.head(20))
+    pivot_df.dropna()
     return pivot_df
 
 
@@ -80,7 +70,7 @@ def FALHAS_ROUTINE(path: str):
     elif path.endswith('.json'):
         df = pd.read_json(path)
     elif path.endswith('.parquet'):
-        df = pd.read_parquet(path)
+        df = pd.read_parquet(path,engine='pyarrow')
     elif path.endswith('.txt'):
         df = pd.read_csv(path, delimiter='\t')  # Supondo que seja um arquivo tabulado
     else:
@@ -145,12 +135,51 @@ def FALHAS_ROUTINE(path: str):
     # Reorganizando o DataFrame
     result_df = result_df[new_order]
     pivot_df.loc[:, 'TEM_FALHA_ROD'] = np.where(pivot_df['QTD_HALLE_ROD'] > 0, 1, 0)  # Cria a coluna 'TEM_FALHA_ROD' com valor 1 se 'QTD_HALLE_ROD' > 0, caso contrário, 0
-    
-
-    print(pivot_df.columns)
-    print(pivot_df.head(20))
+    pivot_df.dropna()
     return pivot_df
 
+def STATUS_ROUTINE(path: str):
+    # Suporte pra varios arquivos
+    if path.endswith('.csv'):
+        df = pd.read_csv(path)
+    elif path.endswith('.xlsx') or path.endswith('.xls'):
+        df = pd.read_excel(path)
+    elif path.endswith('.json'):
+        df = pd.read_json(path)
+    elif path.endswith('.parquet'):
+        df = pd.read_parquet(path,engine='pyarrow')
+    elif path.endswith('.txt'):
+        df = pd.read_csv(path, delimiter='\t')  # Supondo que seja um arquivo tabulado
+    else:
+        raise ValueError(f"Formato de arquivo não suportado: {path}")
 
-FALHAS_ROUTINE('./FALHAS_2M.xlsx')
-RESULTADO_ROUTINE('./RESULTADOS_2M_PREDICT.xlsx')
+    df.drop(columns='Unnamed: 0', inplace=True)
+    df.columns = df.iloc[0]
+    df.drop(df.index[0], inplace=True)
+    df = df.loc[:, df.columns.notnull()]
+
+    status_to_halle = {
+        'R750': 'ZP5',
+        'L540': 'ZP5A',
+        'G700': 'ZP61',
+        'M600': 'ZP6 / ZP62',
+        'M620': 'CAB',
+        'M700': 'ZP7',
+        'M710': 'ROD',
+        'M720': 'AGUA',
+        'M800': 'ZP8'
+    }
+    df['HALLE'] = df['STATUS'].map(status_to_halle)
+
+    df = df[df['HALLE'].notna()]
+
+    df['DATA'] = pd.to_datetime(df['DATA'], errors='coerce')
+
+    return df 
+
+def MERGE_DFS(df1: pd.DataFrame, df2: pd.DataFrame):
+    df = pd.merge(df1,df2,on='KNR', how='left')
+    print('merging dfs')
+    print(df.head(5))
+    return df
+
