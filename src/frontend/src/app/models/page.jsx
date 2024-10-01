@@ -1,8 +1,9 @@
   'use client';
   import React, { useEffect, useState } from 'react';
-    import { Button } from "@/components/ui/button";
+  import { Button } from "@/components/ui/button";
   import { DataTable } from '@/components/ui/data-table';
   import Link from "next/link";
+  import NavBar from '@/components/navBar';
   import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from "@/components/ui/dialog";
   import { CheckCircle, Loader, Save, Database, BarChart } from 'lucide-react';
   import { toast, ToastContainer } from 'react-toastify';
@@ -235,20 +236,19 @@
           </div>
       </header>
 
-        <div className="my-8 p-4 bg-white shadow-md rounded-lg">
-          <h2 className="text-2xl font-bold mb-4">Métrica do Modelo Atual</h2>
-          <div className="bg-gray-200 p-6 text-center rounded-lg">
-            <p className="text-xl">Precisão: <span className="font-semibold">{modelMetric}%</span></p>
-          </div>
+      <div className="my-8 p-4 bg-white shadow-md rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">Métrica do Modelo Atual</h2>
+        <div className="bg-gray-200 p-6 text-center rounded-lg">
+          <p className="text-xl">Precisão: <span className="font-semibold">{modelMetric}%</span></p>
         </div>
-
-        <div className="my-8 p-4 bg-white shadow-md rounded-lg">
-          <h2 className="text-2xl font-bold mb-4">Modelos Criados</h2>
-          <DataTable columns={modelsColumns} data={paginatedData} />
-        </div>
-        <ToastContainer />
       </div>
-    );
-  }
 
-  export default TrainModelPage;
+      <div className="my-8 p-4 bg-white shadow-md rounded-lg">
+        <h2 className="text-2xl font-bold mb-4">Modelos Criados</h2>
+        <DataTable columns={modelsColumns} data={paginatedData} />
+      </div>
+    </div>
+  );
+}
+
+export default TrainModelPage;
