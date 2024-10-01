@@ -66,6 +66,12 @@ function AnalysisPage() {
             <Link 
           href="/analysis">
             Análise de falhas</Link>
+            <Link 
+          href="/data">
+            Dados do Modelo</Link>
+            <Link 
+          href="/models">
+            Treino de Modelos</Link>
         <div className="text-sm bg-white p-2 rounded shadow-md align-right">
           precisão do modelo: 93%
         </div>
