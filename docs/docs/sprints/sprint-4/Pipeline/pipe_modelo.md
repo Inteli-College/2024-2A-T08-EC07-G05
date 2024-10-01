@@ -99,7 +99,7 @@ O processo de Pipeline do modelo no projeto também conta com uma interface simp
 
 ### Processo de Pipeline no Frontend (Páginas)
 
-O processo de Pipeline no frontend foi feito pensando que o usuário não apenas monitore a evolução dos modelos, mas também de criar novos modelos preditivos de maneira simples. No topo da página de histórico de modelos, há uma seção que exibe a métrica  de precisão do modelo atual, permitindo que os usuários acompanhem o desempenho do modelo mais recente de forma clara e objetiva e o lado temos o botão "Criar Novo Modelo" para criar novos modelos preditivos. Logo abaixo, tem uma tabela que organiza os modelos já criados, mostrando informações como a data de criação, quantidade de carros considerados no treino e o nome do modelo. 
+O processo de Pipeline no frontend foi feito pensando que o usuário não apenas monitore a evolução dos modelos, mas também crie novos modelos preditivos de maneira simples. No topo da página de histórico de modelos, há uma seção que exibe a métrica de precisão do modelo atual, permitindo que os usuários acompanhem o desempenho do modelo mais recente de forma clara e objetiva. Ao lado, temos o botão "Criar Novo Modelo" para criar novos modelos preditivos, que ativarão o pipeline de treinamento para o novo modelo. Logo abaixo, tem uma tabela que organiza os modelos já criados, mostrando informações como a data de criação, quantidade de carros considerados no treino, o nome do modelo e as métricas de desempenho desses modelos. 
 
 ### Verificação dos Modelos
 
