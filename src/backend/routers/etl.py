@@ -32,23 +32,22 @@ async def process_files(
         with open(status_path, "wb") as f:
             f.write(status_file.file.read())
 
-        falhas_processed_df = FALHAS_ROUTINE(falhas_path).dropna()
-        resultados_processed_df = RESULTADO_ROUTINE(resultados_path).dropna()
-        status_processed_df = STATUS_ROUTINE(status_path).dropna()
-        merged_df = MERGE_DFS(falhas_processed_df, resultados_processed_df).dropna()
-        print(merged_df.head(10))
-        falhas_processed_dict = falhas_processed_df.head(5).to_dict(orient='records')
-        resultados_processed_dict = resultados_processed_df.head(5).to_dict(orient='records')
-        status_processed_dict = status_processed_df.head(5).to_dict(orient='records')
-        merged_data_dict = merged_df.head(5).to_dict(orient='records')
+        falhas_processed_df = FALHAS_ROUTINE(falhas_path)
+        resultados_processed_df = RESULTADO_ROUTINE(resultados_path)
+        status_processed_df = STATUS_ROUTINE(status_path)
+        merged_data_df = MERGE_DFS(falhas_processed_df, resultados_processed_df)
+        print(falhas_processed_df.columns)
+        print(resultados_processed_df.columns)
+        print(status_processed_df.columns)
 
         return {
             "message": "Files processed successfully",
-            "falhas_processed_preview": falhas_processed_dict,
-            "resultados_processed_preview": resultados_processed_dict,
-            "status_processed_preview": status_processed_dict,
-            "merged_data_preview": merged_data_dict
+            "falhas_processed_preview": falhas_processed_df,
+            "resultados_processed_preview": resultados_processed_df,
+            "status_processed_preview": status_processed_df,
+            "merged_data_preview": merged_data_df
         }
 
     except Exception as e:
+        print(e)
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
