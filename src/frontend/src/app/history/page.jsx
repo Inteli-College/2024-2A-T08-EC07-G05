@@ -6,6 +6,7 @@ import ReactPaginate from 'react-paginate';
 import {Button } from "@/components/ui/button";
 import { DataTable } from '@/components/ui/data-table';
 import Link from "next/link";
+import NavBar from '@/components/navBar';
 
 
 function HistoryPage() {
@@ -165,46 +166,28 @@ function HistoryPage() {
   console.log(data)
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      {/* Header with Home Icon and Title */}
+    <main className="flex flex-col min-h-screen">
       <header>
-        <nav className="flex flex-start items-center p-4 gap-4">
-        <Button className='bg-blue-500 hover:bg-blue-600 text-white' onClick={homeClick}>
-          <img src="/icone_home.svg" className='w-5'></img>
-        </Button>
-          <Link 
-          href="/history">
-            Histórico de registros</Link>
-            <Link 
-          href="/prediction">
-            Predição de falhas</Link>
-            <Link 
-          href="/analysis">
-            Análise de falhas</Link>
-            <Link 
-          href="/data">
-            Dados do Modelo</Link>
-            <Link 
-          href="/models">
-            Treino de Modelos</Link>
-        </nav>
+        <NavBar />
       </header>
-      <div>
-        <DataTable columns={historyColumns} data={paginatedData} />
-        <ReactPaginate
-          className='flex justify-center gap-4'
-          previousLabel={"←"}
-          nextLabel={"→"}
-          pageCount={Math.ceil(data.length / itemsPerPage)}
-          onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          previousLinkClassName={"pagination__link"}
-          nextLinkClassName={"pagination__link"}
-          disabledClassName={"pagination__link--disabled"}
-          activeClassName={"pagination__link--active"}
-        />
+      <div className="min-h-screen bg-gray-100 p-4">
+        <div>
+          <DataTable columns={historyColumns} data={paginatedData} />
+          <ReactPaginate
+            className='flex justify-center gap-4'
+            previousLabel={"←"}
+            nextLabel={"→"}
+            pageCount={Math.ceil(data.length / itemsPerPage)}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            previousLinkClassName={"pagination__link"}
+            nextLinkClassName={"pagination__link"}
+            disabledClassName={"pagination__link--disabled"}
+            activeClassName={"pagination__link--active"}
+          />
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
 

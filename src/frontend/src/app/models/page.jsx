@@ -4,6 +4,7 @@ import "./style.css";
 import { Button } from "@/components/ui/button";
 import { DataTable } from '@/components/ui/data-table';
 import Link from "next/link";
+import NavBar from '@/components/navBar';
 
 function TrainModelPage() {
   const [modelsData, setModelsData] = useState([]);
@@ -52,18 +53,8 @@ function TrainModelPage() {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <header>
-        <nav className="flex flex-start items-center p-4 gap-4">
-          <Link href="/history">
-            Histórico de Modelos
-          </Link>
-          <Link href="/addData">
-            Adicionar Dados
-          </Link>
-          <Link href="/trainModel">
-            Treinar Modelo
-          </Link>
-        </nav>
-        <div className="absolute top-4 right-4">
+        <NavBar />
+        <div className="absolute top-7 right-10">
           <Button className='bg-blue-500 hover:bg-blue-600 text-white' onClick={handleNewModel}>
             Criar Novo Modelo
           </Button>
