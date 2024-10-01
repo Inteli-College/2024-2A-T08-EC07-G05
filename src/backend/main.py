@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.routers import predict, history, etl
+from routers import predict, history, etl
 
 app = FastAPI()
 
