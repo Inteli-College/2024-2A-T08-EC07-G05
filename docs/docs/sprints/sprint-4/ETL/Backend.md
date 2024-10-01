@@ -5,7 +5,7 @@ O ETL (Extract, Transform, Load) é o processo que consiste no carregamento de d
 - Transformação: Após serem coletados, os dados passarão por um rigoroso processo de tratamento para serem disponibilizados para o treinamento de novos modelos.
 - Carregamento: Com o tratamento feito, os dados são carregados para nosso banco de dados, assim ficando disponíveis para os serviços de treinamento.
 
-Nosso serviço realiza uma implementação prática, permitindo o desenvolvimento e comparação de novos modelos sem nenhum processo de treinamento prévio.
+Nosso serviço realiza uma implementação prática, permitindo o desenvolvimento e comparação de novos modelos sem nenhum processo de tratamento prévio.
 
 ## Implementação
 
