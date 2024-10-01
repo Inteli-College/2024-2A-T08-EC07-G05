@@ -42,7 +42,7 @@ export default function PredictionPage() {
     setIsError(false);
 
     const response = await fetch(
-      `http://${window.location.hostname}:8000/predict`, {
+      `http://${window.location.hostname}:3001/predict`, {
         method: "POST",
         body: JSON.stringify({
           knr: inputValue
