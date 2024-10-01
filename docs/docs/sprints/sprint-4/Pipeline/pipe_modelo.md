@@ -139,8 +139,6 @@ O processo de Pipeline no frontend foi feito pensando que o usuário não apenas
 
 Após a adição de novos dados, o usuário tem a opção de criar um novo modelo de predição, treinado com as informações recém-carregadas. Dessa forma, tem-se a opção de validar os dois modelos, o que foi gerado a partir dessa pipeline desenvolvida para a aplicação e o modelo ja em uso. A decisão vai ser exclusiva do usuário para escolher se vai utilizar o novo modelo ou se vai continuar com o modelo que ja está sendo usado.
 
-## Conclusão
-
 ### Processo de Pipeline no Frontend (Páginas)
 
 O processo de Pipeline no frontend foi feito pensando que o usuário não apenas monitore a evolução dos modelos, mas também crie novos modelos preditivos de maneira simples. No topo da página de histórico de modelos, há uma seção que exibe a métrica de precisão do modelo atual, permitindo que os usuários acompanhem o desempenho do modelo mais recente de forma clara e objetiva. Ao lado, temos o botão "Criar Novo Modelo" para criar novos modelos preditivos, que ativarão o pipeline de treinamento para o novo modelo. Logo abaixo, tem uma tabela que organiza os modelos já criados, mostrando informações como a data de criação, quantidade de carros considerados no treino, o nome do modelo e as métricas de desempenho desses modelos. 
@@ -153,3 +151,15 @@ Após a adição de novos dados, o usuário tem a opção de criar um novo model
 
 Por fim, esse processo de pipeline é importante pra automatizar e melhorar os modelos preditivos de forma contínua, desde a coleta de dados até a implementação e monitoramento. A integração entre o backend e frontend proporciona uma experiência de uso fluida e intuitiva, permitindo que o usuário acompanhe o desempenho dos modelos existentes e crie novos com facilidade. Isso tudo garante que o sistema fique sempre eficiente e pronto pra se adaptar a mudanças, mantendo tudo organizado e ajustável conforme necessário.
 
+
+### Processo de Pipeline no Frontend (Páginas)
+
+O processo de Pipeline no frontend foi feito pensando que o usuário não apenas monitore a evolução dos modelos, mas também crie novos modelos preditivos de maneira simples. No topo da página de histórico de modelos, há uma seção que exibe a métrica de precisão do modelo atual, permitindo que os usuários acompanhem o desempenho do modelo mais recente de forma clara e objetiva. Ao lado, temos o botão "Criar Novo Modelo" para criar novos modelos preditivos, que ativarão o pipeline de treinamento para o novo modelo. Logo abaixo, tem uma tabela que organiza os modelos já criados, mostrando informações como a data de criação, quantidade de carros considerados no treino, o nome do modelo e as métricas de desempenho desses modelos. 
+
+### Verificação dos Modelos
+
+Após a adição de novos dados, o usuário tem a opção de criar um novo modelo de predição, treinado com as informações recém-carregadas. Dessa forma, tem-se a opção de validar os dois modelos, o que foi gerado a partir dessa pipeline desenvolvida para a aplicação e o modelo já em uso. A decisão vai ser exclusiva do usuário para escolher se vai utilizar o novo modelo ou se vai continuar com o modelo atual.
+
+## Conclusão
+
+Por fim, esse processo de pipeline é importante pra automatizar e melhorar os modelos preditivos de forma contínua, desde a coleta de dados até a implementação e monitoramento. A integração entre o backend e frontend proporciona uma experiência de uso fluida e intuitiva, permitindo que o usuário acompanhe o desempenho dos modelos existentes e crie novos com facilidade. Isso tudo garante que o sistema fique sempre eficiente e pronto pra se adaptar a mudanças, mantendo tudo organizado e ajustável conforme necessário.
