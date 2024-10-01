@@ -7,6 +7,32 @@ O ETL (Extract, Transform, Load) é o processo que consiste no carregamento de d
 
 Nosso serviço realiza uma implementação prática, permitindo o desenvolvimento e comparação de novos modelos sem nenhum processo de treinamento prévio.
 
+## Implementação
+
+Quando os arquivos são inseridos, funções internas são chamadas, responsáveis por carregar os dados conforme o tipo de arquivo (CSV, XLSX, JSON, Parquet, TXT), garantindo a flexibilidade na ingestão dos dados. Essa etapa inicial é realizada em todas as funções de tratamento.
+
+```python
+if path.endswith('.csv'):
+    df_resultados = pd.read_csv(path)
+elif path.endswith('.xlsx') or path.endswith('.xls'):
+    df_resultados = pd.read_excel(path)
+elif path.endswith('.json'):
+    df_resultados = pd.read_json(path)
+```
+
+Depois de carregar os dados, ocorre o tratamento das colunas. Colunas desnecessárias são removidas e algumas são renomeadas para proporcionar mais clareza, utilizando `drop` e `rename` para padronizar o formato dos dados:
+
+```python
+df_resultados = df_resultados.drop('Unnamed: 0', axis=1)
+df_resultados = df_resultados.rename(columns={
+    'Unnamed: 1': 'KNR',
+    'Unnamed: 2': 'NAME',
+    'Unnamed: 3': 'ID',
+    'Unnamed: 4': 'STATUS',
+    ...
+})
+```
+Após todas as rotinas de tratamento, os dados são unidos e carregados para o banco de dados, já estando tratados e disponíveis para serem utilizados no treinamento de novos modelos.
 
 ## Endpoint
 
@@ -27,4 +53,4 @@ Nosso serviço realiza uma implementação prática, permitindo o desenvolviment
 
 ## Conclusão
 
-Com a interface desenvolvida pelo grupo IT-CROSS, o teste e desenvolvimento de novos modelos deixa de ser um processo complexo e se torna fácil, rápido e acessível.
+Com a interface desenvolvida pelo grupo IT-CROSS, o processo de teste e desenvolvimento de novos modelos torna-se simples, ágil e acessível, eliminando a complexidade e facilitando a constante melhora da solução.
