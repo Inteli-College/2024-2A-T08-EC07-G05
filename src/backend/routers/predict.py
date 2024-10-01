@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends, status
-from backend.services.predict import prediction
-from backend.schemas.schemas import KNRInput
+from services.predict import prediction
+from schemas.schemas import KNRInput
 from supabase import Client
 
 from backend.database.supabase import create_supabase_client

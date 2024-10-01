@@ -1,9 +1,9 @@
 from fastapi import APIRouter, HTTPException, Depends
-from backend.services.history import fetch_history, fetch_stats
-from backend.schemas.schemas import KNRInput
+from services.history import fetch_history, fetch_stats
+from schemas.schemas import KNRInput
 from supabase import Client
 
-from backend.database.supabase import create_supabase_client
+from database.supabase import create_supabase_client
 router = APIRouter(tags=["history"])
 
 def get_supabase_client() -> Client:

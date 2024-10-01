@@ -1,5 +1,5 @@
-from backend.database.supabase import query_table
-from backend.utils.parser import parse_halle_times, parse_failures
+from database.supabase import query_table
+from utils.parser import parse_halle_times, parse_failures
 
 
 def fetch_history():
