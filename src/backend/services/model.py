@@ -1,4 +1,4 @@
-from database.supabase import insert_table, get_by_id, save_model_to_bucket
+from database.supabase import insert_table, get_by_id, save_model_to_bucket, get_model_from_bucket
 from datetime import datetime
 import numpy as np
 import pandas as pd
@@ -10,42 +10,25 @@ from imblearn.over_sampling import SMOTE
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
-import os
 import asyncio
-import httpx
 
-def get_model_by_id():
-    data = get_by_id('Modelo', 'ID_MODELO,DATA_TREINO,PRECISAO')
-    # PEGAR NO BICKET DO SUPABASE O ARQUIVO PKL CUJO ID É DATA.ID_BUCKET
-    # RETORNAR ARQUIVO PKL 
-    print(data)
-    # for entry in data:
-    #     id = entry['ID_MODELO']
-    #     entry['DATA_TREINO'] = {item['ID_MODELO']: item['DATA_TREINO'] for item in data}.get(id, None)
-    #     entry['PRECISAO'] = {item['ID_MODELO']: item['PRECISAO'] for item in data}.get(id, None)
-    return data
+def get_model_by_id(id):
+    data = get_by_id('Modelo', 'ID_MODELO,DATA_TREINO,METRICAS,URL_BUCKET', id)
+    if data is not None:
+        url_model = data[0]['URL_BUCKET']
+        filename = url_model.split('/')[-1]
+        bucketname = url_model.split('/')[-2]
+        model_bytes = get_model_from_bucket(filename, bucketname)
+        model = pickle.loads(model_bytes)
 
-def get_last_model():
-    data = get_by_id('Modelo', 'ID_MODELO,DATA_TREINO,PRECISAO')
-    # PEGAR NO BICKET DO SUPABASE O ARQUIVO PKL CUJO ID É DATA.ID_BUCKET
-    # RETORNAR ARQUIVO PKL 
     print(data)
-    # for entry in data:
-    #     id = entry['ID_MODELO']
-    #     entry['DATA_TREINO'] = {item['ID_MODELO']: item['DATA_TREINO'] for item in data}.get(id, None)
-    #     entry['PRECISAO'] = {item['ID_MODELO']: item['PRECISAO'] for item in data}.get(id, None)
-    return data
+    return model
 
 def create_model_by_id(key, metrics):
     now = datetime.now().isoformat()
     data = insert_table('Modelo', {"DATA_TREINO": now, "METRICAS": metrics, "URL_BUCKET": key})
     if data is not None:
         return data
-    
-def save_model(model,filename, bucketname):
-    model_bytes = pickle.dumps(model)
-    model_url  = save_model_to_bucket(model_bytes, filename, bucketname)
-    return model_url
 
 # Func para buscar e preparar todos os dados do banco de dados para treinar um novo modelo abaixo 
 
@@ -129,15 +112,11 @@ def train_lstm(X_resampled, y_resampled, epochs=10, batch_size=32):
     history = model_lstm.fit(X_reshaped, y_reshaped, epochs=epochs, batch_size=batch_size, validation_split=0.2, verbose=1)
     return model_lstm, history
 
-# # Função para exportar o modelo como arquivo .pkl
-# def save_model(model, filename="models/model_lstm.pkl", bucketname="modelos-it-cross"):
-#     # Cria o diretório "models" se ele não existir
-#     os.makedirs(os.path.dirname(filename), exist_ok=True)
-    
-#     # Salva o modelo no arquivo especificado
-#     with open(filename, 'wb') as file:
-#         pickle.dump(model, file)
-#     print(f"Modelo salvo como {filename}")
+# Função para salvar o modelo no bucket
+def save_model(model,filename, bucketname):
+    model_bytes = pickle.dumps(model)
+    model_url  = save_model_to_bucket(model_bytes, filename, bucketname)
+    return model_url
 
 # Função para avaliar o modelo e retornar as métricas em formato JSON
 def evaluate_model(model, X_test, y_test):
@@ -162,38 +141,40 @@ def evaluate_model(model, X_test, y_test):
     print(metrics_json)  
     return metrics_json
 
-# Função principal assíncrona
+
 async def new_model():
+
     # Mockar os dados
     df = mock_data()  # --> quando for integrar na nos dados que vem do banco substituir linha pela de baixo
-    yield "data: Iniciando carregamento dos dados...\n\n"
+    # yield "data: Carregando Dados\n\n"
+    # await asyncio.sleep(0.1)
     # df = await fetch_data_from_supabase()
     yield "data: Dados carregados com sucesso!\n\n"
+    await asyncio.sleep(0.1)
     
     if df is not None:
         print("Colunas do DataFrame:", df.columns)
-        yield "data: Separando dados entre treino e teste...\n\n"
-        X_resampled, y_resampled, X_test, y_test = split_data(df)
-        yield "data: Separação concluído!\n\n"
 
-        # Treinar o modelo
-        yield "data: Iniciando treinamento do modelo...\n\n"
+        X_resampled, y_resampled, X_test, y_test = split_data(df)
+        yield "data: Separação concluída!\n\n"
+        await asyncio.sleep(0.1)
+
         model_lstm, history = train_lstm(X_resampled, y_resampled)
         yield "data: Treinamento concluído!\n\n"
+        await asyncio.sleep(0.1)
 
-        # Avaliar o modelo no conjunto de teste
-        yield "data: Avaliando modelo...\n\n"
         metrics_json = evaluate_model(model_lstm, X_test, y_test)
         yield "data: Avaliação completa!\n\n"
+        await asyncio.sleep(0.1)
 
-        # Salvar o modelo
-        yield "data: Salvando modelo...\n\n"
         now = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
         key = save_model(model_lstm, f"model-lstm-{now}.pkl", "modelos-it-cross")
         model_metadata = create_model_by_id(key, metrics_json)
-        yield "data: Modelo Salvo!\n\n"
-        yield "Id do modelo : " + str(model_metadata[0]['ID_MODELO']) + "\n\n"
+        yield "data: Modelo Salvo!"
+        await asyncio.sleep(0.1)
+        # yield "Id do modelo : " + str(model_metadata[0]['ID_MODELO']) + "\n\n"
 
     else:
         yield "data: Erro ao buscar dados.\n\n"
+        await asyncio.sleep(0.1)
         print("Erro ao buscar dados.")

@@ -76,3 +76,26 @@ def save_model_to_bucket(model_bytes: bytes, filename: str, bucketname: str):
     except Exception as e:
         print("An error occurred:", e)
         return None
+    
+def get_model_from_bucket(filename: str, bucketname: str):
+
+    supabase = create_supabase_client()
+    try:
+        # Defina a parte base da URL (até o nome do bucket)
+        base_url = f"https://ujidmgiotjewdzkhutmy.supabase.co/storage/v1/object/public/{bucketname}/"
+        
+        # Remover a parte base da URL para obter o caminho do arquivo
+        file_path = file_url.replace(base_url, "").split("?")[0]
+
+        # Agora fazemos o download do arquivo
+        response = supabase.storage.from_(bucketname).download(file_path)
+        
+        if response.status_code == 200:
+            # Retornar o conteúdo do arquivo
+            return response.content
+        else:
+            print("Erro ao baixar o arquivo:", response.json())
+            return None
+    except Exception as e:
+        print("An error occurred while fetching the file:", e)
+        return None

@@ -1,7 +1,5 @@
-from fastapi import APIRouter, HTTPException, Depends, status
-from fastapi.responses import StreamingResponse
+from fastapi import APIRouter, Depends, status
 from services.predict import prediction
-from services.model import new_model
 from services.FetchAllData import carregar_knrs
 from schemas.schemas import KNRInput
 from supabase import Client
@@ -21,10 +19,6 @@ async def predict_knr(data: KNRInput, supabase: Client = Depends(get_supabase_cl
 async def fetch_all_data():
     all_knrs = carregar_knrs()  
     return all_knrs
-
-@router.get("/new_model", status_code=status.HTTP_200_OK)
-async def create_new_model():
-    return StreamingResponse(new_model(), media_type="text/event-stream")
 
 @router.get("/health_backend", status_code=status.HTTP_200_OK)
 def health_check_backend():
