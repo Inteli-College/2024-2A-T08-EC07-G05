@@ -1,0 +1,113 @@
+/* Overall page styles */
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.text-black {
+  color: black;
+}
+
+.p-4 {
+  padding: 16px;
+}
+
+.text-blue-600 {
+  color: #1E3A8A;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.mb-4, .mb-6, .mb-2 {
+  margin-bottom: 1.5rem;
+}
+
+/* Card styles */
+.card {
+  padding: 20px;
+  border: 2px solid #1E3A8A;
+  background-color: #F0F4F8;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.card h2 {
+  margin-bottom: 8px;
+}
+
+.card p {
+  margin: 0;
+}
+
+/* Table styles */
+.table-container {
+  margin-top: 16px;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+.table th, .table td {
+  border: 1px solid #1E3A8A;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #1E3A8A;
+  color: white;
+}
+
+.table td {
+  background-color: #F0F4F8;
+}
+
+/* File upload section */
+.upload-section {
+  margin-top: 16px;
+}
+
+.file-input {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.upload-button {
+  background-color: #1E3A8A;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.upload-button:hover {
+  background-color: #3743ac;
+}
+
+/* Models button */
+.models-button {
+  background-color: #1E3A8A;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.models-button:hover {
+  background-color: #3743ac;
+}
