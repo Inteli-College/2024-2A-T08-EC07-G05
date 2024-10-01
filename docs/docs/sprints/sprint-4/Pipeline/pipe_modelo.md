@@ -106,3 +106,5 @@ O processo de Pipeline no frontend foi feito pensando que o usuário não apenas
 Após a adição de novos dados, o usuário tem a opção de criar um novo modelo de predição, treinado com as informações recém-carregadas. Dessa forma, tem-se a opção de validar os dois modelos, o que foi gerado a partir dessa pipeline desenvolvida para a aplicação e o modelo ja em uso. A decisão vai ser exclusiva do usuário para escolher se vai utilizar o novo modelo ou se vai continuar com o modelo que ja está sendo usado.
 
 ## Conclusão
+
+Por fim, esse processo de pipeline é importante pra automatizar e melhorar os modelos preditivos de forma contínua, desde a coleta de dados até a implementação e monitoramento. A integração entre o backend e frontend proporciona uma experiência de uso fluida e intuitiva, permitindo que o usuário acompanhe o desempenho dos modelos existentes e crie novos com facilidade. Isso tudo garante que o sistema fique sempre eficiente e pronto pra se adaptar a mudanças, mantendo tudo organizado e ajustável conforme necessário.
