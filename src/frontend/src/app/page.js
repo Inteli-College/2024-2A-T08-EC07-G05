@@ -1,4 +1,4 @@
-import Health from "@/app/health/health.jsx";
+import HealthPage from "@/app/health/page.jsx";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button"
 
