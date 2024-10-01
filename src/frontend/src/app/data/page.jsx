@@ -1,6 +1,9 @@
 "use client";  // Make sure it's at the top
 
+
 import React, { useState } from "react";
+import NavBar from "@/components/navBar";
+
 import {
   Box,
   Heading,
@@ -61,8 +64,11 @@ function DataPage() {
   const isDisabled = !(files.falhas && files.resultados && files.status);
 
   return (
-    <Box minH="100vh" p={6} bg="gray.50">
+    <main className="flex flex-col min-h-screen">
       {/* Page heading */}
+      <header>
+        <NavBar />
+      </header>
       <Heading as="h1" size="lg" color="blue.600" mb={6}>
         Página de Dados
       </Heading>
@@ -172,7 +178,7 @@ function DataPage() {
           <AlertDescription>Todos os arquivos foram enviados corretamente.</AlertDescription>
         </Alert>
       )}
-    </Box>
+    </main>
   );
 }
 

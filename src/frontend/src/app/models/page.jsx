@@ -4,6 +4,7 @@
   import { Button } from "@/components/ui/button";
   import { DataTable } from '@/components/ui/data-table';
   import Link from "next/link";
+  import NavBar from '@/components/navBar';
   import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from "@/components/ui/dialog";
   import { CheckCircle, Loader, Save, Database, BarChart } from 'lucide-react';
   import { toast, ToastContainer } from 'react-toastify';
@@ -108,18 +109,11 @@
 
     const paginatedData = modelsData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
-    return (
-      <div className="min-h-screen bg-gray-100 p-4">
-        <header>
-          <nav className="flex flex-start items-center p-4 gap-4">
-            <Link href="/history">
-              Histórico de Modelos
-            </Link>
-            <Link href="/addData">
-              Adicionar Dados
-            </Link>
-          </nav>
-          <div className="absolute top-4 right-4">
+  return (
+    <div className="min-h-screen bg-gray-100 p-4">
+      <header>
+      <NavBar />
+      <div className="absolute top-4 right-4">
           <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <button
@@ -154,7 +148,7 @@
           </DialogContent>
         </Dialog>
           </div>
-        </header>
+      </header>
 
         <div className="my-8 p-4 bg-white shadow-md rounded-lg">
           <h2 className="text-2xl font-bold mb-4">Métrica do Modelo Atual</h2>
