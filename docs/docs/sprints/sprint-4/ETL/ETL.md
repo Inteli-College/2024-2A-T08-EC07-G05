@@ -1,10 +1,12 @@
-# ETL Process Endpoint Documentation
+## Introduçao
 
-Este documento descreve o endpoint `/etl/process` utilizado para o processamento de arquivos ETL.
+O ETL (Extract, Transform, Load) é o processo que consiste no carregamento de dados do treinamento do modelo. As três etapas do ETL são:
+- Extração: Os dados são coletados de forma crua via API, podendo ser de diversos formatos, tais como csv, xlsx, parquet e outros. Esta etapa visa consolidar todos os dados necessários para que o processo de transformação possa ocorrer com êxito.
+- Transformação: Após serem coletados, os dados passarão por um rigoroso processo de tratamento para serem disponibilizados para o treinamento de novos modelos.
+- Carregamento: Com o tratamento feito, os dados são carregados para nosso banco de dados, assim ficando disponíveis para os serviços de treinamento.
 
-## Visão Geral
+Nosso serviço realiza uma implementação prática, permitindo o desenvolvimento e comparação de novos modelos sem nenhum processo de treinamento prévio.
 
-O proceso de 
 
 ## Endpoint
 
@@ -22,3 +24,7 @@ O proceso de
 
 ![ETL Flow](../../../../static/img/sprint-4/image.png)
 
+
+## Conclusão
+
+Com a interface desenvolvida pelo grupo IT-CROSS, o teste e desenvolvimento de novos modelos deixa de ser um processo complexo e se torna fácil, rápido e acessível.
