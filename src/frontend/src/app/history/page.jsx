@@ -143,7 +143,7 @@ function HistoryPage() {
   }, [isLoading]);
 
   useEffect( () => {
-    fetch(`http://${window.location.hostname}:8000/getHistory`)
+    fetch(`http://${window.location.hostname}:3000/getHistory`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
