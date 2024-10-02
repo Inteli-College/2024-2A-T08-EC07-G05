@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import "./style.css";
 import LoadingPage from "../../components/loadingBar";
 import ReactPaginate from 'react-paginate';
 import {Button } from "@/components/ui/button";
@@ -123,14 +122,7 @@ function HistoryPage() {
       cell: ({cell}) => {
         return cell.getValue("OUTPUT_MODELO") === null ? "-" : (cell.getValue("OUTPUT_MODELO") === true ? "Sim" : "Não");
       },
-    },
-    {
-      accessorKey: "RESULTADO_TESTE",
-      header: "Resultado teste (há falha?)",
-      cell: ({cell}) => {
-        return cell.getValue("RESULTADO_TESTE") === null ? "-" : (cell.getValue("RESULTADO_TESTE") === true ? "Sim" : "Não");
-      },
-    },
+    }
   ];
 
   const homeClick = () => {
@@ -151,7 +143,7 @@ function HistoryPage() {
   }, [isLoading]);
 
   useEffect( () => {
-    fetch(`http://${window.location.hostname}:3001/getHistory`)
+    fetch(`http://${window.location.hostname}:8000/getHistory`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -170,7 +162,7 @@ function HistoryPage() {
       <header>
         <NavBar />
       </header>
-      <div className="min-h-screen bg-gray-100 p-4">
+      <div className="min-h-screen p-4">
         <div>
           <DataTable columns={historyColumns} data={paginatedData} />
           <ReactPaginate

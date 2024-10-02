@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import "./style.css";
 import { Button } from "@/components/ui/button";
 import { DataTable } from '@/components/ui/data-table';
 import Link from "next/link";
