@@ -12,15 +12,6 @@ from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 import asyncio
 
-# def delete_bucket(filename, bucketname):
-#     data = delete_model_bucket(filename, bucketname)
-#     return data
-
-# def delete_model_by_id(id):
-#     # Chama a função que apaga tanto o registro do banco quanto o arquivo no bucket
-#     data = delete_model_and_file_by_id(id)        
-#     return data
-
 def get_model_by_id():
     data = get_by_id('Modelo', 'ID_MODELO,DATA_TREINO,PRECISAO')
 
