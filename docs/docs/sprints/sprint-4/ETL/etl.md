@@ -5,7 +5,9 @@
 
 ## Importância do ETL no Projeto
 
-No projeto de predição de falhas, o processo de ETL (Extract, Transform, Load) desempenha um papel essencial. O modelo de predição faz uma análise de falhas dos carros conforme eles passam na linha de produção e chega ao checkpoint ROD, mas os dados gerados durante esse processo não podem ser descartados. Esses dados são valiosos para futuras melhorias e treinamentos de novos modelos, além de permitirem ajustes e novas análises. O ETL é utilizado para coletar esses dados preditivos, transformá-los conforme necessário e armazená-los de forma adequada no banco de dados, garantindo que estejam disponíveis para uso posterior.
+No projeto de predição de falhas, o processo de ETL (Extract, Transform, Load) desempenha um papel essencial. Ao longo da linha de produção, os carros vão gerando novos dados que o nosso modelo, ao chegar no checkpoint ROD, realiza uma predição com eles. 
+
+Porém, esses dados que chegam a cada instante também são valiosos para futuras melhorias e treinamentos de novos modelos, além de permitirem ajustes e novas análises. O ETL é utilizado para coletar esses dados preditivos, transformá-los conforme necessário e armazená-los de forma adequada no banco de dados, garantindo que estejam disponíveis para uso posterior.
 
 ## O que é o ETL
 
@@ -33,7 +35,7 @@ No projeto de predição de falhas, o processo de ETL segue o fluxo básico de e
      - **Tabela de Status** (informações sobre o status geral da linha de produção).
    
 2. **Transform (Transformação)**:
-   - Após a extração, os dados passam por uma fase de transformação, onde features relevantes são extraídas. Essas features podem incluir variáveis como a quantidade de carros que passaram sem falhas, o tempo entre falhas, a quantidade de operações OK, e outros parâmetros úteis para o aprimoramento do modelo de predição.
+   - Após a extração, os dados passam por uma fase de transformação, obtida a partir da exploração dos dados e da percepção do grupo ao longo do desenvolvimento de quais features contribuem para uma melhor performance do modelo. Essas features podem incluir variáveis como a quantidade de carros que passaram sem falhas, o tempo entre falhas, a quantidade de operações OK, e outros parâmetros úteis para o aprimoramento do modelo de predição.
 
 3. **Load (Carregamento)**:
    - Finalmente, os dados transformados são carregados no banco de dados. Esse banco de dados será utilizado para armazenar o histórico de resultados e falhas, podendo ser usado futuramente para treinar novos modelos de predição.
@@ -59,8 +61,8 @@ Depois de selecionar os arquivos, o usuário clica em "Enviar Arquivos" para que
 
 ### Novo Modelo
 
-Após a adição de novos dados, o usuário tem a opção de criar um novo modelo de predição, treinado com as informações recém-carregadas. O botão "Novo Modelo" redireciona para a página de criar novos modelos. Lá, é possível iniciar esse processo diretamente da interface do frontend.
+Após a adição de novos dados, o usuário tem a opção de criar um novo modelo de predição, treinado com as informações todas informações: antigas e as recém-carregadas. O botão "Novo Modelo" redireciona para a página de criar novos modelos. Lá, é possível iniciar esse processo diretamente da interface do frontend.
 
 ## Conclusão
 
-O processo de ETL no projeto de predição de falhas é essencial para garantir que os dados coletados na linha de produção não sejam desperdiçados. Esses dados são transformados em informações úteis e armazenados de forma adequada, garantindo a possibilidade de melhorias contínuas no modelo de predição. A integração com o frontend facilita a manipulação dos dados pelo usuário, oferecendo uma interface clara e direta para o envio e processamento dos arquivos necessários.
+O processo de ETL no projeto de predição de falhas é essencial para garantir que os dados coletados na linha de produção sejam utilizados para novos modelos. Esses dados são transformados em informações úteis e armazenados de forma adequada, garantindo a possibilidade de melhorias contínuas no modelo de predição. A integração com o frontend facilita a manipulação dos dados pelo usuário, oferecendo uma interface clara e direta para o envio e processamento dos arquivos necessários.
