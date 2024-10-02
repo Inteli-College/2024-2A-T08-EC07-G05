@@ -69,9 +69,6 @@ function DataPage() {
       <header>
         <NavBar />
       </header>
-      <Heading as="h1" size="lg" color="blue.600" mb={6}>
-        Página de Dados
-      </Heading>
 
       {/* Card showing dataset count */}
       <Card p={4} mb={6} shadow="md">
