@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
-from services.model import get_model_by_id, new_model, delete_model_id
+from services.model import get_model_by_id, new_model, delete_model_and_file_by_id
 from supabase import Client
 from fastapi import status
 from fastapi.responses import StreamingResponse
@@ -28,4 +28,8 @@ async def create_new_model():
 
 @router.delete("/deleteModel/", status_code=status.HTTP_200_OK)
 async def delete_model(ID_MODELO):
-    return delete_model_id(ID_MODELO)
+    return delete_model_and_file_by_id(ID_MODELO)
+
+# @router.delete("/deleteModelBucket/", status_code=status.HTTP_200_OK)
+# async def delete_model_from_bucket(ID_MODELO):
+#     return delete_model_bucket(ID_MODELO)

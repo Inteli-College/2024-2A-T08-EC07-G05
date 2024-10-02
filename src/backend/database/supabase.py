@@ -105,7 +105,7 @@ def delete_model_from_bucket(filename: str, bucketname: str):
         # Tenta apagar o arquivo do bucket
         response = supabase.storage.from_(bucketname).remove([filename])
 
-        if response.status_code == 200:
+        if response:
             print(f"Arquivo '{filename}' deletado com sucesso do bucket '{bucketname}'.")
             return True
         else:
@@ -114,8 +114,8 @@ def delete_model_from_bucket(filename: str, bucketname: str):
     except Exception as e:
         print("An error occurred while deleting the file:", e)
         return False
-    
-def delete_model_by_id(id):
+
+def delete_model_from_table(id):
     supabase = create_supabase_client()
     try:
         response = supabase.table('Modelo').delete().eq('ID_MODELO', id).execute()
