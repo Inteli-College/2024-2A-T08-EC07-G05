@@ -50,10 +50,11 @@ function AnalysisPage() {
   console.log("failtypes:", failTypes);
 
   return (
-    <main>
+    <main className="bg-gray-100 min-h-screen p-4">
       <header>
         <NavBar />
       </header>
+
       <div className="min-h-screen p-4">
         <h1 className="text-xl font-semibold mb-4">Recorrência de falhas:</h1>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
