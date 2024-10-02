@@ -2,15 +2,15 @@
 
 ## Importância do Pipeline no Projeto 
 
-No projeto de predição de falhas, o processo de Pipeline é essencial para garantir que os dados coletados durante a linha de produção sejam continuamente utilizados para melhorar o modelo preditivo. Ao capturar e processar os dados em tempo real, o Pipeline assegura que informações valiosas sejam sempre acessíveis para análises e treinamentos de modelos futuros, permitindo ajustes e inovações constantes.
+No projeto de predição de falhas, o processo de pipeline é essencial para garantir que os dados coletados durante a linha de produção sejam continuamente utilizados para melhorar o modelo preditivo. Ao capturar e processar os dados em tempo real, o pipeline assegura que informações valiosas sejam sempre acessíveis para análises e treinamentos de modelos futuros, permitindo ajustes e inovações constantes.
 
 # O que é uma Pipeline em Programação
 
-Uma Pipeline em programação é uma sequência estruturada de processos que transformam dados de entrada em resultados finais. Ela é comumente usada em contextos de processamento de dados, aprendizado de máquina e desenvolvimento de software, permitindo que cada etapa do processo seja tratada de forma modular e reutilizável. O uso de pipelines facilita a automação, a manutenção do código e a escalabilidade de projetos complexos.
+Uma pipeline em programação é uma sequência estruturada de processos que transformam dados de entrada em resultados finais. Ela é comumente usada em contextos de processamento de dados, aprendizado de máquina e desenvolvimento de software, permitindo que cada etapa do processo seja tratada de forma modular e reutilizável. O uso de pipelines facilita a automação, a manutenção do código e a escalabilidade de projetos complexos.
 
 ## Importância das Pipelines
 
-As Pipelines são essenciais porque:
+As pipelines são essenciais porque:
 
 - **Organizam o Fluxo de Dados**: Elas dividem tarefas complexas em etapas menores, facilitando o gerenciamento.
 - **Melhoram a Reutilização**: Funções e componentes podem ser reutilizados em diferentes partes do projeto.
@@ -18,11 +18,7 @@ As Pipelines são essenciais porque:
 
 ![Processo de PIPELINE](../../../../static/img/sprint-4/pipeline.png)
 
-## Como Funciona o Processo de Pipeline no Projeto (Modelo)
-
-No projeto de predição de falhas, o Pipeline em questão vai envolver diversar funções e passos(rotas) que vão servir para mostrarmos o modelo que já estamos utilizando para predizer e colocaremos a disposição o modelo novo que obtivemos com a nossa Pipeline:
-
-### Fases do Processo de Pipeline (Modelo)
+## Quais são as fases do Processo de Pipeline
 
 1. **Coleta de Dados:**
    - Captura de dados de diferentes fontes, como bancos de dados, APIs ou sistemas de monitoramento.
@@ -47,6 +43,10 @@ No projeto de predição de falhas, o Pipeline em questão vai envolver diversar
 
 Essas fases ajudam a garantir que o Pipeline seja eficiente e adaptável ao longo do tempo.
 
+## Como Funciona o Processo de Pipeline no Projeto (Modelo)
+
+No projeto de predição de falhas, a pipeline em questão vai envolver diversar funções e passos(rotas) que vão servir para mostrarmos o modelo que já estamos utilizando para predizer e colocaremos a disposição o modelo novo que obtivemos com a nossa pipeline:
+
 ## Rotas e funções para a Pipeline (Modelo)
 
 As rotas feitas no backend para que pudessemos usar em relação ao salvamento dos novos modelos partindo do pipeline introduzido estão descritos abaixo: 
@@ -58,22 +58,56 @@ async def get_model(precisao: float):
  # função no services/model 
     return create_model_by_id(precisao)
 ```
-E a função principal que utlizamos nessa rota principal é a "create_model_by_id" que, de fato, faz a criação do modelo, salva no bucket do supabase e destaca o **ID** onde vamos utilizar para evidenciar qual modelo estamos usando e com qual vamos comparar:
+
+E a função principal que utlizamos nessa rota principal é a "new_model" que, de fato, faz a criação do modelo, salva no bucket do supabase. Posteriormente vamos utilizar para evidenciar qual modelo estamos usando e com qual vamos comparar:
 
 ```bash
-def create_model_by_id(precisao: float):
-    ## add o parametro do modelo (pkl) e data
-    # função que insere o pkl no bucket e retorna o id do bucket
-    # insere as metricas + id do bucket na tabela do supabase
-    data = insert_table('Modelo', {"DATA_TREINO": datetime.now, "PRECISAO": precisao})
-    parsed_data = parse_halle_times(data)
-    print(data)
-    for entry in parsed_data:
-        id = entry['ID_MODELO']
-        entry['DATA_TREINO'] = {item['ID_MODELO']: item['DATA_TREINO'] for item in data}.get(id, None)
-        entry['PRECISAO'] = {item['ID_MODELO']: item['PRECISAO'] for item in data}.get(id, None)
-    return parsed_data
+async def new_model():
+
+    # Mockar os dados
+    df = mock_data()  # --> quando for integrar na nos dados que vem do banco substituir linha pela de baixo
+    # yield "data: Carregando Dados\n\n"
+    # await asyncio.sleep(0.1)
+    # df = await fetch_data_from_supabase()
+    yield "data: Dados carregados com sucesso!\n\n"
+    await asyncio.sleep(0.1)
 ```
+
+Toda a parte de salvamento do novo modelo:
+
+```bash
+if df is not None:
+        print("Colunas do DataFrame:", df.columns)
+
+        X_resampled, y_resampled, X_test, y_test = split_data(df)
+        yield "data: Separação concluída!\n\n"
+        await asyncio.sleep(0.1)
+
+        model_lstm, history = train_lstm(X_resampled, y_resampled)
+        yield "data: Treinamento concluído!\n\n"
+        await asyncio.sleep(0.1)
+
+        metrics_json = evaluate_model(model_lstm, X_test, y_test)
+        yield "data: Avaliação completa!\n\n"
+        await asyncio.sleep(0.1)
+
+        now = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+        key = save_model(model_lstm, f"model-lstm-{now}.pkl", "modelos-it-cross")
+        model_metadata = create_model_by_id(key, metrics_json)
+        yield "data: Modelo Salvo!"
+        await asyncio.sleep(0.1)
+        # yield "Id do modelo : " + str(model_metadata[0]['ID_MODELO']) + "\n\n"
+```
+
+E se ele não conseguir, ele vai exibir o erro:
+
+```bash
+    else:
+        yield "data: Erro ao buscar dados.\n\n"
+        await asyncio.sleep(0.1)
+        print("Erro ao buscar dados.")
+```
+
 Nessa rota a seguir, utilizamos para poder pegar o modelo salvo no bucket atráves do **ID**
 
 ```bash

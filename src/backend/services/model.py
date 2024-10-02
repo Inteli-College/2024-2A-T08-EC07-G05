@@ -1,7 +1,21 @@
-from database.supabase import insert_table, get_by_id
-from utils.parser import parse_halle_times
+from database.supabase import insert_table, get_by_id, save_model_to_bucket, get_model_from_bucket, delete_model_from_bucket, delete_model_by_id
 from datetime import datetime
+import numpy as np
+import pandas as pd
+import json
+import pickle
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, accuracy_score
+from imblearn.over_sampling import SMOTE
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout
+from tensorflow.keras.optimizers import Adam
+import asyncio
 
+def delete_model_id(id):
+    data = delete_model_by_id(id)
+    # data_2 = delete_model_from_bucket(id)
+    return data
 
 def get_model_by_id():
     data = get_by_id('Modelo', 'ID_MODELO,DATA_TREINO,PRECISAO')
@@ -28,20 +42,6 @@ def create_model_by_id(precisao: float):
         entry['DATA_TREINO'] = {item['ID_MODELO']: item['DATA_TREINO'] for item in data}.get(id, None)
         entry['PRECISAO'] = {item['ID_MODELO']: item['PRECISAO'] for item in data}.get(id, None)
     return parsed_data
-=======
-from database.supabase import insert_table, get_by_id, save_model_to_bucket, get_model_from_bucket
-from datetime import datetime
-import numpy as np
-import pandas as pd
-import json
-import pickle
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, accuracy_score
-from imblearn.over_sampling import SMOTE
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense, Dropout
-from tensorflow.keras.optimizers import Adam
-import asyncio
 
 def get_model_by_id(id):
     data = get_by_id('Modelo', 'ID_MODELO,DATA_TREINO,METRICAS,URL_BUCKET', id)

@@ -1,7 +1,6 @@
 from supabase import Client, create_client
 import os
 import tempfile
-
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
@@ -99,3 +98,29 @@ def get_model_from_bucket(filename: str, bucketname: str):
     except Exception as e:
         print("An error occurred while fetching the file:", e)
         return None
+
+def delete_model_from_bucket(filename: str, bucketname: str):
+    supabase = create_supabase_client()
+    try:
+        # Tenta apagar o arquivo do bucket
+        response = supabase.storage.from_(bucketname).remove([filename])
+
+        if response.status_code == 200:
+            print(f"Arquivo '{filename}' deletado com sucesso do bucket '{bucketname}'.")
+            return True
+        else:
+            print("Erro ao deletar o arquivo do bucket:", response.json())
+            return False
+    except Exception as e:
+        print("An error occurred while deleting the file:", e)
+        return False
+    
+def delete_model_by_id(id):
+    supabase = create_supabase_client()
+    try:
+        response = supabase.table('Modelo').delete().eq('ID_MODELO', id).execute()
+        if response:
+            return response.data
+    except Exception as e:
+        print("An error occurred while deleting the model:", e)
+        return False
