@@ -1,7 +1,6 @@
 from supabase import Client, create_client
 import os
 from dotenv import load_dotenv, find_dotenv
-import pandas as pd
 
 load_dotenv(find_dotenv())
 api_url: str = os.getenv("SUPABASE_URL")

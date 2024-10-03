@@ -2,8 +2,8 @@ from fastapi import APIRouter, HTTPException, status, UploadFile, File
 from fastapi.responses import JSONResponse
 from typing import List
 import pandas as pd
-from backend.utils.etl import FALHAS_ROUTINE, RESULTADO_ROUTINE, STATUS_ROUTINE, MERGE_DFS
-from backend.services.etl import insert
+from utils.etl import FALHAS_ROUTINE, RESULTADO_ROUTINE, STATUS_ROUTINE, MERGE_DFS
+from services.etl import insert
 from io import BytesIO
 import os
 from datetime import datetime
