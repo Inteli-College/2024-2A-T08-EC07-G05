@@ -3,7 +3,8 @@ from services.predict import prediction
 from services.FetchAllData import carregar_knrs
 from schemas.schemas import KNRInput
 from supabase import Client
-from database.supabase import create_supabase_client
+
+from backend.database.supabase import create_supabase_client
 router = APIRouter(tags=["predict"])
 
 def get_supabase_client() -> Client:
