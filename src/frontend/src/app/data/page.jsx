@@ -1,4 +1,4 @@
-"use client";  // Make sure it's at the top
+"use client";
 
 import React, { useState } from "react";
 import {
@@ -30,14 +30,14 @@ import {
 } from "@chakra-ui/react";
 
 function DataPage() {
-  const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI modal hook
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [datasets, setDatasets] = useState([
     { nome: "Dataset 1", data: "2024-09-23", quantidade_de_carros: 10 },
     { nome: "Dataset 2", data: "2024-09-24", quantidade_de_carros: 20 },
   ]);
   
   const [files, setFiles] = useState({ falhas: null, resultados: null, status: null });
-  const [isSubmitted, setIsSubmitted] = useState(false); // Track if files are uploaded successfully
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleFileChange = (event, fileType) => {
     setFiles({ ...files, [fileType]: event.target.files ? event.target.files[0] : null });
@@ -49,25 +49,22 @@ function DataPage() {
       console.log("Resultados:", files.resultados.name);
       console.log("Status:", files.status.name);
 
-      // Simulate a successful file upload
-      setIsSubmitted(true); // Show confirmation
-      onClose(); // Close modal after upload
+      
+      setIsSubmitted(true); 
+      onClose();
     } else {
       console.log("Not all files selected");
     }
   };
 
-  // Check if all files are selected
   const isDisabled = !(files.falhas && files.resultados && files.status);
 
   return (
     <Box minH="100vh" p={6} bg="gray.50">
-      {/* Page heading */}
       <Heading as="h1" size="lg" color="blue.600" mb={6}>
         Página de Dados
       </Heading>
 
-      {/* Card showing dataset count */}
       <Card p={4} mb={6} shadow="md">
         <Heading as="h2" size="md" mb={2}>
           Total de Dados Adicionados
@@ -77,7 +74,6 @@ function DataPage() {
         </Text>
       </Card>
 
-      {/* Table listing datasets */}
       <TableContainer mb={6}>
         <Table variant="simple">
           <Thead bg="blue.600">
@@ -107,23 +103,19 @@ function DataPage() {
         </Table>
       </TableContainer>
 
-      {/* Button container with proper spacing */}
       <Stack direction="row" spacing={4} justify="left" mb={6}>
-        {/* Button to open modal for file upload */}
         <Button colorScheme="blue" onClick={onOpen}>
           Enviar Arquivos
         </Button>
 
-        {/* Button to go to /models page */}
         <Button
           colorScheme="blue"
           onClick={() => (window.location.href = "/models")}
         >
-          Novo Modelo
+          Ver Modelos
         </Button>
       </Stack>
 
-      {/* Modal for file uploads */}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -164,7 +156,6 @@ function DataPage() {
         </ModalContent>
       </Modal>
 
-      {/* Show confirmation after successful upload */}
       {isSubmitted && (
         <Alert status="success" variant="solid" mt={6}>
           <AlertIcon />
