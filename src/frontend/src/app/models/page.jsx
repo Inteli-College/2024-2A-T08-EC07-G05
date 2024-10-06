@@ -3,12 +3,10 @@
   import { Button } from "@/components/ui/button";
   import { DataTable } from '@/components/ui/data-table';
   import Link from "next/link";
-  import NavBar from '@/components/navBar';
   import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from "@/components/ui/dialog";
   import { CheckCircle, Loader, Save, Database, BarChart } from 'lucide-react';
   import { toast, ToastContainer } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
-  import NavBar from '@/components/navBar';
 
   const steps = [
     { label: 'Carregando Dados', icon: <Database /> },
