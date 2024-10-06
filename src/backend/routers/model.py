@@ -12,7 +12,7 @@ def get_supabase_client() -> Client:
 
 @router.get("/getModel/")
 async def get_model(ID_MODELO: int):
-    return get_model_by_id(ID_MODELO: int)
+    return get_model_by_id(ID_MODELO)
 
 @router.post("/getLastModel")
 async def get_model():
