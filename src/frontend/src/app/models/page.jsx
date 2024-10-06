@@ -1,13 +1,13 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import NavBar from '@/components/navBar';
-import { Button } from "@/components/ui/button";
-import { DataTable } from '@/components/ui/data-table';
-import Link from "next/link";
-import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { CheckCircle, Loader, Save, Database, BarChart } from 'lucide-react';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+  'use client';
+  import React, { useEffect, useState } from 'react';
+    import { Button } from "@/components/ui/button";
+  import { DataTable } from '@/components/ui/data-table';
+  import Link from "next/link";
+  import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+  import { CheckCircle, Loader, Save, Database, BarChart } from 'lucide-react';
+  import { toast, ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+  import NavBar from '@/components/navBar';
 
   const steps = [
     { label: 'Carregando Dados', icon: <Database /> },
@@ -25,7 +25,66 @@ import 'react-toastify/dist/ReactToastify.css';
     const [progress, setProgress] = useState([]);
     const [completed, setCompleted] = useState(false);
     const [open, setOpen] = useState(false);
+  function TrainModelPage() {
+    const [modelsData, setModelsData] = useState([]);
+    const [modelMetric, setModelMetric] = useState(null);
+    const itemsPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(0);
+    const [progress, setProgress] = useState([]);
+    const [completed, setCompleted] = useState(false);
+    const [open, setOpen] = useState(false);
 
+    const handlePageClick = (data) => {
+      setCurrentPage(data.selected);
+    };
+
+    useEffect(() => {
+      let eventSource;
+
+      if (open) {
+        eventSource = new EventSource(`http://${window.location.hostname}:3000/new_model`);
+
+        eventSource.onmessage = function (event) {
+          console.log("Evento recebido:", event.data);
+  
+          if (event.data.trim().includes('Modelo Salvo!')) {
+            console.log("Pipeline concluída!");
+            setCompleted(true);
+            setTimeout(() => {
+              setOpen(false);
+              toast.success("Pipeline realizada com sucesso!", {
+                  autoClose: 5000,
+                  position: "top-right",
+              });
+            }, 1000);
+            eventSource.close();
+          }
+
+
+          
+          setProgress((prevProgress) => [...prevProgress, event.data]);
+
+        };
+
+        eventSource.onerror = function (error) {
+          console.error("SSE connection error", error);
+          eventSource.close();
+        };
+
+        return () => {
+          if (eventSource) {
+            eventSource.close();
+            console.log("Conexão SSE fechada.");
+          }
+        };
+      }
+
+      // return () => {
+      //   if (eventSource) eventSource.close();
+      // };
+    }, [open]);
+
+    const isStepCompleted = (index) => index < progress.length;
     const handlePageClick = (data) => {
       setCurrentPage(data.selected);
     };
@@ -96,6 +155,24 @@ import 'react-toastify/dist/ReactToastify.css';
         header: "Nome do Modelo",
       },
     ];
+    const modelsColumns = [
+      {
+        accessorKey: "date",
+        header: "Data",
+      },
+      {
+        accessorKey: "carQuantity",
+        header: "Quantidade de Carros",
+        cell: ({ cell }) => {
+          const carQuantity = cell.getValue();
+          return carQuantity ? `${carQuantity} carros` : '-';
+        }
+      },
+      {
+        accessorKey: "name",
+        header: "Nome do Modelo",
+      },
+    ];
 
     useEffect(() => {
       const mockData = [
@@ -105,7 +182,16 @@ import 'react-toastify/dist/ReactToastify.css';
       setModelsData(mockData);
       setModelMetric(92.5);
     }, []);
+    useEffect(() => {
+      const mockData = [
+        { date: "2024-09-01", carQuantity: 5, name: "Modelo 1" },
+        { date: "2024-09-02", carQuantity: 10, name: "Modelo 2" },
+      ];
+      setModelsData(mockData);
+      setModelMetric(92.5);
+    }, []);
 
+    const paginatedData = modelsData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
     const paginatedData = modelsData.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
   return (
