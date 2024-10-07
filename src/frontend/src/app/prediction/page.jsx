@@ -43,7 +43,7 @@ export default function PredictionPage() {
     setIsError(false);
 
     const response = await fetch(
-      `http://${window.location.hostname}:3001/predict`, {
+      `http://${process.env.NEXT_PUBLIC_BACKEND_AWS}:3001/predict`, {
         method: "POST",
         body: JSON.stringify({
           knr: inputValue
