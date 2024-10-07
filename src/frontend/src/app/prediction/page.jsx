@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
+import NavBar from '@/components/navBar';
 // import {
 //   Card,
 //   CardContent,
@@ -42,7 +43,7 @@ export default function PredictionPage() {
     setIsError(false);
 
     const response = await fetch(
-      `http://${window.location.hostname}:3001/predict`, {
+      `http://${process.env.NEXT_PUBLIC_BACKEND_AWS}/predict`, {
         method: "POST",
         body: JSON.stringify({
           knr: inputValue
@@ -97,24 +98,11 @@ export default function PredictionPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col px-10 py-6">
+    <main className="flex min-h-screen flex-col">
       <header>
-        <nav className="flex flex-start items-center p-4 gap-4">
-        <Button className='bg-blue-500 hover:bg-blue-600 text-white' onClick={homeClick}>
-          <img src="/icone_home.svg" className='w-5'></img>
-        </Button>
-          <Link 
-          href="/history">
-            Histórico de registros</Link>
-            <Link 
-          href="/prediction">
-            Predição de falhas</Link>
-            <Link 
-          href="/analysis">
-            Análise de falhas</Link>
-        </nav>
+        <NavBar />
       </header>
-      <div className="w-full flex space-x-4 mb-6">
+      <div className="w-full flex space-x-4 px-10 mb-6">
         <form onSubmit={submitPrediction} className='flex flex-start space-x-4 w-full'>
           <FormControl isInvalid={isError} className="flex flex-col w-200" >
           <HStack spacing={2}>

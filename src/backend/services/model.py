@@ -1,4 +1,5 @@
 from database.supabase import insert_table, get_by_id, save_model_to_bucket, get_model_from_bucket, delete_model_from_bucket, delete_model_from_table
+from utils.parser import parse_halle_times
 from datetime import datetime
 import numpy as np
 import pandas as pd

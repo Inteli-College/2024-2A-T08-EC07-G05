@@ -1,0 +1,8 @@
+{
+    "label": "ETL",
+    "position": 1,
+    "link": {
+        "type": "generated-index",
+        "description": "Essa seção busca documentar a estratégia que utilizamos para o ETL da aplicação."
+    }
+}
