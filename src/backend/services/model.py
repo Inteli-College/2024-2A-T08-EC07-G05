@@ -1,5 +1,5 @@
+from database.supabase import insert_table, get_by_id, save_model_to_bucket, get_model_from_bucket, delete_model_from_bucket, delete_model_from_table
 from utils.parser import parse_halle_times
-from database.supabase import insert_table, get_by_id, save_model_to_bucket, get_model_from_bucket
 from datetime import datetime
 import numpy as np
 import pandas as pd
@@ -56,6 +56,28 @@ def create_model_by_id(key, metrics):
     data = insert_table('Modelo', {"DATA_TREINO": now, "METRICAS": metrics, "URL_BUCKET": key})
     if data is not None:
         return data
+    
+def delete_model_and_file_by_id(id):
+    deleted_row = delete_model_from_table(id)
+
+    if deleted_row:
+        x = deleted_row[0]
+
+        url = x['URL_BUCKET'].split('/')[-1]
+        url = url.split('?')[0]
+        # Buscar o URL do arquivo no bucket
+        print(url)
+
+        # Deletar o arquivo do bucket
+        response = delete_model_from_bucket(url, 'modelos-it-cross')
+        print(response)
+
+        if response:
+            return {"message": f"Modelo e arquivo {url} deletados com sucesso."}
+        
+        return {"error": "Erro ao deletar o modelo e o arquivo."}
+    
+    return {"error": "Erro ao deletar o modelo."}
 
 # Func para buscar e preparar todos os dados do banco de dados para treinar um novo modelo abaixo 
 

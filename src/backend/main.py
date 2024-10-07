@@ -1,14 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import predict, history, etl
+from routers import predict, history, etl, model
 
 app = FastAPI()
 
 app.include_router(predict.router)
 app.include_router(history.router)
+app.include_router(model.router)
 app.include_router(etl.router)
-
-
 
 app.add_middleware(
     CORSMiddleware,

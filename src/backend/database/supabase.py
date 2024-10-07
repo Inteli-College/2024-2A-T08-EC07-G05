@@ -99,6 +99,33 @@ def get_model_from_bucket(filename: str, bucketname: str):
         print("An error occurred while fetching the file:", e)
         return None
 
+
+def delete_model_from_bucket(filename: str, bucketname: str):
+    supabase = create_supabase_client()
+    try:
+        # Tenta apagar o arquivo do bucket
+        response = supabase.storage.from_(bucketname).remove([filename])
+
+        if response:
+            print(f"Arquivo '{filename}' deletado com sucesso do bucket '{bucketname}'.")
+            return True
+        else:
+            print("Erro ao deletar o arquivo do bucket:", response.json())
+            return False
+    except Exception as e:
+        print("An error occurred while deleting the file:", e)
+        return False
+
+def delete_model_from_table(id):
+    supabase = create_supabase_client()
+    try:
+        response = supabase.table('Modelo').delete().eq('ID_MODELO', id).execute()
+        if response:
+            return response.data
+    except Exception as e:
+        print("An error occurred while deleting the model:", e)
+        return False
+      
 def insert_dataframe_to_etl(df):
     """
     Adiciona um dataframe pandas na tabela de ETL.
