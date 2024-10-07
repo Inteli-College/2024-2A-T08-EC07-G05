@@ -22,6 +22,7 @@ def query_table(table: str, columns: str):
         return response.data
     except Exception as e:
         print("An error occurred:", e)
+
 def insert_table(table: str, data: dict):
     """
     Table deve ser o nome da tabela, como 'Operacao'.
@@ -97,6 +98,7 @@ def get_model_from_bucket(filename: str, bucketname: str):
     except Exception as e:
         print("An error occurred while fetching the file:", e)
         return None
+
 def insert_dataframe_to_etl(df):
     """
     Adiciona um dataframe pandas na tabela de ETL.

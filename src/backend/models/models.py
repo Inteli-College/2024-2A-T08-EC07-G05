@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Boolean, TIMESTAMP
+from sqlalchemy import Column, String, Integer, Boolean, TIMESTAMP, UUID
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -29,4 +29,10 @@ class Info(Base):
     TEMPO_MEDIO_OPERACOES = Column(TIMESTAMP)
     RESULTADO_TESTE = Column(Boolean)
     DATA_TESTE = Column(TIMESTAMP)
+
+class Modelo(Base):
+    __tablename__ = "info"
+    ID_MODELO = Column(UUID, primary_key=True, index=True)
+    DATA_TREINO= Column(TIMESTAMP)
+    METRICAS = Column(json)
 
