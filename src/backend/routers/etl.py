@@ -1,7 +1,9 @@
 from fastapi import APIRouter, HTTPException, status, UploadFile, File
+from fastapi.responses import JSONResponse
 from typing import List
 import pandas as pd
-from backend.utils.etl import FALHAS_ROUTINE, RESULTADO_ROUTINE, STATUS_ROUTINE, MERGE_DFS
+from utils.etl import FALHAS_ROUTINE, RESULTADO_ROUTINE, STATUS_ROUTINE, MERGE_DFS
+from services.etl import insert
 from io import BytesIO
 import os
 from datetime import datetime
@@ -35,18 +37,13 @@ async def process_files(
         falhas_processed_df = FALHAS_ROUTINE(falhas_path)
         resultados_processed_df = RESULTADO_ROUTINE(resultados_path)
         status_processed_df = STATUS_ROUTINE(status_path)
-        merged_data_df = MERGE_DFS(falhas_processed_df, resultados_processed_df)
-        print(falhas_processed_df.columns)
-        print(resultados_processed_df.columns)
-        print(status_processed_df.columns)
+        merged_data_df = MERGE_DFS(falhas_processed_df, resultados_processed_df, status_processed_df)
+        insert(merged_data_df)
 
-        return {
-            "message": "Files processed successfully",
-            "falhas_processed_preview": falhas_processed_df,
-            "resultados_processed_preview": resultados_processed_df,
-            "status_processed_preview": status_processed_df,
-            "merged_data_preview": merged_data_df
-        }
+        return JSONResponse(
+            status_code=200,
+            content={"message": "Dados inseridos com sucesso"}
+            )
 
     except Exception as e:
         print(e)
