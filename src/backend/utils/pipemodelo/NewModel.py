@@ -30,24 +30,6 @@ async def fetch_data_from_supabase():
         except httpx.RequestError as e:
             print(f"Request error: {e}")
             return None  # Retorna None em caso de erro
-        
-# # Função para mockar um DataFrame com 20 linhas
-# def mock_data():
-#     np.random.seed(42)
-#     data = {
-#         'feature1': np.random.rand(20),
-#         'feature2': np.random.rand(20),
-#         'feature3': np.random.rand(20),
-#         'feature4': np.random.rand(20),
-#         'feature5': np.random.rand(20),
-#         'feature6': np.random.rand(20),
-#         'feature7': np.random.rand(20),
-#         'feature8': np.random.rand(20),
-#         'feature9': np.random.rand(20),
-#         'feature10': np.random.rand(20),
-#         'TEM_FALHA_ROD': np.random.randint(0, 2, size=20)
-#     }
-#     return pd.DataFrame(data)
 
 # Função para aplicar SMOTE
 def apply_smote(X_train, y_train):
@@ -131,9 +113,9 @@ def evaluate_model(model, X_test, y_test):
 
 # Função principal assíncrona
 async def new_model():
-    # Mockar os dados
-    # df = mock_data()  # --> quando for integrar na nos dados que vem do banco substituir linha pela de baixo
     df = await fetch_data_from_supabase()
+
+    print(df)
     yield "data: Iniciando carregamento dos dados...\n\n"
     yield "data: Dados carregados com sucesso!\n\n"
     

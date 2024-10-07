@@ -8,15 +8,20 @@ from database.supabase import create_supabase_client
 router = APIRouter()
 
 def transform_data(data):
+    coluna_especifica = "TEM_FALHA_ROD"
     transformed_data = []
     
     for item in data:
         new_item = {}
-        for index, value in enumerate(item.values()):
-            new_item[index] = value
+        for index, (key, value) in enumerate(item.items()):
+            if key == coluna_especifica:
+                new_item[key] = value  # Mantém o nome da coluna
+            else:
+                new_item[index] = value  # Enumera as outras colunas
         transformed_data.append(new_item)
 
     return transformed_data
+
 
 def carregar_knrs():
     supabase = create_supabase_client() 

@@ -24,8 +24,8 @@ async def fetch_all_data():
 
 @router.get("/new_model", status_code=status.HTTP_200_OK)
 async def create_new_model():
-    new_model_pipe = new_model()
-    return new_model_pipe
+    async for message in new_model():
+        print(message)  
 
 @router.get("/health_backend", status_code=status.HTTP_200_OK)
 def health_check_backend():
