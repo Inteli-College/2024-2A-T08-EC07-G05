@@ -12,7 +12,6 @@ router = APIRouter(tags=["health"])
 
 BACKEND_URL = os.getenv("BACKEND_URL")
 FRONTEND_URL = os.getenv("FRONTEND_URL")
-DATA_LAKE_URL = os.getenv("DATA_LAKE_URL")
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY") 
 
@@ -25,7 +24,6 @@ async def health_check(supabase: Client = Depends(create_supabase_client)):
     backend_health = await check_backend()
     frontend_health = await check_frontend()
     database_health = await check_database()
-    datalake_health = await check_data_lake()
 
     # Compila a resposta final com a saúde dos três serviços
     health_status = {
@@ -33,7 +31,6 @@ async def health_check(supabase: Client = Depends(create_supabase_client)):
         "backend_connection": backend_health,
         "frontend_connection": frontend_health,
         "database_connection": database_health,
-        "datalake_connection": datalake_health
     }
 
     # Prepara os dados para serem inseridos no banco
@@ -41,7 +38,6 @@ async def health_check(supabase: Client = Depends(create_supabase_client)):
         {"SERVICO": "backend", "HEALTH": backend_health["status"], "DATE": get_formatted_datetime()},
         {"SERVICO": "frontend", "HEALTH": frontend_health["status"], "DATE": get_formatted_datetime()},
         {"SERVICO": "database", "HEALTH": database_health["status"], "DATE": get_formatted_datetime()},
-        {"SERVICO": "datalake", "HEALTH": datalake_health["status"], "DATE": get_formatted_datetime()}
     ]
 
     # Insere os registros na tabela 'Health'
@@ -87,21 +83,6 @@ async def check_database():
         except httpx.HTTPStatusError as e:
             return {"status": "unhealthy", "error": str(e)}
         except httpx.RequestError as e:
-            return {"status": "unhealthy", "error": str(e)}
-
-async def check_data_lake():
-    async with httpx.AsyncClient() as client:
-        try: 
-            response = await client.get(DATA_LAKE_URL)
-            
-            if response.status_code == 200:
-                return {"status": "healthy"}
-            else:
-                return {"status": "unhealthy", "error": f"Status code: {response.status_code}"}
-        
-        except httpx.RequestError as e:
-            # Captura erros de conexão
-            print(f"Erro ao conectar-se ao data lake: {e}")
             return {"status": "unhealthy", "error": str(e)}
 
         
