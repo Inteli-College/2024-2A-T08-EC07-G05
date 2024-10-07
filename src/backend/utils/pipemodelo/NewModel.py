@@ -112,10 +112,10 @@ def evaluate_model(model, X_test, y_test):
     return metrics_json
 
 # Função principal assíncrona
-async def new_model():
+async def new_model2():
     df = await fetch_data_from_supabase()
 
-    print(df)
+    print(df)               
     yield "data: Iniciando carregamento dos dados...\n\n"
     yield "data: Dados carregados com sucesso!\n\n"
     
