@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Depends, status
 from services.predict import prediction
 from services.FetchAllData import carregar_knrs
+from utils.pipemodelo.NewModel import new_model
 from schemas.schemas import KNRInput
 from supabase import Client
 from database.supabase import create_supabase_client
+
 router = APIRouter(tags=["predict"])
 
 def get_supabase_client() -> Client:
@@ -19,6 +21,11 @@ async def predict_knr(data: KNRInput, supabase: Client = Depends(get_supabase_cl
 async def fetch_all_data():
     all_knrs = carregar_knrs()  
     return all_knrs
+
+@router.get("/new_model", status_code=status.HTTP_200_OK)
+async def create_new_model():
+    new_model_pipe = new_model()
+    return new_model_pipe
 
 @router.get("/health_backend", status_code=status.HTTP_200_OK)
 def health_check_backend():
