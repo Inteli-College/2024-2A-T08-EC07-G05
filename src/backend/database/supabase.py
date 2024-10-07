@@ -25,16 +25,13 @@ def query_table(table: str, columns: str):
 
 def insert_dataframe_to_etl(df: pd.DataFrame):
     """
-    Inserts data from a pandas DataFrame into the ETL table in Supabase.
-    
-    :param df: pandas DataFrame containing the data to be inserted
-    :return: Number of rows successfully inserted
+    Adiciona um dataframe pandas na tabela de ETL.
+    :param df: DataFrame
+    :return: Numero de Rows inserido
     """
     supabase = create_supabase_client()
     
-    # Convert DataFrame to list of dictionaries
     data = df.to_dict('records')
-    # Insert data in batches of 1000 rows
     batch_size = 1000
     successful_inserts = 0
     
@@ -44,7 +41,7 @@ def insert_dataframe_to_etl(df: pd.DataFrame):
             response = supabase.table('ETL').insert(batch).execute()
             successful_inserts += len(response.data)
         except Exception as e:
-            print(f"An error occurred while inserting batch {i//batch_size + 1}: {e}")
+            print(f"Ocorreu um problema inserindo o bloco número {i//batch_size + 1}: {e}")
     
     return successful_inserts
 
