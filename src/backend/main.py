@@ -9,6 +9,7 @@ app.include_router(history.router)
 app.include_router(etl.router)
 
 
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
