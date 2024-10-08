@@ -1,4 +1,4 @@
-from database.supabase import insert_table, get_by_id, save_model_to_bucket, get_model_from_bucket
+from database.supabase import insert_table, get_by_id, save_model_to_bucket, get_model_from_bucket, delete_model_from_bucket, delete_model_from_table
 from datetime import datetime
 import numpy as np
 import pandas as pd
@@ -192,10 +192,10 @@ async def new_model():
         now = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
         key = save_model(model_lstm, f"model-lstm-{now}.pkl", "modelos-it-cross")
         model_metadata = create_model_by_id(key, metrics_json)
+        yield "Id do modelo : " + str(model_metadata[0]['ID_MODELO']) + "\n\n"
         yield "data: Modelo Salvo!\n\n"
         await asyncio.sleep(1)
         print("Modelo salvo com sucesso!")
-        # yield "Id do modelo : " + str(model_metadata[0]['ID_MODELO']) + "\n\n"
     else:
         yield "data: Erro ao buscar dados.\n\n"
         await asyncio.sleep(0.1)
