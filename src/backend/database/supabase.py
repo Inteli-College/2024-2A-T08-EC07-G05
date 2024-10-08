@@ -48,6 +48,15 @@ def get_by_id(table: str, columns: str, id: int):
     except Exception as e:
         print("An error occurred:", e)
 
+def get_models_from_table():
+    supabase = create_supabase_client()
+    try:
+        response = supabase.table('Modelo').select('*').execute()
+        return response.data
+    except Exception as e:
+        print("An error occurred:", e)
+        return None
+
 def get_last_register(table: str, column: str):
     """
     Table deve ser o nome da tabela, como 'Operacao'.

@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, Dialog
 import { CheckCircle, Loader, Save, Database, BarChart } from 'lucide-react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+const currentModelId = process.env.NEXT_PUBLIC_MODEL_ID;
 
   const steps = [
     { label: 'Carregando Dados', icon: <Database /> },
@@ -26,6 +27,7 @@ import 'react-toastify/dist/ReactToastify.css';
     const [completed, setCompleted] = useState(false);
     const [openComparison, setOpenComparison] = useState(false);
     const [openTraining, setOpenTraining] = useState(false);
+    const [modelId, setModelId] = useState(null);
 
     const modelA = {
       id: 1,
@@ -49,7 +51,7 @@ import 'react-toastify/dist/ReactToastify.css';
         eventSource = new EventSource(`http://${window.location.hostname}:3000/new_model`);
 
         eventSource.onmessage = function (event) {
-          console.log("Evento recebido:", event.data);
+          console.log("Evento topissimo recebido:", event.data);
   
           if (event.data.trim().includes('Modelo Salvo!')) {
             console.log("Pipeline concluída!");
@@ -66,8 +68,12 @@ import 'react-toastify/dist/ReactToastify.css';
             eventSource.close();
           }
 
+          if (event.data.includes('Id do modelo')) {
+            const modelId = event.data.split(":")[1].trim();
+            console.log("Id do modelo:", modelId);
+            setModelId(modelId);
+          }
 
-          
           setProgress((prevProgress) => [...prevProgress, event.data]);
 
         };
@@ -93,7 +99,7 @@ import 'react-toastify/dist/ReactToastify.css';
     const isStepCompleted = (index) => index < progress.length;
 
     const handleDiscardModel = () => {
-      fetch(`http://${window.location.hostname}:3000/deleteModel/?ID_MODELO=${modelB.id}`, {
+      fetch(`http://${window.location.hostname}:3000/deleteModel/?ID_MODELO=${modelId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -118,32 +124,46 @@ import 'react-toastify/dist/ReactToastify.css';
 
     const modelsColumns = [
       {
-        accessorKey: "date",
+        accessorKey: "DATA_TREINO",
         header: "Data",
-      },
-      {
-        accessorKey: "carQuantity",
-        header: "Quantidade de Carros",
         cell: ({ cell }) => {
-          const carQuantity = cell.getValue();
-          return carQuantity ? `${carQuantity} carros` : '-';
-        }
+          const date = cell.getValue();
+          const formattedDate = new Date(date).toLocaleDateString();
+          return formattedDate;}
       },
+      // {
+      //   accessorKey: "carQuantity",
+      //   header: "Quantidade de Carros",
+      //   cell: ({ cell }) => {
+      //     const carQuantity = cell.getValue();
+      //     return carQuantity ? `${carQuantity} carros` : '-';
+      //   }
+      // },
       {
-        accessorKey: "name",
+        accessorKey: "ID_MODELO",
         header: "Nome do Modelo",
+
       },
     ];
 
     useEffect(() => {
-      const mockData = [
-        { date: "2024-09-01", carQuantity: 5, name: "Modelo 1" },
-        { date: "2024-09-02", carQuantity: 10, name: "Modelo 2" },
-      ];
-      setModelsData(mockData);
-      setModelMetric(92.5);
-    }, []);
-    useEffect(() => {
+      // Fetch all models
+      fetch(`http://${window.location.hostname}:3000/getModels`)
+        .then((res) => res.json())
+        .then((data) => {
+          data.sort((a, b) => new Date(b.DATA_TREINO) - new Date(a.DATA_TREINO));
+          setModelsData(data);
+          console.log("id modelo atual:", currentModelId);
+
+          if (data.length > 0) {
+        fetch(`http://${window.location.hostname}:3000/getModel/${currentModelId}`)
+          .then((res) => res.json())
+          .then((modelData) => {
+            setModelMetric(modelData.metric);
+            console.log("Modelo atual:", modelData);
+          });
+          }
+        });
       const mockData = [
         { date: "2024-09-01", carQuantity: 5, name: "Modelo 1" },
         { date: "2024-09-02", carQuantity: 10, name: "Modelo 2" },

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
-from services.model import get_model_by_id, new_model, delete_model_and_file_by_id
+from services.model import get_model_by_id, new_model, delete_model_and_file_by_id, get_models
 from supabase import Client
 from fastapi import status
 from fastapi.responses import StreamingResponse
@@ -14,16 +14,6 @@ def get_supabase_client() -> Client:
 async def get_model(ID_MODELO: int):
     return get_model_by_id(ID_MODELO)
 
-@router.post("/getLastModel")
-async def get_model():
-    return get_model_by_id()
-
-@router.post("/createModel/")
-## RECEBER METRICAS E O ARQUIVO PKL
-async def get_model(precisao: float):
- # função no services/model 
-    return create_model_by_id(precisao)
-
 @router.get("/new_model", status_code=status.HTTP_200_OK)
 async def create_new_model():
     return StreamingResponse(new_model(), media_type="text/event-stream", headers={
@@ -34,6 +24,13 @@ async def create_new_model():
 @router.delete("/deleteModel/", status_code=status.HTTP_200_OK)
 async def delete_model(ID_MODELO):
     return delete_model_and_file_by_id(ID_MODELO)
+
+@router.get("/getModels")
+async def fetch_models():
+    data = get_models()
+    if data is None:
+        return {"error": "Unable to fetch models"}
+    return data
 
 # @router.delete("/deleteModelBucket/", status_code=status.HTTP_200_OK)
 # async def delete_model_from_bucket(ID_MODELO):
