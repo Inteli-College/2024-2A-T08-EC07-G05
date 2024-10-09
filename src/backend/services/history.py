@@ -14,6 +14,6 @@ def fetch_history():
     return data
 
 def fetch_stats():
-    data = query_table('Operacao','HALLE,TEVE_FALHA,GRUPO_FALHA')
+    data = query_table('ETL','QTD_SGROUP_#MULTIVALUE,QTD_SGROUP_-2,QTD_SGROUP_1,QTD_SGROUP_133,QTD_SGROUP_137,QTD_SGROUP_140,QTD_SGROUP_2,QTD_SGROUP_4,QTD_SGROUP_5,QTD_SGROUP_9830946')
     print(data)
     return parse_failures(data)

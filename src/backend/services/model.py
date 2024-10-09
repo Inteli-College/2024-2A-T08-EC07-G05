@@ -12,16 +12,17 @@ from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 import asyncio
 import os
+import httpx
 
 def get_model_by_id(id):
     data = get_by_id('Modelo', 'ID_MODELO, URL_BUCKET', id)
     if data is not None:
         filename = data[0]['URL_BUCKET']
         print("filename: ", filename)
-        model_bytes = get_model_from_bucket(filename, "modelos-it-cross")
-        if model_bytes is None:
+        model = get_model_from_bucket(filename, "modelos-it-cross")
+        if model is None:
             return {"error": "Erro ao buscar o modelo no bucket."}
-        model = pickle.loads(model_bytes)
+
     print(data)
     return model
 
