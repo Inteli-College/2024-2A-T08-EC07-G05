@@ -1,11 +1,11 @@
-from database.supabase import insert_table, get_by_id, save_model_to_bucket, get_model_from_bucket, delete_model_from_bucket, delete_model_from_table, get_models_from_table
+from database.supabase import insert_table, get_by_id, save_model_to_bucket, get_model_from_bucket, delete_model_from_bucket, delete_model_from_table, get_models_from_table, get_current_model_from_table, delete_current_model_from_table
 from datetime import datetime
 import numpy as np
 import pandas as pd
-import json
 import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, accuracy_score
+from sklearn.metrics import precision_score, recall_score, f1_score
 from imblearn.over_sampling import SMOTE
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
@@ -13,14 +13,14 @@ from tensorflow.keras.optimizers import Adam
 import asyncio
 
 def get_model_by_id(id):
-    data = get_by_id('Modelo', 'ID_MODELO,DATA_TREINO,METRICAS,URL_BUCKET', id)
+    data = get_by_id('Modelo', 'ID_MODELO, URL_BUCKET', id)
     if data is not None:
-        url_model = data[0]['URL_BUCKET']
-        filename = url_model.split('/')[-1]
-        bucketname = url_model.split('/')[-2]
-        model_bytes = get_model_from_bucket(filename, bucketname)
+        filename = data[0]['URL_BUCKET']
+        print("filename: ", filename)
+        model_bytes = get_model_from_bucket(filename, "modelos-it-cross")
+        if model_bytes is None:
+            return {"error": "Erro ao buscar o modelo no bucket."}
         model = pickle.loads(model_bytes)
-
     print(data)
     return model
 
@@ -28,11 +28,50 @@ def get_models():
     data = get_models_from_table()
     return data
 
-def create_model_by_id(key, metrics):
-    now = datetime.now().isoformat()
-    data = insert_table('Modelo', {"DATA_TREINO": now, "METRICAS": metrics, "URL_BUCKET": key})
+def get_current_model():
+    data = get_current_model_from_table()
     if data is not None:
         return data
+    
+def update_current_model_by_id(ID_NOVO_MODELO):
+    try:
+        new_model = get_by_id('Modelo', '*', ID_NOVO_MODELO)
+        print(new_model)
+        if new_model is not None:
+            print("new_model data: ", new_model[0])
+            new_model_added = insert_table('Modelo_atual', {
+                "ID_MODELO_ATUAL": ID_NOVO_MODELO,
+                "URL_BUCKET": new_model[0]["URL_BUCKET"],
+                "DATA_TREINO": new_model[0]["DATA_TREINO"],
+                "ACURACIA": new_model[0]["ACURACIA"],
+                "PRECISAO": new_model[0]["PRECISAO"],
+                "RECALL": new_model[0]["RECALL"],
+                "F1": new_model[0]["F1"]})
+        if new_model_added is not None:
+            return new_model_added
+    except Exception as e:
+        print(e)
+        return {"error": "Erro ao atualizar o modelo atual."}
+
+def create_model_by_id(model_filename, accuracy, precision, recall, f1):
+    now = datetime.now().isoformat()
+    data = insert_table('Modelo', {
+        'DATA_TREINO': now,
+        'ACURACIA': accuracy,
+        'PRECISAO': precision,
+        'RECALL': recall,
+        'F1': f1,
+        'URL_BUCKET': model_filename
+    } ) 
+    if data is not None:
+        return data
+    
+def delete_current_model():
+    try:
+        data = delete_current_model_from_table()
+        return data
+    except Exception as e:
+        print(e)
     
 def delete_model_and_file_by_id(id):
     deleted_row = delete_model_from_table(id)
@@ -42,12 +81,7 @@ def delete_model_and_file_by_id(id):
 
         url = x['URL_BUCKET'].split('/')[-1]
         url = url.split('?')[0]
-        # Buscar o URL do arquivo no bucket
-        print(url)
-
-        # Deletar o arquivo do bucket
         response = delete_model_from_bucket(url, 'modelos-it-cross')
-        print(response)
 
         if response:
             return {"message": f"Modelo e arquivo {url} deletados com sucesso."}
@@ -139,10 +173,10 @@ def train_lstm(X_resampled, y_resampled, epochs=10, batch_size=32):
     return model_lstm, history
 
 # Função para salvar o modelo no bucket
-def save_model(model,filename, bucketname):
+def save_model(model, filename, bucketname):
     model_bytes = pickle.dumps(model)
-    model_url  = save_model_to_bucket(model_bytes, filename, bucketname)
-    return model_url
+    model_filename  = save_model_to_bucket(model_bytes, filename, bucketname)
+    return model_filename
 
 # Função para avaliar o modelo e retornar as métricas em formato JSON
 def evaluate_model(model, X_test, y_test):
@@ -154,19 +188,12 @@ def evaluate_model(model, X_test, y_test):
     
     report = classification_report(y_test_reshaped, y_pred_lstm, output_dict=True)
     accuracy = accuracy_score(y_test_reshaped, y_pred_lstm)
-    
-    # Retorna um dicionário com as métricas principais
-    metrics = {
-        "loss": loss_lstm,
-        "accuracy": accuracy,
-        "classification_report": report
-    }
-    
-    # Converte o dicionário para JSON
-    metrics_json = json.dumps(metrics, indent=4)
-    print(metrics_json)  
-    return metrics_json
 
+    precision = precision_score(y_test_reshaped, y_pred_lstm, average='weighted')
+    recall = recall_score(y_test_reshaped, y_pred_lstm, average='weighted')
+    f1= f1_score(y_test_reshaped, y_pred_lstm, average='weighted')
+
+    return accuracy, precision, recall, f1
 
 async def new_model():
 
@@ -179,8 +206,6 @@ async def new_model():
     await asyncio.sleep(0.1)
     
     if df is not None:
-        print("Colunas do DataFrame:", df.columns)
-
         X_resampled, y_resampled, X_test, y_test = split_data(df)
         yield "data: Separação concluída!\n\n"
         await asyncio.sleep(0.1)
@@ -189,14 +214,14 @@ async def new_model():
         yield "data: Treinamento concluído!\n\n"
         await asyncio.sleep(0.1)
 
-        metrics_json = evaluate_model(model_lstm, X_test, y_test)
+        accuracy, precision, recall, f1 = evaluate_model(model_lstm, X_test, y_test)
         yield "data: Avaliação completa!\n\n"
         await asyncio.sleep(0.1)
 
         now = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-        key = save_model(model_lstm, f"model-lstm-{now}.pkl", "modelos-it-cross")
-        model_metadata = create_model_by_id(key, metrics_json)
-        yield "data: Id do modelo : " + str(model_metadata[0]['ID_MODELO']) + "\n\n"
+        model_filename = save_model(model_lstm, f"model-lstm-{now}.pkl", "modelos-it-cross")
+        model_metadata = create_model_by_id(model_filename, accuracy, precision, recall, f1)
+        yield f"data: Novo modelo: {model_metadata}" + "\n\n"
         yield "data: Modelo Salvo!\n\n"
         await asyncio.sleep(1)
         print("Modelo salvo com sucesso!")
