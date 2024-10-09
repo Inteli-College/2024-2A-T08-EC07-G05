@@ -243,8 +243,7 @@ import 'react-toastify/dist/ReactToastify.css';
           </DialogHeader>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <h3 className="font-semibold text-l">Modelo antigo</h3>
-              <p className="font-semibold">Id do modelo:</p><span>{currentModel?.ID_MODELO_ATUAL}</span>
+              <h3 className="font-semibold text-lg p-2">Modelo atual</h3>
               <div><p className="font-semibold">Acurácia:</p><span >{parseFloat(currentModel?.ACURACIA).toFixed(3)}</span></div>
               <div><p className="font-semibold">Precisão:</p><span >{parseFloat(currentModel?.PRECISAO).toFixed(3)}</span></div>
               <div><p className="font-semibold">Recall:</p><span >{parseFloat(currentModel?.RECALL).toFixed(3)}</span></div>
@@ -252,8 +251,7 @@ import 'react-toastify/dist/ReactToastify.css';
               <div><p className="font-semibold">Data de treinamento:</p><span >{new Date(currentModel?.DATA_TREINO).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}</span></div>
               </div>
             <div className="gap-2">
-              <h3 className="font-semibold text-l">Modelo Novo</h3>
-              <p className="font-semibold">Id do modelo:</p><span>{newModel?.ID_MODELO}</span>
+              <h3 className="font-semibold text-lg p-2">Modelo Novo</h3>
               <div><p className="font-semibold">Acurácia:</p><span >{parseFloat(newModel?.ACURACIA).toFixed(3)}</span></div>
               <div><p className="font-semibold">Precisão:</p><span >{parseFloat(newModel?.PRECISAO).toFixed(3)}</span></div>
               <div><p className="font-semibold">Recall:</p><span >{parseFloat(newModel?.RECALL).toFixed(3)}</span></div>
