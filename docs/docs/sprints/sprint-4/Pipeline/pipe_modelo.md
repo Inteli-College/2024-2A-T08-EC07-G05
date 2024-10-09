@@ -1,3 +1,9 @@
+---
+title: Pipeline
+sidebar_position: 1
+slug: "/pipeline"
+---
+
 # Processo de Pipeline
 
 ## Importância do Pipeline no Projeto 
@@ -182,7 +188,6 @@ def get_model_by_id():
 
 ## Processo de Pipeline no Frontend (Modelo)
 
-![Processo de Pipeline no front (Modelo)](Linkdofuncionamentodapipelinedomodelo)
 
 O processo de Pipeline do modelo no projeto também conta com uma interface simples e intuitiva no frontend. As páginas permitem que o usuário salve os novos modelos que o pipeline gerou, a visualização dos modelos que estão salvos no bucket do datalake (SUPABASE) e a escolha de qual modelo usar através das métricas dispostas.
 
