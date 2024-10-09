@@ -34,7 +34,7 @@ function AnalysisPage() {
   }, [isLoading]);
 
   useEffect(() => {
-    fetch(`http://${window.location.hostname}:3001/getStats`)
+    fetch(`http://${window.location.hostname}:3000/getStats`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);

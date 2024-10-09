@@ -11,6 +11,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 import asyncio
+import os
 
 def get_model_by_id(id):
     data = get_by_id('Modelo', 'ID_MODELO, URL_BUCKET', id)
