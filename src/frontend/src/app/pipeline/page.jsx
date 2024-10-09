@@ -22,9 +22,10 @@ export default function PipelineProgressModal() {
     let eventSource;
 
     if (open) {
-      eventSource = new EventSource(`http://${window.location.hostname}:3001/new_model`);
+      eventSource = new EventSource(`http://${window.location.hostname}:3000/new_model`);
 
       eventSource.onmessage = function (event) {
+        console.log("Evento recebido:", event.data);
         if (event.data.trim().includes('Modelo Salvo!')) {
           console.log("Pipeline concluída!");
           setCompleted(true);
@@ -38,7 +39,6 @@ export default function PipelineProgressModal() {
           eventSource.close();
         }
 
-        console.log("Evento recebido:", event.data);
 
         
         setProgress((prevProgress) => [...prevProgress, event.data]);
