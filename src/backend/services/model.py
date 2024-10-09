@@ -65,7 +65,7 @@ def create_model_by_id(model_filename, accuracy, precision, recall, f1):
     } ) 
     if data is not None:
         return data
-    
+ 
 def delete_current_model():
     try:
         data = delete_current_model_from_table()
@@ -78,10 +78,7 @@ def delete_model_and_file_by_id(id):
 
     if deleted_row:
         x = deleted_row[0]
-
-        url = x['URL_BUCKET'].split('/')[-1]
-        url = url.split('?')[0]
-        response = delete_model_from_bucket(url, 'modelos-it-cross')
+        response = delete_model_from_bucket(x['URL_BUCKET'], 'modelos-it-cross')
 
         if response:
             return {"message": f"Modelo e arquivo {url} deletados com sucesso."}
@@ -92,38 +89,20 @@ def delete_model_and_file_by_id(id):
 
 # Func para buscar e preparar todos os dados do banco de dados para treinar um novo modelo abaixo 
 
-# # Variável de ambiente para buscar dados do Supabase
-# FETCH_ALL_DATA = os.getenv("FETCH_ALL_DATA")
+# Variável de ambiente para buscar dados do Supabase
+FETCH_ALL_DATA = os.getenv("FETCH_ALL_DATA")
 
-# # Função assíncrona para buscar dados do Supabase
-# async def fetch_data_from_supabase():
-#     async with httpx.AsyncClient() as client:
-#         try:
-#             response = await client.get(FETCH_ALL_DATA)
-#             response.raise_for_status()  # Levanta um erro se a resposta não for 200
-#             data = response.json()  # Extraindo os dados JSON da resposta
-#             return pd.DataFrame(data)  # Convertendo para um DataFrame do pandas
-#         except httpx.RequestError as e:
-#             print(f"Request error: {e}")
-#             return None  # Retorna None em caso de erro
-        
-# Função para mockar um DataFrame com 20 linhas
-def mock_data():
-    np.random.seed(42)
-    data = {
-        'feature1': np.random.rand(20),
-        'feature2': np.random.rand(20),
-        'feature3': np.random.rand(20),
-        'feature4': np.random.rand(20),
-        'feature5': np.random.rand(20),
-        'feature6': np.random.rand(20),
-        'feature7': np.random.rand(20),
-        'feature8': np.random.rand(20),
-        'feature9': np.random.rand(20),
-        'feature10': np.random.rand(20),
-        'TEM_FALHA_ROD': np.random.randint(0, 2, size=20)
-    }
-    return pd.DataFrame(data)
+# Função assíncrona para buscar dados do Supabase
+async def fetch_data_from_supabase():
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.get(FETCH_ALL_DATA)
+            response.raise_for_status()  # Levanta um erro se a resposta não for 200
+            data = response.json()  # Extraindo os dados JSON da resposta
+            return pd.DataFrame(data)  # Convertendo para um DataFrame do pandas
+        except httpx.RequestError as e:
+            print(f"Request error: {e}")
+            return None  # Retorna None em caso de erro
 
 # Função para aplicar SMOTE
 def apply_smote(X_train, y_train):
@@ -196,12 +175,7 @@ def evaluate_model(model, X_test, y_test):
     return accuracy, precision, recall, f1
 
 async def new_model():
-
-    # Mockar os dados
-    df = mock_data()  # --> quando for integrar na nos dados que vem do banco substituir linha pela de baixo
-    # yield "data: Carregando Dados\n\n"
-    # await asyncio.sleep(0.1)
-    # df = await fetch_data_from_supabase()
+    df = await fetch_data_from_supabase()
     yield "data: Dados carregados com sucesso!\n\n"
     await asyncio.sleep(0.1)
     
@@ -225,6 +199,7 @@ async def new_model():
         yield "data: Modelo Salvo!\n\n"
         await asyncio.sleep(1)
         print("Modelo salvo com sucesso!")
+
     else:
         yield "data: Erro ao buscar dados.\n\n"
         await asyncio.sleep(0.1)

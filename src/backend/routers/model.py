@@ -32,6 +32,10 @@ async def update_current_model(ID_NOVO_MODELO):
         return {"error": "Unable to delete current model"}
     return update_current_model_by_id(ID_NOVO_MODELO)
 
+@router.post("/getLastModel")
+async def get_model():
+    return get_model_by_id()
+
 @router.get("/new_model", status_code=status.HTTP_200_OK)
 async def create_new_model():
     return StreamingResponse(new_model(), media_type="text/event-stream", headers={

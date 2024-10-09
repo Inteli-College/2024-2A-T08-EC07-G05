@@ -222,7 +222,7 @@ def delete_model_from_table(id):
     except Exception as e:
         print("An error occurred while deleting the model:", e)
         return False
-    
+ 
 def delete_current_model_from_table():
     supabase = create_supabase_client()
     try:

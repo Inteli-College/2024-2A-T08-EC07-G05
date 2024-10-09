@@ -12,13 +12,18 @@ Uma pipeline em programação é uma sequência estruturada de processos que tra
 
 As pipelines são essenciais porque:
 
+
 - **Organizam o Fluxo de Dados**: Elas dividem tarefas complexas em etapas menores, facilitando o gerenciamento.
 - **Melhoram a Reutilização**: Funções e componentes podem ser reutilizados em diferentes partes do projeto.
 - **Facilitam Testes e Manutenção**: Cada etapa pode ser testada individualmente, tornando a identificação de bugs mais eficiente.
 
 ![Processo de PIPELINE](../../../../static/img/sprint-4/pipeline.png)
 
+
 ## Quais são as fases do Processo de Pipeline
+
+No projeto de predição de falhas, o Pipeline em questão vai envolver diversas funções e passos(rotas) que vão servir para mostrarmos o modelo que já estamos utilizando para predizer e colocaremos a disposição o modelo novo que obtivemos com a nossa Pipeline:
+
 
 1. **Coleta de Dados:**
    - Captura de dados de diferentes fontes, como bancos de dados, APIs ou sistemas de monitoramento.
@@ -60,6 +65,56 @@ async def get_model(precisao: float):
 ```
 
 E a função principal que utlizamos nessa rota principal é a "new_model" que, de fato, faz a criação do modelo, salva no bucket do supabase. Posteriormente vamos utilizar para evidenciar qual modelo estamos usando e com qual vamos comparar:
+
+```bash
+async def new_model():
+
+    # Mockar os dados
+    df = mock_data()  # --> quando for integrar na nos dados que vem do banco substituir linha pela de baixo
+    # yield "data: Carregando Dados\n\n"
+    # await asyncio.sleep(0.1)
+    # df = await fetch_data_from_supabase()
+    yield "data: Dados carregados com sucesso!\n\n"
+    await asyncio.sleep(0.1)
+```
+
+Toda a parte de salvamento do novo modelo:
+
+```bash
+if df is not None:
+        print("Colunas do DataFrame:", df.columns)
+
+        X_resampled, y_resampled, X_test, y_test = split_data(df)
+        yield "data: Separação concluída!\n\n"
+        await asyncio.sleep(0.1)
+
+        model_lstm, history = train_lstm(X_resampled, y_resampled)
+        yield "data: Treinamento concluído!\n\n"
+        await asyncio.sleep(0.1)
+
+        metrics_json = evaluate_model(model_lstm, X_test, y_test)
+        yield "data: Avaliação completa!\n\n"
+        await asyncio.sleep(0.1)
+
+        now = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+        key = save_model(model_lstm, f"model-lstm-{now}.pkl", "modelos-it-cross")
+        model_metadata = create_model_by_id(key, metrics_json)
+        yield "data: Modelo Salvo!"
+        await asyncio.sleep(0.1)
+        # yield "Id do modelo : " + str(model_metadata[0]['ID_MODELO']) + "\n\n"
+```
+
+E se ele não conseguir, ele vai exibir o erro:
+
+```bash
+    else:
+        yield "data: Erro ao buscar dados.\n\n"
+        await asyncio.sleep(0.1)
+        print("Erro ao buscar dados.")
+```
+
+E a função principal que utlizamos nessa rota principal é a "create_model_by_id" que, de fato, faz a criação do modelo, salva no bucket do supabase e destaca o **ID** onde vamos utilizar para evidenciar qual modelo estamos usando e com qual vamos comparar:
+
 
 ```bash
 async def new_model():

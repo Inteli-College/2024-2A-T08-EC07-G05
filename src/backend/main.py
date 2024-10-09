@@ -6,9 +6,9 @@ app = FastAPI()
 
 app.include_router(predict.router)
 app.include_router(history.router)
+app.include_router(model.router)
 app.include_router(etl.router)
 app.include_router(model.router)
-
 
 app.add_middleware(
     CORSMiddleware,
