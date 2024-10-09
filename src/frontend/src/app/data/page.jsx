@@ -31,27 +31,28 @@ import {
   AlertTitle,
   AlertDescription,
 } from "@chakra-ui/react";
+import { DataTable } from "@/components/ui/data-table";
 
 function DataPage() {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI modal hook
   const [datasets, setDatasets] = useState([
-    { nome: "Dataset 1", data: "2024-09-23", quantidade_de_carros: 10 },
-    { nome: "Dataset 2", data: "2024-09-24", quantidade_de_carros: 20 },
+    { datasetName: "Dataset 1", date: "2024-09-23", numberOfRows: 10 },
+    { datasetName: "Dataset 2", date: "2024-09-24", numberOfRows: 20 },
   ]);
   
   const [files, setFiles] = useState({ falhas: null, resultados: null, status: null });
   const [isSubmitted, setIsSubmitted] = useState(false); // Track if files are uploaded successfully
-
+  
   const handleFileChange = (event, fileType) => {
     setFiles({ ...files, [fileType]: event.target.files ? event.target.files[0] : null });
   };
-
+  
   const handleFileUpload = () => {
     if (files.falhas && files.resultados && files.status) {
       console.log("Falhas:", files.falhas.name);
       console.log("Resultados:", files.resultados.name);
       console.log("Status:", files.status.name);
-
+      
       // Simulate a successful file upload
       setIsSubmitted(true); // Show confirmation
       onClose(); // Close modal after upload
@@ -59,69 +60,48 @@ function DataPage() {
       console.log("Not all files selected");
     }
   };
-
+  
   // Check if all files are selected
   const isDisabled = !(files.falhas && files.resultados && files.status);
+  
+  const dataInfoColumns = [
+    {
+      accessorKey: "datasetName",
+      header: "Nome do dataset",
+    },
+    {
+      accessorKey: "date",
+      header: "Data",
+    },
+    {
+      accessorKey: "numberOfRows",
+      header: "Quantidade de carros",
+    },
+  ]
 
   return (
-    <main className="flex flex-col min-h-screen">
-      {/* Page heading */}
+    <>
+    {/* Page heading */}
       <header>
         <NavBar />
       </header>
+      <main className="flex flex-col min-h-screen p-4">
+        <div className="p-4 shadow-md rounded-lg">
+          <h2 className="text-2xl font-bold mb-4">Dados inseridos no modelo</h2>
+          <DataTable columns={dataInfoColumns} data={datasets}></DataTable>
+        </div>
 
-      {/* Card showing dataset count */}
-      <Card p={4} mb={6} shadow="md">
-        <Heading as="h2" size="md" mb={2}>
-          Total de Dados Adicionados
-        </Heading>
-        <Text fontSize="4xl" fontWeight="bold" color="blue.600">
-          {datasets.length}
-        </Text>
-      </Card>
-
-      {/* Table listing datasets */}
-      <TableContainer mb={6}>
-        <Table variant="simple">
-          <Thead bg="blue.600">
-            <Tr>
-              <Th color="white">Nome</Th>
-              <Th color="white">Data</Th>
-              <Th color="white">Quantidade de Carros</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {datasets.length > 0 ? (
-              datasets.map((dataset, index) => (
-                <Tr key={index}>
-                  <Td>{dataset.nome}</Td>
-                  <Td>{dataset.data}</Td>
-                  <Td>{dataset.quantidade_de_carros}</Td>
-                </Tr>
-              ))
-            ) : (
-              <Tr>
-                <Td colSpan={3} textAlign="center">
-                  Nenhum conjunto de dados disponível
-                </Td>
-              </Tr>
-            )}
-          </Tbody>
-        </Table>
-      </TableContainer>
+      <br />
 
       {/* Button container with proper spacing */}
       <Stack direction="row" spacing={4} justify="left" mb={6}>
         {/* Button to open modal for file upload */}
-        <Button colorScheme="blue" onClick={onOpen}>
+        <Button className="bg-blue-500 hover:bg-blue-600 text-white" onClick={onOpen}>
           Enviar Arquivos
         </Button>
 
         {/* Button to go to /models page */}
-        <Button
-          colorScheme="blue"
-          onClick={() => (window.location.href = "/models")}
-        >
+        <Button className="bg-blue-500 hover:bg-blue-600 text-white" onClick={() => (window.location.href = "/models")}>
           Novo Modelo
         </Button>
       </Stack>
@@ -138,7 +118,7 @@ function DataPage() {
                 type="file"
                 accept=".xlsx, .xls"
                 onChange={(event) => handleFileChange(event, "falhas")}
-              />
+                />
             </Box>
             <Box mb={4}>
               <Text>Arquivo de Resultados:</Text>
@@ -176,6 +156,7 @@ function DataPage() {
         </Alert>
       )}
     </main>
+    </>
   );
 }
 
