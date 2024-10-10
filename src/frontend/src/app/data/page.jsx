@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import NavBar from "@/components/navBar";
 import {
@@ -42,12 +41,27 @@ function DataPage() {
   };
 
   const isDisabled = !(files.falhas && files.resultados && files.status);
-
   const dataInfoColumns = [
     { accessorKey: "datasetName", header: "Nome do dataset" },
     { accessorKey: "date", header: "Data" },
     { accessorKey: "numberOfRows", header: "Quantidade de carros" },
   ];
+  return (
+    <main className="flex flex-col min-h-screen">
+      {/* Page heading */}
+      <header>
+        <NavBar />
+      </header>
+
+      {/* Card showing dataset count */}
+      <Card p={4} mb={6} shadow="md">
+        <Heading as="h2" size="md" mb={2}>
+          Total de Dados Adicionados
+        </Heading>
+        <Text fontSize="4xl" fontWeight="bold" color="blue.600">
+          {datasets.length}
+        </Text>
+      </Card>
 
   return (
     <>

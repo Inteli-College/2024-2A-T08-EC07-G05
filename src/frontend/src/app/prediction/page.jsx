@@ -41,6 +41,7 @@ export default function PredictionPage() {
     }
 
     setIsError(false);
+    console.log(`URL: ${process.env.NEXT_PUBLIC_BACKEND_AWS}/predict`);
 
     const response = await fetch(
       `http://${process.env.NEXT_PUBLIC_BACKEND_AWS}/predict`, {

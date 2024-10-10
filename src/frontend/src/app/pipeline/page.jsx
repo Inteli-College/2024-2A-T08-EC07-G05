@@ -22,7 +22,8 @@ export default function PipelineProgressModal() {
     let eventSource;
 
     if (open) {
-      eventSource = new EventSource(`http://${window.location.hostname}:3000/new_model`);
+
+      eventSource = new EventSource(`${process.env.NEXT_PUBLIC_BACKEND_AWS}/new_model`);
 
       eventSource.onmessage = function (event) {
         console.log("Evento recebido:", event.data);

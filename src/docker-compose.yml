@@ -3,10 +3,8 @@ services:
     build: ./frontend
     image: src/frontend
     restart: unless-stopped
-    # environment:
-    #   NEXT_PUBLIC_BACKEND_URL: "http://backend:3000"
     ports:
-      - "3002:3000"
+      - "80:3000"
     container_name: itcross-frontend
 
   backend:
