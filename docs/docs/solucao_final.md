@@ -6,6 +6,8 @@ slug: "/solucao_final"
 
 Documentação oficial do sistema de manutenção preditiva desenvolvido pelo grupo IT CROSS para a Volkswagen Brasil.
 
+![Tela de Home](../static/img/sprint-5/tela_home.png)
+
 ## Escopo
 Diariamente milhares de carros são montados nas fábricas da Volkswagen, onde cada um desses carros passa por um processo de "rodagem", na qual passa por diversas estações até o processo final de montagem. No processo de rodagem, os mais diversos tipos de erro podem aparecer, e é importantíssimo mitigar qualquer erro possível a fim de maximizar o uso do tempo na montadora.
 ## Problema
@@ -83,20 +85,27 @@ Na fase final do projeto, o foco foi dado aos últimos ajustes necessários para
 
 
 ## Funcionalidades
+### Funcionalidades Principais
 
-### Key Features
+- **Previsão de Falhas em ROD com base no KNR do Carro**  
+    ![Previsão de Falhas](../static/img/sprint-3/tela-predicao.png)  
+    A plataforma possui uma funcionalidade que permite prever falhas antes do processo de rodagem (ROD) com base no KNR. Ao inserir o KNR, o sistema busca todas as informações relevantes do veículo, como histórico de inspeções, dados de produção e falhas anteriores. Essas informações são então processadas pelo modelo preditivo, que analisa os dados e retorna um resultado indicando teste longo ou curto. Essa funcionalidade é crucial para antecipar problemas e realizar manutenções preventivas, garantindo maior eficiência e segurança no processo produtivo da Volkswagen.
 
 - **Monitoramento constante dos diversos modelos**  
-O sistema oferece uma funcionalidade de monitoramento contínuo para acompanhar o desempenho dos diferentes modelos de machine learning em tempo real. Isso garante que eventuais mudanças na qualidade das predições sejam rapidamente identificadas, permitindo ajustes ou retrainings rápidos, sempre visando manter a precisão e eficiência do modelo em produção.
+    ![Monitoramento Constante](../static/img/sprint-5/tela_treino_de_modelos.png)  
+    O sistema oferece uma funcionalidade de monitoramento contínuo para acompanhar o desempenho dos diferentes modelos de machine learning em tempo real. Isso garante que eventuais mudanças na qualidade das predições sejam rapidamente identificadas, permitindo ajustes ou retrainings rápidos, sempre visando manter a precisão e eficiência do modelo em produção.
 
 - **Consulta e seleção de modelos desenvolvidos**  
-Os usuários têm a capacidade de acessar e consultar qualquer um dos modelos desenvolvidos ao longo do processo. O sistema permite uma seleção flexível, onde é possível escolher o modelo que melhor se adapta ao cenário atual, de acordo com os critérios específicos de desempenho ou a necessidade de ajustes para determinados casos de uso.
+    ![Consulta e Seleção de Modelos](../static/img/sprint-5/tela_modelos.png)
+    Os usuários têm a capacidade de acessar e consultar qualquer um dos modelos desenvolvidos ao longo do processo. O sistema permite uma seleção flexível, onde é possível escolher o modelo que melhor se adapta ao cenário atual, de acordo com os critérios específicos de desempenho ou a necessidade de ajustes para determinados casos de uso.
 
 - **Processo automatizado de retreinamento com novos dados**  
-O sistema implementa um pipeline automatizado de retreinamento, que se ativa sempre que novos dados são adicionados. Essa funcionalidade garante que o modelo esteja constantemente atualizado, refinando as predições com as últimas informações disponíveis, o que aumenta a precisão e a relevância do modelo para o contexto atual.
+    ![Retreinamento Automatizado](../static/img/sprint-5/tela_pipeline.png)
+    O sistema implementa um pipeline automatizado de retreinamento, que se ativa sempre que novos dados são adicionados. Essa funcionalidade garante que o modelo esteja constantemente atualizado, refinando as predições com as últimas informações disponíveis, o que aumenta a precisão e a relevância do modelo para o contexto atual.
 
 - **Insights sobre o processo produtivo com dashboards**  
-A solução oferece dashboards interativos e visuais que fornecem insights detalhados sobre o processo produtivo. Esses dashboards permitem que os usuários tomem decisões mais informadas, visualizando dados críticos de forma clara, como o tipo de inspeção necessária para cada veículo, a performance dos modelos e as métricas de qualidade do processo de manutenção.
+    ![Dashboards Interativos](../static/img/sprint-5/tela_falhas.png) 
+    A solução oferece dashboards interativos e visuais que fornecem insights detalhados sobre o processo produtivo. Esses dashboards permitem que os usuários tomem decisões mais informadas, visualizando dados críticos de forma clara, como o tipo de inspeção necessária para cada veículo, a performance dos modelos e as métricas de qualidade do processo de manutenção.
 
 ## Fase de Testes
 

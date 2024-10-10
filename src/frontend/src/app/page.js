@@ -13,7 +13,7 @@ export default function Home() {
       <div className="flex flex-row items-center p-10">
         <div className=" flex flex-col space-y-4 items-center">
         <img src="/logo.svg" alt="Logo" className="w-120" />
-        <p>(adicionar pequena descrição da aplicação)</p> 
+        <p>IT-Cross é um sistema de manutenção preditiva para a Volkswagen Brasil.</p> 
         <div className="flex space-x-4">
             <Link 
             href="/history"
