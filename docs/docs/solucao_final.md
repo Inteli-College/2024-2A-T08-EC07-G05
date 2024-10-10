@@ -1,4 +1,8 @@
-
+---
+title: Solução Final
+sidebar_position: 3
+slug: "/solucao_final"
+---
 
 Documentação oficial do sistema de manutenção preditiva desenvolvido pelo grupo IT CROSS para a Volkswagen Brasil.
 
@@ -40,43 +44,42 @@ RNF01: **Precisão e Confiabilidade**
 O modelo de classificação deve alcançar uma taxa de acurácia mínima de 95% na classificação de veículos com problemas.
 
 RNF02: **Escalabilidade e Alta Disponibilidade**  
-A infraestrutura deve garantir um SLA acima de 97,0% de disponibilidade.
+A infraestrutura deve garantir um SLA acima de 97,0% de disponibilidade e ser capaz de escalar para atender a um aumento de até 300% na carga de trabalho em momentos de pico, com um tempo de inatividade máximo de 0,01% por mês.
 
-RNF03: **Escalabilidade e Alta Disponibilidade**  
-O sistema deve poder ser escalado para atender a um aumento de até 300% na carga de trabalho em momentos de pico, com um tempo de inatividade máximo de 0,01% por mês.
+RNF03: **Tempo de Resposta e Usabilidade**  
+A interface visual deve apresentar os resultados de classificação em até 3 segundos após a solicitação do usuário. O dashboard deve ser desenvolvido para atender as heurísticas de Nielsen.
 
-RNF04: **Tempo de Resposta e Usabilidade**  
-A interface visual deve apresentar os resultados de classificação em até 3 segundos após a solicitação do usuário.
-
-RNF06: **Tempo de Resposta e Usabilidade**  
-O dashboard deve ser desenvolvido para atender as heurísticas de Nielsen.
-
-RNF07: **Conformidade com Normas de Proteção de Dados**  
+RNF04: **Conformidade com Normas de Proteção de Dados**  
 O sistema deve estar em conformidade com regulamentos de proteção de dados, como LGPD e GDPR, incluindo a implementação de controles de acesso rigorosos e anonimização de dados pessoais quando necessário.
 
-RNF08: **Compatibilidade e Portabilidade**  
+RNF05: **Compatibilidade e Portabilidade**  
 O sistema deve ser compatível com diferentes versões de navegadores (Chrome, Firefox, Safari) e sistemas operacionais (Windows, Linux, macOS). Deve também ser portável para execução em ambientes locais e na nuvem, sem a necessidade de reconfigurações extensivas. (Implementável no GitHub Actions)
 
-## DADOS UTILIZADOS
-Para o treinamento do modelo a Volkswagen forneceu inúmeros dados referentes ao processo de rodagem e as possíveis falhas que podem ser 
 
-## Tecnologias usadas / Desenvolvimento do projeto
+## Dados Utilizados
 
+Para o treinamento do modelo, a Volkswagen forneceu um vasto conjunto de dados relacionados ao processo de rodagem dos veículos e às possíveis falhas identificadas durante este processo. Esses dados incluíam informações detalhadas sobre o tempo que cada carro passou em cada estação da linha de rodagem, permitindo um mapeamento preciso das etapas de produção. Além disso, foram fornecidos dados sobre os diferentes tipos de falhas que ocorreram em cada estação, como problemas mecânicos, elétricos ou de componentes específicos. Essas informações foram cruciais para identificar padrões e treinar o modelo preditivo, ajudando a antecipar falhas e otimizar o processo produtivo.
+
+
+## Tecnologias Usadas / Desenvolvimento do Projeto
 
 ### Sprint 1: Análise do Modelo de Negócios e Exploração dos Dados
 Na primeira fase do desenvolvimento, foi realizada uma análise detalhada do modelo de negócios, com o objetivo de entender as necessidades e requisitos do projeto, especialmente no que diz respeito à classificação de veículos e inspeções automatizadas. Paralelamente, foi conduzida uma análise exploratória dos dados (EDA), focada em identificar padrões e comportamentos relevantes que poderiam ser utilizados para treinar o modelo de predição. Durante esta fase, tecnologias como **Python**, **Pandas** e **Matplotlib** foram usadas para manipulação e visualização dos dados.
 
 ### Sprint 2: Análise dos Dados e Construção do Primeiro Modelo
-Com uma visão mais clara do conjunto de dados, o foco desta sprint foi na análise mais aprofundada dos dados e na construção do primeiro modelo de classificação. Técnicas de pré-processamento de dados foram aplicadas para lidar com dados ausentes, normalização e categorização das variáveis. A partir disso, um modelo inicial foi treinado utilizando algoritmos de inteligência artifical, tais como **GRU** e **LSTM**. Os resultados obtidos neste estágio forneceram uma linha de base para otimizar a solução nas fases seguintes.
+Com uma visão mais clara do conjunto de dados, o foco desta sprint foi na análise mais aprofundada dos dados e na construção do primeiro modelo de classificação. Técnicas de pré-processamento de dados foram aplicadas para lidar com dados ausentes, normalização e categorização das variáveis. A partir disso, um modelo inicial foi treinado utilizando algoritmos de redes neurais recorrentes, tais como **GRU** e **LSTM**. Os resultados obtidos neste estágio forneceram uma linha de base para otimizar a solução nas fases seguintes.
 
-### Sprint 3: Retratamento dos Dados, Feature Engineering e Redesenvolvimento do Modelo
-Com os resultados do modelo inicial em mãos, iniciou-se a terceira sprint focada em refinar o tratamento dos dados e realizar **feature engineering** para otimizar as variáveis utilizadas pelo modelo. Técnicas como criação de novas variáveis e remoção de outliers foram implementadas. Em seguida, um novo modelo foi redesenvolvido, explorando novas arquiteturas e utilizando **redes neurais LSTM** para melhorar a precisão das previsões.
+### Sprint 3: Retratamento dos Dados, Feature Engineering, Validação Cruzada e Dockerização
+Nesta fase, o foco foi no retratamento dos dados e na execução de **feature engineering** para otimizar as variáveis utilizadas pelo modelo. Foram aplicadas técnicas como a criação de novas variáveis e a remoção de outliers para melhorar a qualidade dos dados. Além disso, foi realizado um processo de **validação cruzada** para garantir que o modelo não sofresse de overfitting, ajudando a melhorar a generalização das predições. 
 
-### Sprint 4: Dockerização da Aplicação, ETL e Funcionalidades de Retreinamento
-Nesta fase, a aplicação foi containerizada utilizando **Docker**, facilitando a escalabilidade e implantação em diferentes ambientes. Além disso, foi implementado um processo de **ETL (Extract, Transform, Load)** para automatizar a ingestão e tratamento dos dados, assegurando que o modelo fosse continuamente atualizado com novos dados. Também foi desenvolvido um mecanismo para permitir o retreinamento do modelo de forma automática quando novos dados fossem inseridos no sistema, garantindo a longevidade e precisão contínua das predições.
+Simultaneamente, a aplicação foi **dockerizada**, o que facilitou sua escalabilidade e implantação em diferentes ambientes, garantindo maior consistência no comportamento do sistema independentemente da plataforma em que estivesse rodando.
+
+### Sprint 4: Processo ETL e Funcionalidades de Retreinamento
+Nesta sprint, foi implementado um processo de **ETL (Extract, Transform, Load)** para automatizar a ingestão e o tratamento de dados, assegurando que o modelo fosse continuamente atualizado com novos dados. Além disso, foi criado um mecanismo para permitir o **retreinamento automático** do modelo quando novos dados fossem inseridos no sistema, garantindo a longevidade e a precisão contínua das predições.
 
 ### Sprint 5: Toques Finais e Deploy na AWS
 Na fase final do projeto, o foco foi dado aos últimos ajustes necessários para garantir que o sistema estivesse pronto para produção. Foram feitas otimizações no código, melhorias na interface visual do dashboard, e os toques finais para garantir a usabilidade da solução. A aplicação foi, então, implantada na **AWS** utilizando **Instâncias EC2**, assegurando alta disponibilidade, escalabilidade e conformidade com os requisitos de desempenho e segurança estabelecidos.
+
 
 
 ## Funcionalidades
@@ -117,8 +120,3 @@ Essas melhorias visam não apenas otimizar a usabilidade da plataforma, mas tamb
 ## Conclusão
 
 A solução de manutenção preditiva proposta pela nossa equipe para a Volkswagen Brasil se mostrou eficaz na identificação antecipada de falhas no processo de rodagem dos veículos, contribuindo para otimizar o tempo e os recursos na fábrica. Durante o desenvolvimento, nossa equipe priorizou a integração com a infraestrutura em nuvem, a segurança de dados e a escalabilidade, garantindo um sistema eficiente e de alta disponibilidade. Os testes realizados forneceram insights valiosos para melhorias na interface e na usabilidade, e com os ajustes propostos, o software construído estará preparado para aumentar a assertividade das inspeções e impulsionar a eficiência operacional da Volkswagen.
-
-
-
-
-
