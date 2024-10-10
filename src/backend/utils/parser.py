@@ -31,14 +31,10 @@ def parse_halle_times(data):
     return results
 
 def parse_failures(data):
-    failure_counts = defaultdict(lambda: defaultdict(int))
-    
+    total_sums = defaultdict(int)
+    total_registers = len(data)
     for entry in data:
-        halle = entry["HALLE"]
-        grupo_falha = entry["GRUPO_FALHA"]
-        teve_falha = entry["TEVE_FALHA"]
-        if teve_falha:
-            failure_counts[halle][grupo_falha] += 1
-        #Talvez seja melhor fazer essa lógica no banco, por enquanto isso vai servir <3
-    
-    return {halle: dict(groups) for halle, groups in failure_counts.items()}
+        for key, value in entry.items():
+            total_sums[key] += value
+
+    return total_sums, total_registers
