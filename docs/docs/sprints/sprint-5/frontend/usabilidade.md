@@ -15,7 +15,7 @@ sidebar_position: 1
 
 &emsp;A navbar, componente em formato de barra horizontal com função de facilitar a navegação na aplicação web da solução, também foi alterada durante a sprint 5. Ela passou por um processo de componentização, o que eleva a legibilidade e facilidade de manutenção do código, tendo em vista que, até a sprint anterior a navbar era inscrita de maneira estática no código do componente de cada página da solução.
 
-&emsp;Além disso, para atender aos feedbacks apresentados pelos usuários da solução durante os testes de usabilidade promovidos pela equipe It-Cross, a navbar também teve ajustes de estilização na sprint 5. Ela passou a apresentar um destaque azul quando o cursor do mouse passa sobre um de seus botões de navegação e outro detaque, também em um tom de azul, para indicar a página atual na qual o usuário está, como demonstra a imagem a seguir.
+&emsp;Além disso, para atender aos feedbacks apresentados pelos usuários da solução durante os testes de usabilidade promovidos pela equipe It-Cross, a navbar também teve ajustes de estilização na sprint 5. Ela passou a apresentar um destaque azul quando o cursor do mouse passa sobre um de seus botões de navegação e outro destaque, também em um tom de azul, para indicar a página atual na qual o usuário está, como demonstra a imagem a seguir.
 
 
 <p style={{textAlign: 'center'}}>Figura 1 - Aparência atual da navbar</p>
@@ -40,4 +40,4 @@ sidebar_position: 1
 
 <p style={{textAlign: 'center'}}>Fonte: Elaborado pela equipe It-Cross</p>
 
-&emsp;Como é observado nas images acima, a disposição dos elementos contidos na página também foi alterada. Um botão de redirecionamento para página de retreinamento do modelo foi excluído (uma vez que a navbar anula sua necessidade), o botão restante foi movido para aixo da tabela, que passou a ter o mesmo estilo das demais tabelas existentes nas páginas de histórico de registros e retreinamento do modelo. Além disso, a nomenclatura de alguns termos na página foi alterada com o intuito de não gerar ambiguidade para o usuário, como é possível verificar na mudança de "dados" para "datasets".
+&emsp;Como é observado nas imagnes acima, a disposição dos elementos contidos na página também foi alterada. Um botão de redirecionamento para página de retreinamento do modelo foi excluído (uma vez que a navbar anula sua necessidade), o botão restante foi movido para baixo da tabela, que passou a ter o mesmo estilo das demais tabelas existentes nas páginas de histórico de registros e retreinamento do modelo. Além disso, a nomenclatura de alguns termos na página foi alterada com o intuito de não gerar ambiguidade para o usuário, como é possível verificar na mudança de "dados" para "datasets".
