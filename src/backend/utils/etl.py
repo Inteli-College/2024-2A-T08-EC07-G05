@@ -3,14 +3,6 @@ import numpy as np
 
 
 
-"""
-
-
-TODAS FUNCOES FUNCIONANDO, TRATAMENTO SIMILAR. FALTA APENAS ADICIONAR A LOGICA DE ADICIONAR NO BACK
-
-"""
-
-
 def RESULTADO_ROUTINE(path: str):
     if path.endswith('.csv'):
         df_resultados = pd.read_csv(path)
@@ -19,15 +11,12 @@ def RESULTADO_ROUTINE(path: str):
     elif path.endswith('.json'):
         df_resultados = pd.read_json(path)
     elif path.endswith('.parquet'):
-        print(f'detectou parquet: {path}')
         df_resultados = pd.read_parquet(path,engine='pyarrow')
     elif path.endswith('.txt'):
         df_resultados = pd.read_csv(path, delimiter='\t')  # Supondo que seja um arquivo tabulado
     else:
         raise ValueError(f"Formato de arquivo não suportado: {path}")
-    print('comecou resultados')
     df_resultados = df_resultados.drop('Unnamed: 0', axis=1)
-    print(df_resultados.head())
     df_resultados = df_resultados.drop(0)
 
     df_resultados = df_resultados.rename(columns={
@@ -73,16 +62,11 @@ def FALHAS_ROUTINE(path: str):
         df = pd.read_json(path)
     elif path.endswith('.parquet'):
         df = pd.read_parquet(path,engine='pyarrow')
-        print(f'detectou parquet: {path}')
     elif path.endswith('.txt'):
         df = pd.read_csv(path, delimiter='\t')  # Supondo que seja um arquivo tabulado
     else:
         raise ValueError(f"Formato de arquivo não suportado: {path}")
-    print('comecou falhas')
-    print(df.head())
     df = df.drop('Unnamed: 0', axis=1)  
-
-    print(df.head())
     df = df.drop(0)
     df = df.rename(columns={
         'Unnamed: 1': 'KNR',
@@ -93,9 +77,9 @@ def FALHAS_ROUTINE(path: str):
         'Unnamed: 6': 'USUARIO',
         'Unnamed: 7': 'HALLE',
         'Unnamed: 8': 'FALHA',
-        'Unnamed: 9': 'DATA',
+        'Unnamed: 9': 'S_GROUP_ID',
+        'Unnamed: 10': 'DATA'
     })
-    print('df rename deu certo')
     df.drop(columns='MODELO', inplace=True) # Remove a coluna MODELO
     df.drop_duplicates(inplace=True) # Remove duplicadas
     df['FALHA'] = df['FALHA'].str.upper()  # Converte todos os valores da coluna 'FALHA' para maiúsculas
@@ -104,7 +88,6 @@ def FALHAS_ROUTINE(path: str):
     df['DATA'] = pd.to_datetime(df['DATA'], dayfirst=True)
     df['MES_ANO'] = df['DATA'].dt.to_period('M')
     df['S_GROUP_ID'] = df['S_GROUP_ID'].astype(str)
-    print('eita porra ')
 
     # Pivot table para HALLE
     pivot_halle = df.pivot_table(index='KNR', columns='HALLE', aggfunc='size', fill_value=0)
@@ -143,7 +126,6 @@ def FALHAS_ROUTINE(path: str):
     result_df = result_df[new_order]
     pivot_df.loc[:, 'TEM_FALHA_ROD'] = np.where(pivot_df['QTD_HALLE_ROD'] > 0, 1, 0)  # Cria a coluna 'TEM_FALHA_ROD' com valor 1 se 'QTD_HALLE_ROD' > 0, caso contrário, 0
     pivot_df.dropna()
-    print('terminou falhas')
     return pivot_df
 
 def STATUS_ROUTINE(path: str):
@@ -183,9 +165,63 @@ def STATUS_ROUTINE(path: str):
 
     df['DATA'] = pd.to_datetime(df['DATA'], errors='coerce')
 
-    return df 
+    required_halles = set(['ZP5', 'ZP5A', 'ZP61', 'ZP6 / ZP62', 'CAB', 'ZP7'])
 
-def MERGE_DFS(df1: pd.DataFrame, df2: pd.DataFrame):
-    df = pd.merge(df1,df2,on='KNR', how='left')
+    grouped = df.groupby('KNR')['HALLE'].apply(set)
+
+    valid_knrs = grouped[grouped.apply(lambda x: required_halles.issubset(x))].index
+
+    filtered_df = df[df['KNR'].isin(valid_knrs)]
+
+    df_pivot = filtered_df.pivot_table(index='KNR', columns='HALLE', values='DATA', aggfunc='first')
+
+    df_pivot_reset = df_pivot.reset_index()
+
+    df_pivot_reset.columns.name = None
+    halle_order = ['ZP5', 'ZP5A', 'ZP61', 'ZP6 / ZP62', 'CAB', 'ZP7']
+    def calculate_time_diffs(row):
+        time_diffs = {}
+        for i in range(len(halle_order) - 1):
+            current_halle = halle_order[i]
+            next_halle = halle_order[i + 1]
+            if current_halle in row.index and next_halle in row.index:
+                if pd.notna(row[current_halle]) and pd.notna(row[next_halle]):
+                    time_diff = (pd.to_datetime(row[next_halle]) - pd.to_datetime(row[current_halle])).total_seconds() / 60
+                    time_diffs[f'{current_halle}_MIN'] = time_diff
+                else:
+                    time_diffs[f'{current_halle}_MIN'] = pd.NA
+            else:
+                time_diffs[f'{current_halle}_MIN'] = pd.NA
+        
+        return pd.Series(time_diffs)
+
+    time_spent_df = df_pivot_reset.apply(calculate_time_diffs, axis=1)
+
+    time_spent_df = pd.concat([df_pivot_reset['KNR'], time_spent_df], axis=1)
+
+    time_spent_df.head()
+    def has_negative_values(row):
+        return any(value < 0 for value in row[1:] if pd.notna(value))
+
+    negative_rows = time_spent_df.apply(has_negative_values, axis=1)
+
+    negative_count = negative_rows.sum()
+    knrs_with_negatives = time_spent_df[negative_rows]
+
+
+    final_df = time_spent_df[~negative_rows]
+
+
+
+
+    return final_df
+
+def MERGE_DFS(falhas: pd.DataFrame, resultados: pd.DataFrame,status: pd.DataFrame):
+    falhas_result = pd.merge(falhas,resultados,on='KNR', how='left')
+    falhas_result = falhas_result.fillna(0)
+    falhas_result = falhas_result.drop_duplicates()
+
+    df = falhas_result.merge(status, on='KNR', how='right')
+    df = df.drop(columns=["QTD_HALLE_ROD", "QTD_HALLE_AGUA", "QTD_HALLE_ZP8", "QTD_HALLE_ZP8R"])
+    df = df.dropna()
     return df
-

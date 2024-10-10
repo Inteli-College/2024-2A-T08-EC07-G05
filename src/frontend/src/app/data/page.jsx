@@ -1,22 +1,10 @@
-"use client";  // Make sure it's at the top
-
-
+"use client";
 import React, { useState } from "react";
 import NavBar from "@/components/navBar";
-
 import {
   Box,
-  Heading,
   Text,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
   Button,
-  Card,
   Input,
   Modal,
   ModalOverlay,
@@ -25,22 +13,21 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
-  Stack,
   Alert,
   AlertIcon,
   AlertTitle,
   AlertDescription,
 } from "@chakra-ui/react";
+import { DataTable } from "@/components/ui/data-table";
 
 function DataPage() {
-  const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI modal hook
-  const [datasets, setDatasets] = useState([
-    { nome: "Dataset 1", data: "2024-09-23", quantidade_de_carros: 10 },
-    { nome: "Dataset 2", data: "2024-09-24", quantidade_de_carros: 20 },
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [datasets] = useState([
+    { datasetName: "Dataset 1", date: "2024-09-23", numberOfRows: 10 },
+    { datasetName: "Dataset 2", date: "2024-09-24", numberOfRows: 20 },
   ]);
-  
   const [files, setFiles] = useState({ falhas: null, resultados: null, status: null });
-  const [isSubmitted, setIsSubmitted] = useState(false); // Track if files are uploaded successfully
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleFileChange = (event, fileType) => {
     setFiles({ ...files, [fileType]: event.target.files ? event.target.files[0] : null });
@@ -48,21 +35,17 @@ function DataPage() {
 
   const handleFileUpload = () => {
     if (files.falhas && files.resultados && files.status) {
-      console.log("Falhas:", files.falhas.name);
-      console.log("Resultados:", files.resultados.name);
-      console.log("Status:", files.status.name);
-
-      // Simulate a successful file upload
-      setIsSubmitted(true); // Show confirmation
-      onClose(); // Close modal after upload
-    } else {
-      console.log("Not all files selected");
+      setIsSubmitted(true);
+      onClose();
     }
   };
 
-  // Check if all files are selected
   const isDisabled = !(files.falhas && files.resultados && files.status);
-
+  const dataInfoColumns = [
+    { accessorKey: "datasetName", header: "Nome do dataset" },
+    { accessorKey: "date", header: "Data" },
+    { accessorKey: "numberOfRows", header: "Quantidade de carros" },
+  ];
   return (
     <main className="flex flex-col min-h-screen">
       {/* Page heading */}
@@ -80,102 +63,80 @@ function DataPage() {
         </Text>
       </Card>
 
-      {/* Table listing datasets */}
-      <TableContainer mb={6}>
-        <Table variant="simple">
-          <Thead bg="blue.600">
-            <Tr>
-              <Th color="white">Nome</Th>
-              <Th color="white">Data</Th>
-              <Th color="white">Quantidade de Carros</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {datasets.length > 0 ? (
-              datasets.map((dataset, index) => (
-                <Tr key={index}>
-                  <Td>{dataset.nome}</Td>
-                  <Td>{dataset.data}</Td>
-                  <Td>{dataset.quantidade_de_carros}</Td>
-                </Tr>
-              ))
-            ) : (
-              <Tr>
-                <Td colSpan={3} textAlign="center">
-                  Nenhum conjunto de dados disponível
-                </Td>
-              </Tr>
-            )}
-          </Tbody>
-        </Table>
-      </TableContainer>
+  return (
+    <>
+      <header>
+        <NavBar />
+      </header>
 
-      {/* Button container with proper spacing */}
-      <Stack direction="row" spacing={4} justify="left" mb={6}>
-        {/* Button to open modal for file upload */}
-        <Button colorScheme="blue" onClick={onOpen}>
-          Enviar Arquivos
-        </Button>
+      <main className="flex flex-col min-h-screen p-4">
 
-        {/* Button to go to /models page */}
-        <Button
-          colorScheme="blue"
-          onClick={() => (window.location.href = "/models")}
-        >
-          Novo Modelo
-        </Button>
-      </Stack>
+        <div className="p-4 shadow-md rounded-lg border border-gray-200">
+          <h2 className="text-2xl font-bold mb-4">Datasets utilizados</h2>
+          <DataTable columns={dataInfoColumns} data={datasets} />
+          <br />
+          <h3 className="font-bold">Total de datasets: {datasets.length}</h3>
+          <p>A lista de datasets acima refere-se aos novos datasets carregados para retreinamento do modelo preditivo.</p>
+        </div>
 
-      {/* Modal for file uploads */}
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Envie os Arquivos</ModalHeader>
-          <ModalBody>
-            <Box mb={4}>
-              <Text>Arquivo de Falhas:</Text>
-              <Input
-                type="file"
-                accept=".xlsx, .xls"
-                onChange={(event) => handleFileChange(event, "falhas")}
-              />
-            </Box>
-            <Box mb={4}>
-              <Text>Arquivo de Resultados:</Text>
-              <Input
-                type="file"
-                accept=".xlsx, .xls"
-                onChange={(event) => handleFileChange(event, "resultados")}
-              />
-            </Box>
-            <Box mb={4}>
-              <Text>Arquivo de Status:</Text>
-              <Input
-                type="file"
-                accept=".xlsx, .xls"
-                onChange={(event) => handleFileChange(event, "status")}
-              />
-            </Box>
-          </ModalBody>
+        <div className="py-4" style={{ display: "flex", gap: "10px", justifyContent: "flex-end", marginBottom: "10px" }}>
+          <Button
+            backgroundColor="#3B82F6"
+            color="white"
+            _hover={{ backgroundColor: "#2563EB" }}
+            fontSize="lg"
+            onClick={onOpen}
+          >
+            Enviar novos datasets
+          </Button>
+        </div>
 
-          <ModalFooter>
-            <Button colorScheme="blue" onClick={handleFileUpload} isDisabled={isDisabled} mr={3}>
-              Enviar Arquivos
-            </Button>
-            <Button variant="ghost" onClick={onClose}>Cancelar</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Envie os Arquivos</ModalHeader>
+            <ModalBody>
+              <Box mb={4}>
+                <Text>Arquivo de Falhas:</Text>
+                <Input type="file" accept=".xlsx, .xls" onChange={(event) => handleFileChange(event, "falhas")} />
+              </Box>
+              <Box mb={4}>
+                <Text>Arquivo de Resultados:</Text>
+                <Input type="file" accept=".xlsx, .xls" onChange={(event) => handleFileChange(event, "resultados")} />
+              </Box>
+              <Box mb={4}>
+                <Text>Arquivo de Status:</Text>
+                <Input type="file" accept=".xlsx, .xls" onChange={(event) => handleFileChange(event, "status")} />
+              </Box>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                backgroundColor="#3B82F6"
+                color="white"
+                _hover={{ backgroundColor: "#2563EB" }}
+                fontSize="sm"
+                onClick={handleFileUpload}
+                isDisabled={isDisabled}
+                mr={3}
+              >
+                Enviar Arquivos
+              </Button>
+              <Button variant="ghost" onClick={onClose} fontSize="sm">
+                Cancelar
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
 
-      {/* Show confirmation after successful upload */}
-      {isSubmitted && (
-        <Alert status="success" variant="solid" mt={6}>
-          <AlertIcon />
-          <AlertTitle>Arquivos enviados com sucesso!</AlertTitle>
-          <AlertDescription>Todos os arquivos foram enviados corretamente.</AlertDescription>
-        </Alert>
-      )}
-    </main>
+        {isSubmitted && (
+          <Alert status="success" variant="solid" mt={6}>
+            <AlertIcon />
+            <AlertTitle>Arquivos enviados com sucesso!</AlertTitle>
+            <AlertDescription>Todos os arquivos foram enviados corretamente.</AlertDescription>
+          </Alert>
+        )}
+      </main>
+    </>
   );
 }
 

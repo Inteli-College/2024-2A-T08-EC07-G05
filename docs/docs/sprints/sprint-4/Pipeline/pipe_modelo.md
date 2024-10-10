@@ -1,16 +1,22 @@
+---
+title: Pipeline
+sidebar_position: 1
+slug: "/pipeline"
+---
+
 # Processo de Pipeline
 
 ## Importância do Pipeline no Projeto 
 
-No projeto de predição de falhas, o processo de Pipeline é essencial para garantir que os dados coletados durante a linha de produção sejam continuamente utilizados para melhorar o modelo preditivo. Ao capturar e processar os dados em tempo real, o Pipeline assegura que informações valiosas sejam sempre acessíveis para análises e treinamentos de modelos futuros, permitindo ajustes e inovações constantes.
+No projeto de predição de falhas, o processo de pipeline é essencial para garantir que os dados coletados durante a linha de produção sejam continuamente utilizados para melhorar o modelo preditivo. Ao capturar e processar os dados em tempo real, o pipeline assegura que informações valiosas sejam sempre acessíveis para análises e treinamentos de modelos futuros, permitindo ajustes e inovações constantes.
 
 # O que é uma Pipeline em Programação
 
-Uma Pipeline em programação é uma sequência estruturada de processos que transformam dados de entrada em resultados finais. Ela é comumente usada em contextos de processamento de dados, aprendizado de máquina e desenvolvimento de software, permitindo que cada etapa do processo seja tratada de forma modular e reutilizável. O uso de pipelines facilita a automação, a manutenção do código e a escalabilidade de projetos complexos.
+Uma pipeline em programação é uma sequência estruturada de processos que transformam dados de entrada em resultados finais. Ela é comumente usada em contextos de processamento de dados, aprendizado de máquina e desenvolvimento de software, permitindo que cada etapa do processo seja tratada de forma modular e reutilizável. O uso de pipelines facilita a automação, a manutenção do código e a escalabilidade de projetos complexos.
 
 ## Importância das Pipelines
 
-As Pipelines são essenciais porque:
+As pipelines são essenciais porque:
 
 - **Organizam o Fluxo de Dados**: Elas dividem tarefas complexas em etapas menores, facilitando o gerenciamento.
 - **Melhoram a Reutilização**: Funções e componentes podem ser reutilizados em diferentes partes do projeto.
@@ -58,6 +64,7 @@ async def get_model(precisao: float):
  # função no services/model 
     return create_model_by_id(precisao)
 ```
+
 E a função principal que utlizamos nessa rota principal é a "create_model_by_id" que, de fato, faz a criação do modelo, salva no bucket do supabase e destaca o **ID** onde vamos utilizar para evidenciar qual modelo estamos usando e com qual vamos comparar:
 
 ```bash
@@ -74,6 +81,7 @@ def create_model_by_id(precisao: float):
         entry['PRECISAO'] = {item['ID_MODELO']: item['PRECISAO'] for item in data}.get(id, None)
     return parsed_data
 ```
+
 Nessa rota a seguir, utilizamos para poder pegar o modelo salvo no bucket atráves do **ID**
 
 ```bash
