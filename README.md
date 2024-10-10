@@ -8,10 +8,6 @@
 
 # IT-CROSS
 
-<!-- <p align="center">
-<a href="https://inteli-college.github.io/2024-1B-T08-EC06-G01/"><img src="docs/static/img/cannabot.png" alt="CANNABOT" border="0" width="20%" height="20%">
-</p> -->
-
 ## 🟣 GitHub Pages
 
 &emsp; A documentação do projeto pode ser acessada pelo GitHub Pages, através do seguinte link:
@@ -29,7 +25,7 @@
 
 ## 📜 Descrição
 
-&emsp;A solução que está sendo desenvolvida pelos membros do grupo TI-CROSS é um protótipo de um sistema de manutenção preditiva com IA a partir de diversos modelos de inteligência artificial que hoje estão presentes no mercado.
+&emsp;A solução It-Cross se trata de um sistema de IA para manutenção preditiva no contexto da linha de produção de carros do modelo T-Cross em uma das fábricas da Volkswagen no Brasil. A solução apresenta um modelo preditivo capaz de auxiliar gerentes de qualidade da empresa a verificar de maneira mais otimizada quais veículos necessitam ou não de testes longos de rodagem, o que é visualizado através de uma aplicação web na nuvem.
 
 ## 📚 Professores e Orientadores
 
@@ -45,71 +41,73 @@
 
 ```bash
 .
+├── .github
 ├── docs
-│   ├── docs
-│   │   └── sprints
-│   │       ├── Sprint 1
-│   │       ├── Sprint 2
-│   │       ├── Sprint 3
-│   │       ├── Sprint 4
-│   │       └── Sprint 5
-│   ├── src
-│   │   ├── components
-│   │   │   └── HomepageFeatures
-│   │   ├── css
-│   │   └── pages
-│   └── static
-│       └── img
-│           └── integrantes
-│
-├── LICENSE
-├── README.md
-
+│   └── docs
+│       └── sprints
+│           ├── Sprint 1
+│           ├── Sprint 2
+│           ├── Sprint 3
+│           ├── Sprint 4
+│           └── Sprint 5
+├── src
+│   ├── backend
+│   ├── database
+│   ├── frontend
+│   ├── health
+│   ├── notebooks
+│   └── utils
+├── .gitignore
+└── README.md
 ```
 
 &emsp;&emsp;Dentre os arquivos e pastas presentes na raiz do projeto, define-se:
 
-- <b>.github</b>: nesta pasta há o arquivo de deploy do repositório, que faz a documentação do projeto ser exibida no GitHub Pages
+- <b>.github</b>: contém o arquivo .yaml para deploy da documentação do projeto no Github Pages
 
-- <b>docs</b>: aqui fica os arquivos relacionados a documentação do projeto, como as sprints, a descrição do projeto e os integrantes. Ele utiliza o Docusaurus para gerar a documentação
+- <b>docs</b>: contém os arquivos que compõem a documentação do projeto no formato Docusaurus
+
+- <b>src</b>: contém o código fonte da solução, o que inclui desde o processo de exploração de dados até o frontend
 
 - <b>README.md</b>: arquivo que serve como guia e explicação geral sobre o projeto
 
-- <b>LICENSE</b>: arquivo que contém a licença do projeto (CC-0)
+- <b>.gitignore</b>: arquivo que impede upload de arquivos indesejados para o repositório
 
 ## 🚀 Setup
 
-Clone o repositório do projeto:
+### Pré requisitos:
+
+Para rodar a solução localmente, é necessário possuir:
+
+1. Git instalado e configurado
+2. Docker instalado e configurado
+3. WSL instalado e configurado (para sistema operacional Windows)
+
+### Instalação e Execução
+
+1. Numa janela de terminal, clone o repositório do projeto no seu diretório de preferência através do seguinte comando:
 
 ```bash
 git clone https://github.com/Inteli-College/2024-2A-T08-EC07-G05.git
 ```
 
-## Instalação e Execução
+2. Digite o seguinte comando para adentrar na pasta src do repositório
 
-&emsp; Para poder executar o projeto seguindo a ordem de pastas que está dentro do projeto devemos seguir alguns passos que estão dispostos abaixo:
-
-1 - Garantir que, quando você fez o git clone no projeto, o arquivo chamado "docker-compose.yml" está dentro de pasta "src"
-
-2 - Estando o arquivo dentro do projeto, precisamos estar presente dentro da pasta "src" e instalar todas as dependências para rodar o projeto
-```cmd
-pip install -r requirements.txt
+```bash
+cd 2024-2A-T08-EC07-G05/src
 ```
 
-3 - Estando dentro de "src" rode o comando abaixo para poder subir os containers que estamos usando que são: 
-  - Container Back
-  - Container Front
-  - Container DataLake (MINIO)
-  - Container Postgress (Banco de Dados)
-  ```cmd
-  docker-compose up
-  ```
+> :bulb:**IMPORTANTE:** Para a próxima etapa, caso você esteja utilizando Windows, digite `wsl` na mesma janela de terminal para iniciar o wsl.
 
-4 - Enquanto estiver rodando os containers, poderemos ver o local onde o DataLake e a nossa página via web estará funcionando.
-```cmd
-http://0.0.0.0:8000
-http://127.0.0.1:9000
+3. Digite o seguinte comando para buildar e incializar cada container da solução
+
+```bash
+docker compose up --build
 ```
+
+4. Por fim, acesse a solução por meio da URL do frontend indicado na janela de terminal após o comando anterior
 
 ## Demonstração da Solução
+
+Para conferir um vídeo de demonstração da solução, [clique aqui](https://youtu.be/xyCvN2pKIoo). 
 
