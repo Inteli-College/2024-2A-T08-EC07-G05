@@ -1,7 +1,7 @@
 ---
 title: Solução Final
 sidebar_position: 3
-slug: "/"
+slug: "/solucao_final"
 ---
 
 Documentação oficial do sistema de manutenção preditiva desenvolvido pelo grupo IT CROSS para a Volkswagen Brasil.
