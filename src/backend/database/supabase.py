@@ -3,6 +3,7 @@ import os
 import tempfile
 from dotenv import load_dotenv, find_dotenv
 import pandas as pd
+import pickle
 
 load_dotenv(find_dotenv())
 api_url: str = os.getenv("SUPABASE_URL")
@@ -45,6 +46,19 @@ def get_by_id(table: str, columns: str, id: int):
     supabase = create_supabase_client()
     try:
         response = supabase.table(table).select(columns).eq('ID_MODELO', id).execute()
+        return response.data
+    except Exception as e:
+        print("An error occurred:", e)
+
+def get_by_knr(table: str, columns: str, knr: str):
+    """
+    Table deve ser o nome da tabela, como 'Operacao'.
+    Columns deve ser uma string que lista as tabelas, como 'KNR, HALLE, TEMPO' (Por algum motivo satânico)
+    ID é o ID do modelo a ser buscado
+    """
+    supabase = create_supabase_client()
+    try:
+        response = supabase.table(table).select(columns).eq('KNR', knr).execute()
         return response.data
     except Exception as e:
         print("An error occurred:", e)
@@ -189,8 +203,15 @@ def get_model_from_bucket(filename: str, bucketname: str):
 
         response = supabase.storage.from_(bucketname).download(filename)
       
-        if response.status_code == 200:
-            return response.content
+        if response is not None:
+            with open(f"{filename}", "wb") as f:
+                f.write(response)
+            
+            with open(filename, "rb") as f:
+                model = pickle.load(f)
+
+            print("File downloaded successfully!")
+            return model
         else:
             print("Erro ao baixar o arquivo:", response.json())
             return None

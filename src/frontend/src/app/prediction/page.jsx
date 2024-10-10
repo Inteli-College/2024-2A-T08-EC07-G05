@@ -10,16 +10,8 @@ import {
   HStack
 } from '@chakra-ui/react'
 import {Button} from "@/components/ui/button";
-import Link from "next/link";
 import NavBar from '@/components/navBar';
-// import {
-//   Card,
-//   CardContent,
-//   CardDescription,
-//   CardFooter,
-//   CardHeader,
-//   CardTitle,
-// } from "@/components/ui/card";
+
 
 export default function PredictionPage() {
   const [data, setData] = useState(null);
@@ -44,7 +36,7 @@ export default function PredictionPage() {
     console.log(`URL: ${process.env.NEXT_PUBLIC_BACKEND_AWS}/predict`);
 
     const response = await fetch(
-      `http://${process.env.NEXT_PUBLIC_BACKEND_AWS}/predict`, {
+      `${process.env.NEXT_PUBLIC_BACKEND_AWS}/predict`, {
         method: "POST",
         body: JSON.stringify({
           knr: inputValue
@@ -56,6 +48,7 @@ export default function PredictionPage() {
 
     if (!response.ok) {
       console.error("Erro na requisição:", response.statusText);
+      alert("Erro na requisição. Tente novamente.");
       return;
     }
 
@@ -79,10 +72,6 @@ export default function PredictionPage() {
       setPredictionTextOutput("Teste curto");
       setCardColor('bg-green-600');
     }
-  };
-
-  const homeClick = () => {
-    window.location.href = '/';
   };
 
   const validateInput = (e) => { 
@@ -126,18 +115,6 @@ export default function PredictionPage() {
 
       {showTable && data && (
         <div className="flex justify-center items-center mt-6">
-          {/* <Card>
-            <CardHeader>
-              <CardTitle>{predictionTextOutput}</CardTitle>
-              <CardDescription>Card Description</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Card Content</p>
-            </CardContent>
-            <CardFooter>
-              <p>Card Footer</p>
-            </CardFooter>
-          </Card> */}
           <BaseCard text={predictionTextOutput} color={cardColor} />  {/* Passa a cor como prop */}
         </div>
       )}
