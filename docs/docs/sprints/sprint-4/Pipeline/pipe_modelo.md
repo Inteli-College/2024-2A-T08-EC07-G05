@@ -1,3 +1,9 @@
+---
+title: Pipeline
+sidebar_position: 1
+slug: "/pipeline"
+---
+
 # Processo de Pipeline
 
 ## Importância do Pipeline no Projeto 
@@ -12,18 +18,17 @@ Uma pipeline em programação é uma sequência estruturada de processos que tra
 
 As pipelines são essenciais porque:
 
-
 - **Organizam o Fluxo de Dados**: Elas dividem tarefas complexas em etapas menores, facilitando o gerenciamento.
 - **Melhoram a Reutilização**: Funções e componentes podem ser reutilizados em diferentes partes do projeto.
 - **Facilitam Testes e Manutenção**: Cada etapa pode ser testada individualmente, tornando a identificação de bugs mais eficiente.
 
 ![Processo de PIPELINE](../../../../static/img/sprint-4/pipeline.png)
 
+## Como Funciona o Processo de Pipeline no Projeto (Modelo)
 
-## Quais são as fases do Processo de Pipeline
+No projeto de predição de falhas, o Pipeline em questão vai envolver diversar funções e passos(rotas) que vão servir para mostrarmos o modelo que já estamos utilizando para predizer e colocaremos a disposição o modelo novo que obtivemos com a nossa Pipeline:
 
-No projeto de predição de falhas, o Pipeline em questão vai envolver diversas funções e passos(rotas) que vão servir para mostrarmos o modelo que já estamos utilizando para predizer e colocaremos a disposição o modelo novo que obtivemos com a nossa Pipeline:
-
+### Fases do Processo de Pipeline (Modelo)
 
 1. **Coleta de Dados:**
    - Captura de dados de diferentes fontes, como bancos de dados, APIs ou sistemas de monitoramento.
@@ -48,10 +53,6 @@ No projeto de predição de falhas, o Pipeline em questão vai envolver diversas
 
 Essas fases ajudam a garantir que o Pipeline seja eficiente e adaptável ao longo do tempo.
 
-## Como Funciona o Processo de Pipeline no Projeto (Modelo)
-
-No projeto de predição de falhas, a pipeline em questão vai envolver diversar funções e passos(rotas) que vão servir para mostrarmos o modelo que já estamos utilizando para predizer e colocaremos a disposição o modelo novo que obtivemos com a nossa pipeline:
-
 ## Rotas e funções para a Pipeline (Modelo)
 
 As rotas feitas no backend para que pudessemos usar em relação ao salvamento dos novos modelos partindo do pipeline introduzido estão descritos abaixo: 
@@ -64,103 +65,21 @@ async def get_model(precisao: float):
     return create_model_by_id(precisao)
 ```
 
-E a função principal que utlizamos nessa rota principal é a "new_model" que, de fato, faz a criação do modelo, salva no bucket do supabase. Posteriormente vamos utilizar para evidenciar qual modelo estamos usando e com qual vamos comparar:
-
-```bash
-async def new_model():
-
-    # Mockar os dados
-    df = mock_data()  # --> quando for integrar na nos dados que vem do banco substituir linha pela de baixo
-    # yield "data: Carregando Dados\n\n"
-    # await asyncio.sleep(0.1)
-    # df = await fetch_data_from_supabase()
-    yield "data: Dados carregados com sucesso!\n\n"
-    await asyncio.sleep(0.1)
-```
-
-Toda a parte de salvamento do novo modelo:
-
-```bash
-if df is not None:
-        print("Colunas do DataFrame:", df.columns)
-
-        X_resampled, y_resampled, X_test, y_test = split_data(df)
-        yield "data: Separação concluída!\n\n"
-        await asyncio.sleep(0.1)
-
-        model_lstm, history = train_lstm(X_resampled, y_resampled)
-        yield "data: Treinamento concluído!\n\n"
-        await asyncio.sleep(0.1)
-
-        metrics_json = evaluate_model(model_lstm, X_test, y_test)
-        yield "data: Avaliação completa!\n\n"
-        await asyncio.sleep(0.1)
-
-        now = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-        key = save_model(model_lstm, f"model-lstm-{now}.pkl", "modelos-it-cross")
-        model_metadata = create_model_by_id(key, metrics_json)
-        yield "data: Modelo Salvo!"
-        await asyncio.sleep(0.1)
-        # yield "Id do modelo : " + str(model_metadata[0]['ID_MODELO']) + "\n\n"
-```
-
-E se ele não conseguir, ele vai exibir o erro:
-
-```bash
-    else:
-        yield "data: Erro ao buscar dados.\n\n"
-        await asyncio.sleep(0.1)
-        print("Erro ao buscar dados.")
-```
-
 E a função principal que utlizamos nessa rota principal é a "create_model_by_id" que, de fato, faz a criação do modelo, salva no bucket do supabase e destaca o **ID** onde vamos utilizar para evidenciar qual modelo estamos usando e com qual vamos comparar:
 
-
 ```bash
-async def new_model():
-
-    # Mockar os dados
-    df = mock_data()  # --> quando for integrar na nos dados que vem do banco substituir linha pela de baixo
-    # yield "data: Carregando Dados\n\n"
-    # await asyncio.sleep(0.1)
-    # df = await fetch_data_from_supabase()
-    yield "data: Dados carregados com sucesso!\n\n"
-    await asyncio.sleep(0.1)
-```
-
-Toda a parte de salvamento do novo modelo:
-
-```bash
-if df is not None:
-        print("Colunas do DataFrame:", df.columns)
-
-        X_resampled, y_resampled, X_test, y_test = split_data(df)
-        yield "data: Separação concluída!\n\n"
-        await asyncio.sleep(0.1)
-
-        model_lstm, history = train_lstm(X_resampled, y_resampled)
-        yield "data: Treinamento concluído!\n\n"
-        await asyncio.sleep(0.1)
-
-        metrics_json = evaluate_model(model_lstm, X_test, y_test)
-        yield "data: Avaliação completa!\n\n"
-        await asyncio.sleep(0.1)
-
-        now = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-        key = save_model(model_lstm, f"model-lstm-{now}.pkl", "modelos-it-cross")
-        model_metadata = create_model_by_id(key, metrics_json)
-        yield "data: Modelo Salvo!"
-        await asyncio.sleep(0.1)
-        # yield "Id do modelo : " + str(model_metadata[0]['ID_MODELO']) + "\n\n"
-```
-
-E se ele não conseguir, ele vai exibir o erro:
-
-```bash
-    else:
-        yield "data: Erro ao buscar dados.\n\n"
-        await asyncio.sleep(0.1)
-        print("Erro ao buscar dados.")
+def create_model_by_id(precisao: float):
+    ## add o parametro do modelo (pkl) e data
+    # função que insere o pkl no bucket e retorna o id do bucket
+    # insere as metricas + id do bucket na tabela do supabase
+    data = insert_table('Modelo', {"DATA_TREINO": datetime.now, "PRECISAO": precisao})
+    parsed_data = parse_halle_times(data)
+    print(data)
+    for entry in parsed_data:
+        id = entry['ID_MODELO']
+        entry['DATA_TREINO'] = {item['ID_MODELO']: item['DATA_TREINO'] for item in data}.get(id, None)
+        entry['PRECISAO'] = {item['ID_MODELO']: item['PRECISAO'] for item in data}.get(id, None)
+    return parsed_data
 ```
 
 Nessa rota a seguir, utilizamos para poder pegar o modelo salvo no bucket atráves do **ID**
@@ -182,30 +101,7 @@ def get_model_by_id():
 
 ## Processo de Pipeline no Frontend (Modelo)
 
-![Processo de Pipeline no front (Modelo)](Linkdofuncionamentodapipelinedomodelo)
-
 O processo de Pipeline do modelo no projeto também conta com uma interface simples e intuitiva no frontend. As páginas permitem que o usuário salve os novos modelos que o pipeline gerou, a visualização dos modelos que estão salvos no bucket do datalake (SUPABASE) e a escolha de qual modelo usar através das métricas dispostas.
-
-### Processo de Pipeline no Frontend (Páginas)
-
-O processo de Pipeline no frontend foi feito pensando que o usuário não apenas monitore a evolução dos modelos, mas também crie novos modelos preditivos de maneira simples. No topo da página de histórico de modelos, há uma seção que exibe a métrica de precisão do modelo atual, permitindo que os usuários acompanhem o desempenho do modelo mais recente de forma clara e objetiva. Ao lado, temos o botão "Criar Novo Modelo" para criar novos modelos preditivos, que ativarão o pipeline de treinamento para o novo modelo. Logo abaixo, tem uma tabela que organiza os modelos já criados, mostrando informações como a data de criação, quantidade de carros considerados no treino, o nome do modelo e as métricas de desempenho desses modelos. 
-
-### Verificação dos Modelos
-
-Após a adição de novos dados, o usuário tem a opção de criar um novo modelo de predição, treinado com as informações recém-carregadas. Dessa forma, tem-se a opção de validar os dois modelos, o que foi gerado a partir dessa pipeline desenvolvida para a aplicação e o modelo já em uso. A decisão vai ser exclusiva do usuário para escolher se vai utilizar o novo modelo ou se vai continuar com o modelo atual.
-
-### Processo de Pipeline no Frontend (Páginas)
-
-O processo de Pipeline no frontend foi feito pensando que o usuário não apenas monitore a evolução dos modelos, mas também crie novos modelos preditivos de maneira simples. No topo da página de histórico de modelos, há uma seção que exibe a métrica de precisão do modelo atual, permitindo que os usuários acompanhem o desempenho do modelo mais recente de forma clara e objetiva. Ao lado, temos o botão "Criar Novo Modelo" para criar novos modelos preditivos, que ativarão o pipeline de treinamento para o novo modelo. Logo abaixo, tem uma tabela que organiza os modelos já criados, mostrando informações como a data de criação, quantidade de carros considerados no treino, o nome do modelo e as métricas de desempenho desses modelos. 
-
-### Verificação dos Modelos
-
-Após a adição de novos dados, o usuário tem a opção de criar um novo modelo de predição, treinado com as informações recém-carregadas. Dessa forma, tem-se a opção de validar os dois modelos, o que foi gerado a partir dessa pipeline desenvolvida para a aplicação e o modelo já em uso. A decisão vai ser exclusiva do usuário para escolher se vai utilizar o novo modelo ou se vai continuar com o modelo atual.
-
-## Conclusão
-
-Por fim, esse processo de pipeline é importante pra automatizar e melhorar os modelos preditivos de forma contínua, desde a coleta de dados até a implementação e monitoramento. A integração entre o backend e frontend proporciona uma experiência de uso fluida e intuitiva, permitindo que o usuário acompanhe o desempenho dos modelos existentes e crie novos com facilidade. Isso tudo garante que o sistema fique sempre eficiente e pronto pra se adaptar a mudanças, mantendo tudo organizado e ajustável conforme necessário.
-
 
 ### Processo de Pipeline no Frontend (Páginas)
 

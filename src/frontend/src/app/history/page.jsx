@@ -90,7 +90,7 @@ function HistoryPage() {
   }, [isLoading]);
 
   useEffect( () => {
-    fetch(`http://${window.location.hostname}:3000/getHistory`)
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_AWS}/getHistory`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data)

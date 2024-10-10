@@ -30,7 +30,7 @@ function AnalysisPage() {
   }, [isLoading]);
 
   useEffect(() => {
-    fetch(`http://${window.location.hostname}:3000/getStats`)
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_AWS}/getStats`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
