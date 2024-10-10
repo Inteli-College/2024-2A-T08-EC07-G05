@@ -10,15 +10,8 @@ import {
   HStack
 } from '@chakra-ui/react'
 import {Button} from "@/components/ui/button";
-import Link from "next/link";
-// import {
-//   Card,
-//   CardContent,
-//   CardDescription,
-//   CardFooter,
-//   CardHeader,
-//   CardTitle,
-// } from "@/components/ui/card";
+import NavBar from '@/components/navBar';
+
 
 export default function PredictionPage() {
   const [data, setData] = useState(null);
@@ -40,9 +33,10 @@ export default function PredictionPage() {
     }
 
     setIsError(false);
+    console.log(`URL: ${process.env.NEXT_PUBLIC_BACKEND_AWS}/predict`);
 
     const response = await fetch(
-      `http://${window.location.hostname}:3000/predict`, {
+      `${process.env.NEXT_PUBLIC_BACKEND_AWS}/predict`, {
         method: "POST",
         body: JSON.stringify({
           knr: inputValue
@@ -54,6 +48,7 @@ export default function PredictionPage() {
 
     if (!response.ok) {
       console.error("Erro na requisição:", response.statusText);
+      alert("Erro na requisição. Tente novamente.");
       return;
     }
 
@@ -79,10 +74,6 @@ export default function PredictionPage() {
     }
   };
 
-  const homeClick = () => {
-    window.location.href = '/';
-  };
-
   const validateInput = (e) => { 
     const regex = /^\d{4}-\d{7}$/;
     return regex.test(inputValue);
@@ -97,24 +88,11 @@ export default function PredictionPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col px-10 py-6">
+    <main className="flex min-h-screen flex-col">
       <header>
-        <nav className="flex flex-start items-center p-4 gap-4">
-        <Button className='bg-blue-500 hover:bg-blue-600 text-white' onClick={homeClick}>
-          <img src="/icone_home.svg" className='w-5'></img>
-        </Button>
-          <Link 
-          href="/history">
-            Histórico de registros</Link>
-            <Link 
-          href="/prediction">
-            Predição de falhas</Link>
-            <Link 
-          href="/analysis">
-            Análise de falhas</Link>
-        </nav>
+        <NavBar />
       </header>
-      <div className="w-full flex space-x-4 mb-6">
+      <div className="w-full flex space-x-4 px-10 mb-6">
         <form onSubmit={submitPrediction} className='flex flex-start space-x-4 w-full'>
           <FormControl isInvalid={isError} className="flex flex-col w-200" >
           <HStack spacing={2}>
@@ -137,18 +115,6 @@ export default function PredictionPage() {
 
       {showTable && data && (
         <div className="flex justify-center items-center mt-6">
-          {/* <Card>
-            <CardHeader>
-              <CardTitle>{predictionTextOutput}</CardTitle>
-              <CardDescription>Card Description</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Card Content</p>
-            </CardContent>
-            <CardFooter>
-              <p>Card Footer</p>
-            </CardFooter>
-          </Card> */}
           <BaseCard text={predictionTextOutput} color={cardColor} />  {/* Passa a cor como prop */}
         </div>
       )}

@@ -14,7 +14,6 @@ def parse_halle_times(data):
     for knr, halle_data in grouped_data.items():
         halle_data.sort(key=lambda x: x["TEMPO"])
 
-        # Create an object with HALLE names as keys and time spent as values
         halle_times = {}
         for i in range(len(halle_data) - 1):
             current_halle = halle_data[i]
@@ -22,7 +21,6 @@ def parse_halle_times(data):
             time_spent = (next_halle["TEMPO"] - current_halle["TEMPO"]).total_seconds() / 60
             halle_times[current_halle["HALLE"]] = time_spent
 
-        # Set the last HALLE with zero time as there's no further entry
         halle_times[halle_data[-1]["HALLE"]] = 0
 
         results.append({
@@ -33,14 +31,10 @@ def parse_halle_times(data):
     return results
 
 def parse_failures(data):
-    failure_counts = defaultdict(lambda: defaultdict(int))
-    
+    total_sums = defaultdict(int)
+    total_registers = len(data)
     for entry in data:
-        halle = entry["HALLE"]
-        grupo_falha = entry["GRUPO_FALHA"]
-        teve_falha = entry["TEVE_FALHA"]
-        if teve_falha:
-            failure_counts[halle][grupo_falha] += 1
-        #Talvez seja melhor fazer essa lógica no banco, por enquanto isso vai servir <3
-    
-    return {halle: dict(groups) for halle, groups in failure_counts.items()}
+        for key, value in entry.items():
+            total_sums[key] += value
+
+    return total_sums, total_registers

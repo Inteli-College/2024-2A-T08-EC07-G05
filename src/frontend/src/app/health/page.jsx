@@ -12,7 +12,7 @@ function HealthPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/health');
+        const response = await fetch(`${process.env.NEXT_PUBLIC_HEALTH_AWS}/health`);
         const data = await response.json();
 
         const updatedHealth = [

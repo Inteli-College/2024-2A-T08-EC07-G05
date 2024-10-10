@@ -1,31 +1,18 @@
-import HealthPage from "@/app/health/page.jsx";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button"
+import NavBar from "@/components/navBar";
 
 export default function Home() {
   return (
-    <main className="flex flex-col min-h-screen ">
+    <main className="flex flex-col min-h-screen">
       <header>
-        <nav className="flex flex-start items-center p-4 gap-4">
-          <Link href="/">
-          <img src="/logo.svg" alt="Logo" className="w-24" />
-          </Link>
-          <Link 
-          href="/history">
-            Histórico de registros</Link>
-            <Link 
-          href="/prediction">
-            Predição de falhas</Link>
-            <Link 
-          href="/analysis">
-            Análise de falhas</Link>
-          
-        </nav>
+        <NavBar />
       </header>
+
       <div className="flex flex-row items-center p-10">
         <div className=" flex flex-col space-y-4 items-center">
         <img src="/logo.svg" alt="Logo" className="w-120" />
-        <p>(adicionar pequena descrição da aplicação)</p> 
+        <p>IT-Cross é um sistema de manutenção preditiva para a Volkswagen Brasil.</p> 
         <div className="flex space-x-4">
             <Link 
             href="/history"
