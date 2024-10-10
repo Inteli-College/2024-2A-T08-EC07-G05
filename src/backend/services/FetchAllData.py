@@ -71,8 +71,6 @@ def carregar_knrs():
     transformed_data = transform_data(normalized_data_array)
 
     # Exibindo os dados transformados
-    print(transformed_data)
-
     return transformed_data
 
 def carregar_knr(knr):
@@ -105,8 +103,5 @@ def carregar_knr(knr):
 
     # Aplicando a transformação nos dados normalizados
     transformed_data = transform_data_predict(normalized_data_array)
-
-    # Exibindo os dados transformados
-    print(transformed_data)
 
     return transformed_data

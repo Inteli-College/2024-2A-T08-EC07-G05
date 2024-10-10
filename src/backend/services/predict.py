@@ -19,7 +19,6 @@ def prediction(knr: str = None, supabase = Client):
     
     current_model_id = current_model_data[0]["ID_MODELO_ATUAL"]
     model = get_model_by_id(current_model_id)
-    print("Model_shape:", model.input_shape)
 
     knr_info = carregar_knr(knr)
     knr_data = pd.DataFrame(knr_info)

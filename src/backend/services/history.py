@@ -10,10 +10,8 @@ def fetch_history():
             knr = entry['KNR']
             entry['OUTPUT_MODELO'] = {item['KNR']: item['OUTPUT_MODELO'] for item in model_data}.get(knr, None)
     
-    print("Data history:", data)
     return data
 
 def fetch_stats():
-    data = query_table('ETL','QTD_SGROUP_#MULTIVALUE,QTD_SGROUP_-2,QTD_SGROUP_1,QTD_SGROUP_133,QTD_SGROUP_137,QTD_SGROUP_140,QTD_SGROUP_2,QTD_SGROUP_4,QTD_SGROUP_5,QTD_SGROUP_9830946')
-    print(data)
+    data = query_table('ETL','QTD_SGROUP_MULTIVALUE,QTD_SGROUP_-2,QTD_SGROUP_1,QTD_SGROUP_133,QTD_SGROUP_137,QTD_SGROUP_140,QTD_SGROUP_2,QTD_SGROUP_4,QTD_SGROUP_5,QTD_SGROUP_9830946, QTD_HALLE_ZP5,QTD_HALLE_ZP5A,QTD_HALLE_ZP6,QTD_HALLE_ZP61,QTD_HALLE_ZP62,QTD_HALLE_ZP7' )
     return parse_failures(data)
