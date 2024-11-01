@@ -111,3 +111,41 @@ docker compose up --build
 
 Para conferir um vídeo de demonstração da solução, [clique aqui](https://youtu.be/xyCvN2pKIoo). 
 
+## 🗃 Histórico de lançamento
+
+- **1.1.0 - 08/05/2024**
+  - Início do desenvolvimento do projeto.
+
+- **1.1.1 - 08/19/2024**
+  - Estabelecimento do escopo do projeto;
+  - Experiência aprimorada do usuário;
+  - Integração de princípios de economia circular;
+  - Criação do primeiro modelo preditivo.
+
+- **1.1.2 - 09/02/2024**
+  - Ajuste de filtros para exploração de dados;
+  - Aperfeiçoamento de acurácia e recall dos modelos;
+  - Testes com novas configurações de modelos;
+  - Implementação da primeira API para acesso ao modelo.
+
+- **1.2.0 - 09/16/2024**
+  - Otimização e ajustes no modelo;
+  - Solução encapsulada em Docker;
+  - Implementação de um Datalake.
+
+- **1.2.1 - 09/30/2024**
+  - Processo completo de ETL (Extract, Transform, Load);
+  - Aprimoramento do modelo preditivo;
+  - Pipeline de treinamento com integração do modelo;
+  - Criação de um dashboard para visualização de dados.
+
+- **1.2.2 - 10/07/2024**
+  - Integração do Docker e Datalake na nuvem;
+  - Refinamento do front-end;
+  - Conclusão da integração final.
+
+
+## Licença 
+
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><span property="dct:title">IT CROSS</span> by <span property="cc:attributionName">José Alencar ,Luiza Rubim ,Marco Rizzi ,Murilo Prianti,Pedro Cruz ,Raí de Oliveira, Vitoria Novaes</span> is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Creative Commons Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""></a></p>
+
